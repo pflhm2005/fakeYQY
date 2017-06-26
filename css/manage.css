@@ -1,0 +1,97 @@
+.top {
+  height: 114px;
+  background-color: #fb565c;
+  line-height: 114px;
+}
+.top > .logo {
+  height: 100%;
+}
+.top > .logo > img {
+  margin: 20px 80px 0 50px;
+}
+.top > .top-list > .list-item {
+  float: left;
+  height: 100%;
+  width: 150px;
+  text-align: center;
+  color: #fff;
+}
+.filter {
+  margin: 50px 0 50px 190px;
+  width: 1100px;
+}
+.filter > .filter-item {
+  border-bottom: 1px dashed #ccc;
+  font-size: 12px;
+  line-height: 46px;
+}
+.filter > .filter-item > .fi-list > a {
+  margin: 0 10px;
+  float: left;
+}
+.filter > .filter-item > .fi-list > a.on {
+  font-weight: bold;
+  color: #fb565c;
+}
+.filter > .filter-item > .fi-list > .diy-input {
+  float: left;
+}
+.filter > .filter-item > .fi-list > .diy-input > input {
+  border: 1px solid #ddd;
+  width: 100px;
+  padding: 4px;
+  font-size: 12px;
+}
+.filter > .filter-item > .fi-list > .diy-input > .area-submit {
+  margin-left: 10px;
+  display: inline-block;
+  height: 20px;
+  line-height: 0;
+  padding: 10px 13px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+.filter > .more-list {
+  font-size: 12px;
+  margin: 10px 0;
+  color: #666;
+  cursor: pointer;
+}
+.table {
+  margin: 0 190px;
+  text-align: center;
+}
+.table > .t-title {
+  border-top: 1px solid #ccc;
+  border-right: 1px solid #ccc;
+}
+.table > .t-list {
+  border-right: 1px solid #ccc;
+}
+.table .list-item {
+  float: left;
+  height: 82px;
+  line-height: 82px;
+  border: 1px solid #ccc;
+  border-top: none;
+  border-right: none;
+  font-size: 13px;
+}
+.table .t-name {
+  width: 20%;
+}
+.table .t-time {
+  width: 15%;
+}
+.table .t-type {
+  width: 15%;
+}
+.table .t-person {
+  width: 15%;
+}
+.table .t-ver {
+  width: 15%;
+}
+.table .t-more {
+  width: 20%;
+}

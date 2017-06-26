@@ -1,0 +1,99 @@
+.title {
+  height: 30px;
+  line-height: 30px;
+  margin: 20px auto;
+}
+.title > .title-name > h1 {
+  color: #000;
+  font-size: 28px;
+  font-weight: normal;
+}
+.title > .title-price {
+  color: #cc2929;
+  font-size: 12px;
+}
+.title > .title-price > .num {
+  font-size: 28px;
+}
+.big-pic > .img {
+  width: 760px;
+  height: 420px;
+  border-radius: 4px;
+  overflow: hidden;
+  position: relative;
+}
+.big-pic > .img > .slide > .slide-otem > img {
+  width: 100%;
+  height: 100%;
+}
+.big-pic > .intro {
+  width: 342px;
+  height: 420px;
+  overflow: hidden;
+  position: relative;
+  padding: 0 10px;
+}
+.big-pic > .intro > .i-title {
+  font-size: 24px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  color: #000;
+}
+.big-pic > .intro > .i-price {
+  margin-bottom: 18px;
+  margin-top: 23px;
+  overflow: hidden;
+  height: 25px;
+  line-height: 25px;
+}
+.big-pic > .intro > .i-price > .month {
+  float: left;
+  margin-right: 10px;
+}
+.big-pic > .intro > .i-price > .month > .unit {
+  float: left;
+  font-size: 24px;
+  text-align: right;
+  color: #cc2929;
+  line-height: 18px;
+}
+.big-pic > .intro > .i-price > .month > span {
+  font-size: 12px;
+  color: #cc2929;
+  height: 25px;
+  margin-left: 4px;
+  line-height: 25px;
+  display: inline-block;
+}
+.big-pic > .intro > .i-price > .total {
+  font-size: 12px;
+  color: #cc2929;
+  float: left;
+  text-align: right;
+  line-height: 25px;
+}
+.big-pic > .intro > .i-price > .update {
+  font-size: 12px;
+  color: #b2b2b2;
+  float: right;
+  line-height: 25px;
+}
+.big-pic > .intro > .i-tip {
+  padding: 10px 20px;
+  border-top: 1px solid #ccc;
+}
+.big-pic > .intro > .i-tip > .it-list {
+  padding: 5px 0;
+  line-height: 19px;
+}
+.big-pic > .intro > .i-tip > .it-list > .itl-title {
+  font-size: 14px;
+  color: #b2b2b2;
+  float: left;
+}
+.big-pic > .intro > .i-tip > .it-list > .itl-content {
+  font-size: 13px;
+  color: #353535;
+  float: left;
+}

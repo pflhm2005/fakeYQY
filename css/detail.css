@@ -1,0 +1,263 @@
+.info-list > .hlt-item {
+  float: left;
+  color: #000;
+  font-size: 12px;
+  margin-right: 10px;
+  text-align: center;
+}
+.info-list > .hlt-photo {
+  width: 130px;
+}
+.info-list > .hlt-photo > img {
+  width: 96px;
+  height: 100%;
+}
+.info-list > .hlt-area {
+  cursor: pointer;
+  width: 150px;
+}
+.info-list > .hlt-area > .num {
+  font-size: 24px;
+  margin-right: 4px;
+}
+.info-list > .hlt-area > .unit {
+  position: relative;
+  top: -3px;
+}
+.info-list > .hlt-price {
+  width: 150px;
+}
+.info-list > .hlt-price > .num {
+  font-size: 24px;
+  margin-right: 4px;
+}
+.info-list > .hlt-price > .unit {
+  position: relative;
+  top: -3px;
+  font-size: 12px;
+}
+.info-list > .hlt-price > a {
+  color: #b2b2b2;
+}
+.info-list > .hlt-price > a:hover {
+  color: #17a1e6;
+}
+.info-list > .hlt-price > a.on {
+  color: #000;
+}
+.info-list > .hlt-floor {
+  width: 90px;
+}
+.info-list > .hlt-decor {
+  width: 90px;
+}
+.info-list > .hlt-update {
+  cursor: pointer;
+  width: 140px;
+  margin-right: 0;
+}
+#app > .content > .title {
+  height: 30px;
+  line-height: 30px;
+  margin: 20px auto;
+}
+#app > .content > .title > .title-name > h1 {
+  color: #000;
+  font-size: 28px;
+  font-weight: normal;
+}
+#app > .content > .title > .title-price {
+  color: #cc2929;
+  font-size: 12px;
+}
+#app > .content > .title > .title-price > .num {
+  font-size: 28px;
+}
+#app > .content > .title-tip {
+  font-size: 12px;
+  color: #666;
+}
+#app > .content > .title-tip > .tip-part1 {
+  margin-bottom: 8px;
+}
+#app > .content > .title-tip > .tip-part1 > p > a:hover {
+  color: #17a1e6;
+}
+#app > .content > .title-tip > .tip-part2 {
+  margin-bottom: 26px;
+}
+#app > .content > .big-pic > .img {
+  width: 760px;
+  height: 420px;
+  border-radius: 4px;
+  overflow: hidden;
+  position: relative;
+}
+#app > .content > .big-pic > .img > .slide > .slide-otem > img {
+  width: 100%;
+  height: 100%;
+}
+#app > .content > .big-pic > .map {
+  background-color: aquamarine;
+  width: 342px;
+  height: 420px;
+  overflow: hidden;
+  position: relative;
+}
+#app > .content > .tab {
+  width: 100%;
+  background-color: #fff;
+  height: 60px;
+}
+#app > .content > .tab > .tab-content {
+  position: relative;
+  height: 60px;
+}
+#app > .content > .tab > .tab-content > .tab-bar {
+  height: 60px;
+  line-height: 60px;
+}
+#app > .content > .tab > .tab-content > .tab-bar > li {
+  float: left;
+  margin-right: 60px;
+  line-height: 59px;
+}
+#app > .content > .tab > .tab-content > .tab-bar > li.on {
+  border-bottom: 2px solid #17a1e6;
+}
+#app > .content > .tab > .tab-content > .tab-bar > li.on > a {
+  color: #17a1e6;
+}
+#app > .content > .tab > .tab-content > .tab-bar > li > a {
+  font-size: 12px;
+  position: relative;
+  top: 1px;
+}
+#app > .content > .tab > .tab-content > .right-info {
+  position: absolute;
+  right: 0;
+  top: 81px;
+  float: right;
+}
+#app > .content > .tab > .tab-content > .right-info > .price-info {
+  background-color: #fff;
+  height: 271px;
+  width: 250px;
+  padding: 20px;
+  margin-left: 10px;
+  margin-bottom: 20px;
+  font-size: 12px;
+  color: #666;
+}
+#app > .content > .tab > .tab-content > .right-info > .price-info > .pi-title {
+  width: 100%;
+  line-height: 25px;
+  text-align: left;
+  margin-top: 10px;
+}
+#app > .content > .tab > .tab-content > .right-info > .price-info > .pi-price {
+  line-height: 40px;
+  font-size: 28px;
+  text-align: left;
+}
+#app > .content > .tab > .tab-content > .right-info > .price-info > .pi-price > span {
+  color: #cc2929;
+}
+#app > .content > .tab > .tab-content > .right-info > .price-info > .pi-price > .unit {
+  font-size: 12px;
+  height: 30px;
+}
+#app > .content > .tab > .tab-content > .right-info > .price-info > .pi-tip1 {
+  line-height: 21px;
+}
+#app > .content > .main {
+  margin-top: 20px;
+  width: 860px;
+  padding: 0 30px;
+}
+#app > .content > .main > .house-content {
+  margin-bottom: 20px;
+  padding-bottom: 30px;
+}
+#app > .content > .main > .house-content > .walk > .map-container > ul > li {
+  float: left;
+  cursor: pointer;
+  margin-right: 30px;
+}
+#app > .content > .main > .house-content > .walk > .map-container > ul > li > .hi-title {
+  color: #666;
+  font-size: 14px;
+}
+#app > .content > .main > .house-content > .walk > .map-container > ul > li > .hi-title.on {
+  font-weight: bold;
+}
+#app > .content > .main > .house-content > .walk > .map-container > ul > li > .hi-content {
+  color: #b2b2b2;
+  font-size: 12px;
+}
+#app > .content > .main > .house-content > .walk > .map-container > ul > li > .hi-content > i {
+  font-style: normal;
+  font-size: 12px;
+}
+#app > .content > .main > .house-content > .walk > .map-container > .map-box {
+  position: relative;
+  width: 800px;
+  height: 490px;
+  overflow: hidden;
+}
+#app > .content > .main > .house-content > .house-surround > .hs-list {
+  width: 694px;
+  position: relative;
+}
+#app > .content > .main > .house-content > .house-surround > .hs-list > .hs-btn {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  top: 60px;
+  cursor: pointer;
+}
+#app > .content > .main > .house-content > .house-surround > .hs-list > .hs-btn > i {
+  font-weight: bold;
+  font-size: 20px;
+}
+#app > .content > .main > .house-content > .house-surround > .hs-list > .btn-l {
+  left: -20px;
+}
+#app > .content > .main > .house-content > .house-surround > .hs-list > .btn-r {
+  right: 0px;
+}
+#app > .content > .main > .house-content > .house-surround > .hs-list > .hs-slide {
+  width: 800px;
+  overflow: hidden;
+}
+#app > .content > .main > .house-content > .house-surround > .hs-list > .hs-slide > .hs-pic {
+  width: 9999px;
+}
+#app > .content > .main > .house-content > .house-surround > .hs-list > .hs-slide > .hs-pic > a {
+  float: left;
+  display: block;
+  width: 210px;
+  height: 210px;
+  margin-right: 20px;
+}
+#app > .content > .main > .house-content > .house-surround > .hs-list > .hs-slide > .hs-pic > a > img {
+  width: 100%;
+  height: 140px;
+  border-radius: 3px;
+}
+#app > .content > .main > .house-content > .house-surround > .hs-list > .hs-slide > .hs-pic > a > .hs-name {
+  padding: 5px 0 2px 0;
+  color: #000;
+  font-size: 14px;
+  position: relative;
+}
+#app > .content > .main > .house-content > .house-surround > .hs-list > .hs-slide > .hs-pic > a > .hs-price {
+  padding: 1px 0;
+  padding-bottom: 3px;
+  color: #cc2929;
+  font-size: 12px;
+}
+#app > .content > .main > .house-content > .house-surround > .hs-list > .hs-slide > .hs-pic > a > .hs-dis {
+  color: #b2b2b2;
+  font-size: 12px;
+}

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="./css/base.css">
+    <link rel="stylesheet" href="./css/pag.css">
+    <title>筛选页</title>
+</head>
+
+<body>
+    <div id="app">
+        <!--顶部-->
+        <top></top>
+        <!--挂载区域-->
+        <div class='container'>
+            <div class="detail box">
+                <!--标题-->
+                <div class="title">
+                    <div class="list">
+                        <a href="#" class='on'>全部类型</a>
+                        <a href="#">写字楼</a>
+                        <a href="#">联合办公</a>
+                        <a href="#">工位</a>
+                    </div>
+                </div>
+                <div class="filter">
+                    <!--位置-->
+                    <div class="filter-item clearfix">
+                        <div class="f-title fl">位置</div>
+                        <div class="f-list fr">
+                            <div class="f-list-item f-l-1 clearfix">
+                                <a href="javascript:void(0);">区域</a>
+                            </div>
+                            <div class="f-list-item f-l-2 clearfix">
+                                <a href="javascript:void(0);" v-for="(item,index) in flPos" @click='setSel(0,index)' :class='{on:posIter1 === index}'>{{item}}</a>
+                            </div>
+                            <template v-for="(list,index) in flPosDetail">
+                            <div class="f-list-item f-l-3 clearfix" v-show="posIter1 === index+1">
+                                <a href="javascript:void(0);" v-for="(item,index) in list" @click='setSel(-1,index)' :class='{on:posIter2 === index}'>{{item}}</a>  
+                            </div>
+                        </template>
+                        </div>
+                    </div>
+                    <!--面积-->
+                    <div class="filter-item clearfix">
+                        <div class="f-title fl">面积</div>
+                        <div class="f-list fr">
+                            <div class="f-list-item f-l-1 clearfix">
+                                <a href="javascript:void(0);" v-for="(item,index) in flArea" @click='setSel(1,index)' :class='{on:areaIter === index}'>{{item}}</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!--价格-->
+                    <div class="filter-item clearfix">
+                        <div class="f-title fl">价格</div>
+                        <div class="f-list fr">
+                            <div class="f-list-item f-l-1 clearfix">
+                                <a href="javascript:void(0);" :class='{on:priceIter === 1}' @click='priceIter = 1'>单价</a>
+                                <a href="javascript:void(0);" :class='{on:priceIter === 2}' @click='priceIter = 2'>总价</a>
+                            </div>
+                            <div class="f-list-item f-l-2 clearfix" v-show="priceIter === 1">
+                                <a href="javascript:void(0);" v-for="(item,index) in flSimplePrice" @click='setSel(2,index)' :class='{on:simplePriceIter === index}'>{{item}}</a>
+                            </div>
+                            <div class="f-list-item f-l-2 clearfix" v-show="priceIter === 2">
+                                <a href="javascript:void(0);" v-for="(item,index) in flTotalPrice" @click='setSel(3,index)' :class='{on:totalPriceIter === index}'>{{item}}</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--展示列表-->
+                <div class="content">
+                    <div class="c-list clearfix">
+                        <div class='map fl'>
+                            <a href="#">
+                                <img src="./images/tu_0001.png" alt="">
+                            </a>
+                        </div>
+                        <div class='info fl'>
+                            <div class="part1 clearfix">
+                                <h2 class='fl'>
+                                    <a href="#">软件产业基地</a>
+                                </h2>
+                                <div class="price fr">
+                                    <span class='num'>130</span>
+                                    <span class='unit'>元/m²/月</span>
+                                </div>
+                            </div>
+                            <div class="part2">
+                                <span>宝安-新安</span>
+                                <span> · 步行13分钟到「5号线-兴东站」</span>
+                            </div>
+                            <div class="part3">
+                                <span class='update'>17小时前有更新</span>
+                                <span class='order'> · 近30天内共有67人预约</span>
+                            </div>
+                            <div class="part4">
+                                <a href="#">106m²</a>
+                                <a href="#">106m²</a>
+                                <a href="#">106m²</a>
+                                <a href="#">106m²</a>
+                            </div>
+                            <a href="#" class="btn">查看详情</a>
+                        </div>
+                    </div>
+                    <a href="javascript:void(0);" class='more-info'>查看更多</a>
+                </div>
+            </div>
+            <div class="pag">
+
+            </div>
+        </div>
+        <!--底部-->
+        <foot></foot>
+    </div>
+    <script src="./js/pag.js"></script>
+</body>
+
+</html>

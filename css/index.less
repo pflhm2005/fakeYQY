@@ -1,0 +1,111 @@
+@c-list:c-list;
+.@{c-list}{
+    >.title{
+        font-weight: bold;
+        font-size: 15px;
+        margin-top:20px;
+        >.small{
+            color:#aaa;
+            font-size: 12px;
+        }
+    }
+    >.c-f-list{
+        >a{
+            margin-top:15px;
+            float:left;
+            color:#999;
+            margin-right:16px;
+            font-size: 13px;
+            &:hover{
+                color:#fb565c;
+            }
+        }
+    }
+}
+
+#app{
+    >.container{
+        >.sear{
+            overflow: hidden;
+            height: 500px;
+            background-image: url('../images/bg.png');
+            >.s-content{
+                color:#fff;
+                width: 550px;
+                margin:100px auto;
+                text-align: center;
+                >h5{
+                    font-weight: normal;
+                    font-size: 38px;
+                }
+                >p{
+                    margin-top:20px;
+                    margin-bottom:50px;
+                    font-size: 16px;
+                }
+                >.s-input{
+                    font-size: 0;
+                    >input{
+                        width: 320px;
+                        padding:7px 12px;
+                        
+                    }
+                    >a{
+                        display: inline-block;
+                        padding:7px 12px;
+                        font-size: 12px;
+                    }
+                    >.nor-sear{
+                        color:white;
+                        background-color: #fb565c;
+                    }
+                    >.map-sear{
+                        margin-left:5px;
+                        color:#6a707a;
+                        background-color: #fff;
+                    }
+                }
+            }
+        }
+        >.content{
+            >.c-filter{
+                overflow: hidden;
+                >div{
+                    float:left;
+                    width: 25%;
+                }
+            }
+            >.c-product{
+                margin-top:50px;
+                >.c-p-list{
+                    >.list-item{
+                        float:left;
+                        text-align: center;
+                        width: 30%;
+                        margin-bottom:30px;
+                        >img{
+                            width: 100%;
+                        }
+                        >.l-title{
+                            margin:5px;
+                            font-size: 18px;
+                            font-weight: bold;
+                        }
+                        >.l-intro{
+                            color:#999;
+                            font-size: 12px;
+                        }
+                    }
+                    >li:nth-child(3n+2){
+                        margin:0 1.5%;
+                    }
+                    >li:last-child{
+                        width: 30%;
+                        height: 261px;
+                        background-color: yellow;
+                    }
+                }
+            }
+        }
+    }  
+}

@@ -1,0 +1,96 @@
+.c-list > .title {
+  font-weight: bold;
+  font-size: 15px;
+  margin-top: 20px;
+}
+.c-list > .title > .small {
+  color: #aaa;
+  font-size: 12px;
+}
+.c-list > .c-f-list > a {
+  margin-top: 15px;
+  float: left;
+  color: #999;
+  margin-right: 16px;
+  font-size: 13px;
+}
+.c-list > .c-f-list > a:hover {
+  color: #fb565c;
+}
+#app > .container > .sear {
+  overflow: hidden;
+  height: 500px;
+  background-image: url('../images/bg.png');
+}
+#app > .container > .sear > .s-content {
+  color: #fff;
+  width: 550px;
+  margin: 100px auto;
+  text-align: center;
+}
+#app > .container > .sear > .s-content > h5 {
+  font-weight: normal;
+  font-size: 38px;
+}
+#app > .container > .sear > .s-content > p {
+  margin-top: 20px;
+  margin-bottom: 50px;
+  font-size: 16px;
+}
+#app > .container > .sear > .s-content > .s-input {
+  font-size: 0;
+}
+#app > .container > .sear > .s-content > .s-input > input {
+  width: 320px;
+  padding: 7px 12px;
+}
+#app > .container > .sear > .s-content > .s-input > a {
+  display: inline-block;
+  padding: 7px 12px;
+  font-size: 12px;
+}
+#app > .container > .sear > .s-content > .s-input > .nor-sear {
+  color: white;
+  background-color: #fb565c;
+}
+#app > .container > .sear > .s-content > .s-input > .map-sear {
+  margin-left: 5px;
+  color: #6a707a;
+  background-color: #fff;
+}
+#app > .container > .content > .c-filter {
+  overflow: hidden;
+}
+#app > .container > .content > .c-filter > div {
+  float: left;
+  width: 25%;
+}
+#app > .container > .content > .c-product {
+  margin-top: 50px;
+}
+#app > .container > .content > .c-product > .c-p-list > .list-item {
+  float: left;
+  text-align: center;
+  width: 30%;
+  margin-bottom: 30px;
+}
+#app > .container > .content > .c-product > .c-p-list > .list-item > img {
+  width: 100%;
+}
+#app > .container > .content > .c-product > .c-p-list > .list-item > .l-title {
+  margin: 5px;
+  font-size: 18px;
+  font-weight: bold;
+}
+#app > .container > .content > .c-product > .c-p-list > .list-item > .l-intro {
+  color: #999;
+  font-size: 12px;
+}
+#app > .container > .content > .c-product > .c-p-list > li:nth-child(3n+2) {
+  margin: 0 1.5%;
+}
+#app > .container > .content > .c-product > .c-p-list > li:last-child {
+  width: 30%;
+  height: 261px;
+  background-color: yellow;
+}

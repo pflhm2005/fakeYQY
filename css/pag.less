@@ -1,0 +1,188 @@
+@filter-item:filter-item;
+.@{filter-item}{
+    padding:7px 0;
+    >.f-title{
+        font-size: 13px;
+        width: 8%;
+        padding:11px 0 0 33px;
+        font-weight: 600;
+        color:#666;
+    }
+    >.f-list{
+        width: 92%;
+        padding:10px 0 10px 29px;
+        border-left:2px solid #eee;
+        >.f-list-item{
+            padding-bottom:14px;
+            border-bottom:1px solid #eee;
+            >a{
+                float:left;
+                color:#666;
+                font-size: 13px;
+                &.on{
+                    color:#fb565c;
+                }
+            }
+        }
+        >.f-l-1{
+            >a{
+                margin-right:50px;
+            }
+        }
+        >.f-l-2{
+            padding:14px 0;
+            >a{
+                margin-right:30px;
+            }
+        }
+        >.f-l-3{
+            padding:14px 0;
+            >a{
+                margin-right:20px;
+            }
+        }
+    }
+}
+#app{
+    min-height: 651px;
+    >.container{
+        >.detail{
+            >.title{
+                position: relative;
+                margin-bottom:10px;
+                border-bottom:2px solid #fb565c;
+                >.list{
+                    >a{
+                        width: 90px;
+                        height: 68px;
+                        margin-right:10px;
+                        display: inline-block;
+                        padding-top:38px;
+                        text-align: center;
+                        color:#666;
+                        font-size: 14px;
+                        &.on{
+                            background-color: #fb565c;
+                            color:#fff;
+                        }
+                        &:hover{
+                            color:#17a1e6;
+                        }
+                    }
+                }
+            }
+            >.filter{
+
+                    
+            }
+            >.content{
+                >.c-list{
+                    width: 100%;
+                    padding:30px 0;
+                    border-bottom:1px solid #ccc;
+                    >.map{
+                        height:142px;
+                        overflow: hidden;
+                        >a{
+                            color:#555;
+                            >img{
+                                width: 210px;
+                                height: 142px;
+                                border-radius: 4px;
+                            }
+                        }
+                    }
+                    >.info{
+                        position: relative;
+                        width: 630px;
+                        margin:4px 0 0 20px;
+                        >.part1{
+                            height: 23px;
+                            >h2{
+                                font-size: 18px;
+                                font-weight: 600;
+                                color:#000;
+                                >a{
+                                    color:#000;
+                                }
+                            }
+                            >.price{
+                                color:#cc2929;
+                                font-size: 12px;
+                                >.num{
+                                    font-size: 28px;
+                                }
+                            }
+                        }
+                        >.part2{
+                            margin-top:12px;
+                            >span{
+                                display: inline-block;
+                                font-size: 14px;
+                                color:#353535;
+                            }
+                        }
+                        >.part3{
+                            margin-top:12px;
+                            >span{
+                                color:#353535;
+                                font-size: 14px;
+                            }
+                        }
+                        >.part4{
+                            margin-top:12px;
+                            max-width: 576px;
+                            >a{
+                                border:1px solid #eee;
+                                width: 72px;
+                                height: 40px;
+                                line-height: 40px;
+                                text-align: center;
+                                float:left;
+                                color:#666;
+                                font-size: 14px;
+                            }
+                            >a:first-child{
+                                border-top-left-radius: 4px;
+                                border-bottom-left-radius: 4px;
+                            }
+                            >a:last-child{
+                                border-top-right-radius: 4px;
+                                border-bottom-right-radius: 4px;
+                            }
+                        }
+                        >a{
+                            position: absolute;
+                            right: 0;
+                            top: 103px;
+                            width: 118px;
+                            height: 36px;
+                            line-height: 36px;
+                            text-align: center;
+                            font-size: 14px;
+                            color:#fff;
+                            background: #fb565c;
+                            border-radius: 4px;
+                        }
+                    }
+                }
+                >.more-info{
+                    display: block;
+                    width: 580px;
+                    height: 40px;
+                    line-height: 40px;
+                    margin: 0 auto;
+                    margin-top: 20px;
+                    margin-bottom: 50px;
+                    text-align: center;
+                    border-radius: 5px;
+                    border: solid 1px #b2b2b2;
+                    color:#555;
+                    &:hover{
+                        color:#17a1e6;
+                    }
+                }
+            }
+        }
+    }
+}

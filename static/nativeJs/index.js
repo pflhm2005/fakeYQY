@@ -1,4 +1,5 @@
 import Vue from 'vue';
+import $ from 'jquery';
 import top from '../vue/common/head.vue';
 import foot from '../vue/common/foot.vue';
 
@@ -79,5 +80,18 @@ new Vue({
         searReq: function() {
             console.log(this.sear);
         }
+    },
+    created: function() {
+        console.log(1);
+        $.ajax({
+            method: 'get',
+            url: 'http://119.29.243.158:7070/indexMansionList',
+            success: function(data) {
+                console.log(data);
+            },
+            error: function() {
+                console.log(1);
+            }
+        });
     }
 });

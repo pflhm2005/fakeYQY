@@ -45,6 +45,9 @@
             return {
                 'src': './images/bg.png'
             }
+        },
+        props:{
+          
         }
     }
 </script>

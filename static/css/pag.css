@@ -40,6 +40,12 @@
 .filter-item > .f-list > .f-l-3 > a {
   margin-right: 20px;
 }
+.filter-item > .f-list > .f-l-4 {
+  padding: 14px 0;
+}
+.filter-item > .f-list > .f-l-4 > a {
+  margin-right: 10px;
+}
 #app {
   min-height: 651px;
 }

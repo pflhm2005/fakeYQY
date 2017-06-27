@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="./css/base.css">
     <link rel="stylesheet" href="./css/detail.css">
+    <link rel="stylesheet" href="./css/swiper.min.css">
     <link rel="stylesheet" href="./icon/iconfont.css">
     <title>详情页</title>
 </head>
@@ -50,14 +51,43 @@
             <div class="big-pic clearfix">
                 <div class="img fl">
                     <div class="slide">
-                        <div class="slide-item">
-                            <img src="./images/bg.png" alt="">
-                        </div>
+                        <template v-for="item in bigPic">
+                            <div class="slide-item">
+                                <img :src="item" alt="">
+                            </div>
+                        </template>
+                    </div>
+                    <div class="slide-mask">
+                        <p>查看所有27张照片</p>
                     </div>
                 </div>
                 <div class="map fr" id='pos-img'>
 
                 </div>
+
+                <div class="window-slide">
+                    <div class="mask-container">
+                        <div class="swiper-container">
+                            <div class="swiper-wrapper">
+                                <div class="swiper-slide">
+                                    <img src="./images/bg.png" alt="">
+                                </div>
+                                <div class="swiper-slide">
+                                    <img src="./images/bg.png" alt="">
+                                </div>
+                                <div class="swiper-slide">
+                                    <img src="./images/bg.png" alt="">
+                                </div>
+                            </div>
+                            <div class="swiper-button-prev"></div>
+                            <div class="swiper-button-next"></div>
+                        </div>
+                    </div>
+                    <div class="swiper-wrapper-title">
+                        <span class="tit">大厦图片</span>(<span>1</span>/27)
+                    </div>
+                </div>
+
             </div>
             <!--锚点选项-->
             <div class="tab">
@@ -155,6 +185,17 @@
         <foot></foot>
     </div>
     <script src="./js/detail.js"></script>
+    <script>
+        var mySwiper = new Swiper('.swiper-container', {
+            loop: true,
+            pagination: '.swiper-pagination',
+            nextButton: '.swiper-button-next',
+            prevButton: '.swiper-button-prev',
+            onTouchEnd: function(s) {
+                console.log(s.activeIndex);
+            }
+        })
+    </script>
 </body>
 
 </html>

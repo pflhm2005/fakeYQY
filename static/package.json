@@ -12,6 +12,7 @@
     "extract-text-webpack-plugin": "^2.1.2"
   },
   "dependencies": {
+    "jquery": "^1.11.1",
     "vue-hot-reload-api": "^2.1.0"
   }
 }

@@ -33,40 +33,17 @@
         <div class="house-pic">
             <h3>照片总览<span class="small">户型照片集合</span></h3>
             <div class="hp-list">
-                <div class="hpl-btn btn-l"><i class='iconfont icon-shangyiyehoutuifanhui'></i></div>
-                <div class="hpl-btn btn-r"><i class='iconfont icon-xiayiyeqianjinchakangengduo'></i></div>
+                <div class="hpl-btn btn-l" v-show="slideIter !== 0" @click='prev()'><i class='iconfont icon-shangyiyehoutuifanhui'></i></div>
+                <div class="hpl-btn btn-r" v-show='len>4 && slideIter<len-3' @click='next()'><i class='iconfont icon-xiayiyeqianjinchakangengduo'></i></div>
                 <div class="hpl-container">
-                    <div class="hpl-content clearfix">
-                        <div class="list-item">
-                            <a href="#">
-                                <img :src="src" alt="">
-                            </a>
-                        </div>
-                        <div class="list-item">
-                            <a href="#">
-                                <img :src="src" alt="">
-                            </a>
-                        </div>
-                        <div class="list-item">
-                            <a href="#">
-                                <img :src="src" alt="">
-                            </a>
-                        </div>
-                        <div class="list-item">
-                            <a href="#">
-                                <img :src="src" alt="">
-                            </a>
-                        </div>
-                        <div class="list-item">
-                            <a href="#">
-                                <img :src="src" alt="">
-                            </a>
-                        </div>
-                        <div class="list-item">
-                            <a href="#">
-                                <img :src="src" alt="">
-                            </a>
-                        </div>
+                    <div class="hpl-content clearfix" :style='slideStyle'>
+                        <template v-for="(item,index) in smallPic">
+                            <div class="list-item" :class='{opc:index === slideIter+4}'>
+                                <a href="javascript:void(0);">
+                                    <img :src="item" alt="">
+                                </a>
+                            </div>
+                        </template>
                     </div>
                 </div>
             </div>
@@ -86,7 +63,7 @@
                 <div class="hll-item">
                     <a href="#" class='info-list'>
                         <div class='hlt-item hlt-photo'>
-                            <img :src="src" alt="">
+                            <img :src="smallPic[0]" alt="">
                         </div>
                         <div class='hlt-item hlt-area'>
                             <span class='num'>268</span>
@@ -110,8 +87,28 @@
     export default {
         data: function() {
             return {
-                'src': './images/tu_0001.png'
+                'smallPic':['./images/tu_0001.png','./images/tu_0002.png','./images/tu_0003.png','./images/tu_0004.png','./images/tu_0005.png',],
+                slideIter:0,
             }
+        },
+        methods:{
+            next:function(){
+                this.slideIter++;
+            },
+            prev:function(){
+                this.slideIter--;
+            }
+        },
+        computed:{
+            len:function(){
+                return this.smallPic.length;
+            },
+            slideStyle:function(){
+                return 'transform:translate('+ -this.slideIter*170 +'px)';
+            }
+        },
+        created:function(){
+            
         }
     }
 </script>
@@ -162,16 +159,21 @@
             }
             >.hp-list {
                 position: relative;
-                width: 690px;
+                width: 785px;
                 >.hpl-container {
                     overflow: hidden;
-                    width: 680px;
+                    width: 765px;
                     >.hpl-content {
+                        user-select:none;
                         width: 9999px;
+                        position:relative;
                         >.list-item {
                             float: left;
                             width: 170px;
                             height: 100px;
+                            &.opc{
+                                opacity:0.5;
+                            }
                             >a {
                                 width: 160px;
                                 height: 100px;
@@ -191,6 +193,7 @@
                     height: 20px;
                     top: 40px;
                     cursor: pointer;
+                    z-index:1;
                     >i {
                         font-weight: bold;
                         font-size: 20px;

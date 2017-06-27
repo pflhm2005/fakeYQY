@@ -38,10 +38,13 @@
                                 <a href="javascript:void(0);" v-for="(item,index) in flPos" @click='setSel(0,index)' :class='{on:posIter1 === index}'>{{item}}</a>
                             </div>
                             <template v-for="(list,index) in flPosDetail">
-                            <div class="f-list-item f-l-3 clearfix" v-show="posIter1 === index+1">
-                                <a href="javascript:void(0);" v-for="(item,index) in list" @click='setSel(-1,index)' :class='{on:posIter2 === index}'>{{item}}</a>  
+                                <div class="f-list-item f-l-3 clearfix" v-show="posIter1 === index+1">
+                                    <a href="javascript:void(0);" v-for="(item,index) in list" @click='setSel(-1,index)' :class='{on:posIter2 === index}'>{{item}}</a>  
+                                </div>
+                            </template>
+                            <div class="f-list-item f-l-4 clearfix" v-show='false'>
+                                <a href="javascript:void(0);" v-for="(item,index) in flPosDetailItem">{{item}}</a>
                             </div>
-                        </template>
                         </div>
                     </div>
                     <!--面积-->

@@ -7,8 +7,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="./css/base.css">
     <link rel="stylesheet" href="./css/detail.css">
-    <link rel="stylesheet" href="./css/swiper.min.css">
     <link rel="stylesheet" href="./icon/iconfont.css">
+    <script src="http://api.map.baidu.com/api?v=2.0&ak=7n08qGgSMt4KBH6xbAIYnIHpzESXu8iY"></script>
     <title>详情页</title>
 </head>
 
@@ -21,10 +21,10 @@
             <!--标题-->
             <div class="title">
                 <div class="title-name fl">
-                    <h1>软件产业基地</h1>
+                    <h1>{{totalData.name}}</h1>
                 </div>
                 <div class="title-price fr">
-                    <span class='num'>108~140</span> 元/m²/月
+                    <span class='num'>{{totalData.scopePrice}}</span>元/m²/月
                 </div>
             </div>
             <!--小标题-->
@@ -33,60 +33,35 @@
                     <p>
                         <i class='iconfont icon-ditu'></i>
                         <a href="#">深圳市</a> -
-                        <a href="#">南山区</a>&nbsp;·&nbsp;步行14分钟到「
-                        <a href="#">2号线
-                    </a>-
-                        <a href="#">科苑站
-                    </a>」
+                        <a href="#">{{totalData.city}}</a>
                     </p>
                 </div>
                 <div class="tip-part2">
                     <p>
                         <i class='iconfont icon-qiyeyuanquwuye-xianxing'></i>
-                        <span class='num'>3小时前</span>有更新 · 近30天内共有67人预约
+                        <span class='num'>{{totalData.updateTime}}</span>有更新 · 近30天内共有{{totalData.appiontCount}}人预约
                     </p>
                 </div>
             </div>
             <!--大图和地图-->
             <div class="big-pic clearfix">
-                <div class="img fl">
+                <div class="img fl" @click='maskShow()'>
                     <div class="slide">
-                        <template v-for="item in bigPic">
+                        <template v-for="item in totalData.mansionPictures">
                             <div class="slide-item">
                                 <img :src="item" alt="">
                             </div>
                         </template>
                     </div>
                     <div class="slide-mask">
-                        <p>查看所有27张照片</p>
+                        <p>查看所有{{len}}张照片</p>
                     </div>
                 </div>
-                <div class="map fr" id='pos-img'>
+                <div class="map fr" id='pos_img'>
 
                 </div>
 
-                <div class="window-slide">
-                    <div class="mask-container">
-                        <div class="swiper-container">
-                            <div class="swiper-wrapper">
-                                <div class="swiper-slide">
-                                    <img src="./images/bg.png" alt="">
-                                </div>
-                                <div class="swiper-slide">
-                                    <img src="./images/bg.png" alt="">
-                                </div>
-                                <div class="swiper-slide">
-                                    <img src="./images/bg.png" alt="">
-                                </div>
-                            </div>
-                            <div class="swiper-button-prev"></div>
-                            <div class="swiper-button-next"></div>
-                        </div>
-                    </div>
-                    <div class="swiper-wrapper-title">
-                        <span class="tit">大厦图片</span>(<span>1</span>/27)
-                    </div>
-                </div>
+                <slide :src='dataPic' v-show="maskIter" @close='maskHide'></slide>
 
             </div>
             <!--锚点选项-->
@@ -94,24 +69,19 @@
                 <div class="tab-content">
                     <ul class="tab-bar">
                         <li class='on'><a href="#">在租户型</a></li>
-                        <li><a href="#">经纪人带看</a></li>
-                        <li><a href="#">大厦简介</a></li>
-                        <li><a href="#">360°全景</a></li>
-                        <li><a href="#">10分钟步行圈</a></li>
-                        <li><a href="#">周边大厦</a></li>
+                        <li><a href="#buildingIntro">大厦简介</a></li>
+                        <li><a href="#buildingSur">周边大厦</a></li>
                     </ul>
                     <div class="right-info">
                         <div class="price-info clearfix">
                             <div class="pi-title">大厦均价</div>
                             <div class="pi-price">
-                                <span>66.3</span>
+                                <span>{{totalData.avgPrice}}</span>
                                 <span class='unit'>元/m²/月</span>
                             </div>
-                            <div class="pi-tip1">大厦均价环比持平</div>
-                            <div class="pi-tip2">科技园写字楼均价 134 元/m²/月</div>
                         </div>
                         <!--电话预约信息-->
-                        <order-info></order-info>
+                        <order-info :num='totalData.appiontCount'></order-info>
                     </div>
                 </div>
             </div>
@@ -119,11 +89,11 @@
                 <!--户型展示-->
                 <div class="house-content">
                     <!--大厦列表-->
-                    <list></list>
+                    <list :count='totalData.countRooms' :pic='totalData.roomPictures' :list='totalData.rooms'></list>
                     <!--大厦简介-->
-                    <info></info>
+                    <info :info='Info' id='buildingIntro'></info>
                     <!--十分钟步行圈-->
-                    <div class="walk">
+                    <!--<div class="walk">
                         <h3>10分钟步行圈</h3>
                         <div class="map-container">
                             <ul class='feature'>
@@ -148,33 +118,23 @@
 
                             </div>
                         </div>
-                    </div>
+                    </div>-->
                     <!--周边大厦-->
-                    <div class="house-surround">
+                    <div class="house-surround" id='buildingSur'>
                         <h3>周边大厦</h3>
                         <div class="hs-list">
                             <div class="hs-btn btn-l"><i class='iconfont icon-shangyiyehoutuifanhui'></i></div>
                             <div class="hs-btn btn-r"><i class='iconfont icon-xiayiyeqianjinchakangengduo'></i></div>
                             <div class="hs-slide">
                                 <div class="hs-pic">
-                                    <a href="#">
-                                        <img src="./images/tu_0001.png" alt="">
-                                        <div class='hs-name'>华瀚科技大厦</div>
-                                        <div class='hs-price'>70 元/m²/月</div>
-                                        <div class='hs-dis'>距离 156 米</div>
-                                    </a>
-                                    <a href="#">
-                                        <img src="./images/tu_0001.png" alt="">
-                                        <div class='hs-name'>华瀚科技大厦</div>
-                                        <div class='hs-price'>70 元/m²/月</div>
-                                        <div class='hs-dis'>距离 156 米</div>
-                                    </a>
-                                    <a href="#">
-                                        <img src="./images/tu_0001.png" alt="">
-                                        <div class='hs-name'>华瀚科技大厦</div>
-                                        <div class='hs-price'>70 元/m²/月</div>
-                                        <div class='hs-dis'>距离 156 米</div>
-                                    </a>
+                                    <template v-for="item in totalData.around">
+                                        <a :href="item.href">
+                                            <img src="./images/tu_0001.png" alt="">
+                                            <div class='hs-name'>{{item.name}}</div>
+                                            <div class='hs-price'>{{item.price}}元/m²/月</div>
+                                            <div class='hs-dis'>距离{{item.distance}}米</div>
+                                        </a>
+                                    </template>
                                 </div>
                             </div>
                         </div>
@@ -184,18 +144,19 @@
         </div>
         <foot></foot>
     </div>
-    <script src="./js/detail.js"></script>
-    <script>
-        var mySwiper = new Swiper('.swiper-container', {
-            loop: true,
-            pagination: '.swiper-pagination',
-            nextButton: '.swiper-button-next',
-            prevButton: '.swiper-button-prev',
-            onTouchEnd: function(s) {
-                console.log(s.activeIndex);
-            }
-        })
-    </script>
+    <script src='./js/detail.js'></script>
+    <!--<script>
+        var map = new BMap.Map("pos_img");
+
+        var point = new BMap.Point(1, 1);
+        map.centerAndZoom(point, 16);
+
+        var marker = new BMap.Marker(point);
+        map.addOverlay(marker);
+
+        map.enableScrollWheelZoom();
+        map.enableKeyboard();
+    </script>-->
 </body>
 
 </html>

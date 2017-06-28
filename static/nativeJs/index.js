@@ -2,7 +2,8 @@ import Vue from 'vue';
 import $ from 'jquery';
 import top from '../vue/common/head.vue';
 import foot from '../vue/common/foot.vue';
-
+var rootPath = 'http://119.29.243.158:6060',
+    rootPath2 = 'http://119.29.243.158:7070/';
 new Vue({
     el: '#app',
     components: {
@@ -15,39 +16,9 @@ new Vue({
         type: '',
         area: '',
         price: '',
-        items: [{
-            'src': './images/tu_0004.png',
-            'name': '卓越前海壹号',
-            'intro': '前海门户领先商务综合体（南山-前海）'
-        }, {
-            'src': './images/tu_0006.png',
-            'name': '天健创智中心',
-            'intro': '前海门户领先商务综合体（南山-前海）'
-        }, {
-            'src': './images/tu_0005.png',
-            'name': '天健创智中心',
-            'intro': '前海门户领先商务综合体（南山-前海）'
-        }, {
-            'src': './images/tu_0007.png',
-            'name': '天健创智中心',
-            'intro': '前海门户领先商务综合体（南山-前海）'
-        }, {
-            'src': './images/tu_0001.png',
-            'name': '天健创智中心',
-            'intro': '前海门户领先商务综合体（南山-前海）'
-        }, {
-            'src': './images/tu_0002.png',
-            'name': '天健创智中心',
-            'intro': '前海门户领先商务综合体（南山-前海）'
-        }, {
-            'src': './images/tu_0003.png',
-            'name': '天健创智中心',
-            'intro': '前海门户领先商务综合体（南山-前海）'
-        }, {
-            'src': './images/tu_0008.png',
-            'name': '天健创智中心',
-            'intro': '前海门户领先商务综合体（南山-前海）'
-        }, ]
+        // 图片
+        picArr: [],
+        regionArr: []
     },
     computed: {
 
@@ -82,12 +53,31 @@ new Vue({
         }
     },
     created: function() {
-        console.log(1);
+        var v = this;
+
+        $.ajax({
+            method: 'post',
+            data: '',
+            url: '/api/searchData',
+            success: function(data) {
+                var u = data.data;
+                v.regionArr = u;
+            }
+        });
+
         $.ajax({
             method: 'get',
-            url: 'http://119.29.243.158:7070/indexMansionList',
+            url: '/api/indexMansionList',
             success: function(data) {
-                console.log(data);
+                if (data.success) {
+                    var u = data.aaData,
+                        l = u.length;
+                    for (var i = 0; i < l; i++) {
+                        u[i].titlePicture = rootPath + '/mansionImage/' + u[i].titlePicture;
+                        u[i].href = './detail.html?id=' + u[i].id;
+                    }
+                    v.picArr = u;
+                }
             },
             error: function() {
                 console.log(1);

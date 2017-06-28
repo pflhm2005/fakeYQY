@@ -35,14 +35,9 @@
                     <div class="c-f-region c-list">
                         <div class="title">区域</div>
                         <div class="c-f-list clearfix" @click='getSel(0)'>
-                            <a href='javascript:void(0);' data-id='0'>全部</a>
-                            <a href='javascript:void(0);' data-id='1'>福田</a>
-                            <a href='javascript:void(0);' data-id='2'>罗湖</a>
-                            <a href='javascript:void(0);' data-id='3'>南山</a>
-                            <a href='javascript:void(0);' data-id='4'>宝安</a>
-                            <a href='javascript:void(0);' data-id='5'>龙岗</a>
-                            <a href='javascript:void(0);' data-id='6'>龙华</a>
-                            <a href='javascript:void(0);' data-id='7'>更多>></a>
+                            <a href='javascript:void(0);'>全部</a>
+                            <a href='javascript:void(0);' :data-id='item.id' v-for="item in regionArr">{{item.name}}</a>
+                            <a href='javascript:void(0);'>更多>></a>
                         </div>
                     </div>
                     <div class="c-f-type c-list">
@@ -79,12 +74,14 @@
                 </div>
                 <!--展示内容-->
                 <div class="c-product">
-                    <ul class='c-p-list'>
-                        <template v-for="list in items">
+                    <ul class='c-p-list clearfix'>
+                        <template v-for="list in picArr">
                         <li class='list-item'>
-                            <img :src="list.src" alt="">
-                            <p class='l-title'>{{list.name}}</p>
-                            <p class='l-intro'>{{list.intro}}</p>
+                            <a :href="list.href">
+                                <img :src="list.titlePicture" alt="">
+                                <p class='l-title'>{{list.name}}</p>
+                                <p class='l-intro'>{{list.titleDesc}}</p>
+                            </a>
                         </li>
                     </template>
                         <li class='list-item'>

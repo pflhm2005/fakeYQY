@@ -44,8 +44,7 @@ module.exports = {
     resolve: {
         alias: {
             'vue$': 'vue/dist/vue.common.js',
-            'swiper': 'swiper/dist/js/swiper.min.js',
-            '$': 'jquery/dist/jquery.min.js'
+            'jquery': 'jquery/dist/jquery.min.js',
         }
     },
     //     devtool: '#eval-source-map'

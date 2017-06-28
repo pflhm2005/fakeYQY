@@ -9,16 +9,13 @@ var remoteUrl = 'http://119.29.243.158:7070';
 var webpackDevMiddleware = require("webpack-dev-middleware");
 //获取webpack
 var webpack = require("webpack");
-
-var rootPath = path.resolve(__dirname, './static');
-
 //配置文件
 var compiler = webpack({
     entry: {
-        'index': rootPath + '/nativeJs/index.js',
-        'detail': rootPath + '/nativeJs/detail.js',
-        'pag': rootPath + '/nativeJs/pag.js',
-        'info': rootPath + '/nativeJs/info.js'
+        'index': './static/nativeJs/index.js',
+        'detail': './static/nativeJs/detail.js',
+        'pag': './static/nativeJs/pag.js',
+        'info': './static/nativeJs/info.js'
     },
     output: {
         path: path.resolve(__dirname, './js'),
@@ -64,9 +61,8 @@ app.use(webpackDevMiddleware(compiler, {
     // options
 }));
 
-
-app.use('/static/', function(req, res) {
-    var url = remoteUrl + '/static/' + req.url;
+app.use('/api', function(req, res) {
+    var url = remoteUrl + '/api' + req.url;
     req.pipe(request(url)).pipe(res);
 });
 

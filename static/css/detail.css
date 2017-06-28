@@ -92,6 +92,7 @@
   border-radius: 4px;
   overflow: hidden;
   position: relative;
+  cursor: pointer;
 }
 #app > .content > .big-pic > .img:hover > .slide-mask {
   display: block;
@@ -132,10 +133,8 @@
   font-size: 14px;
   top: 48%;
   left: 320px;
-  cursor: pointer;
 }
 #app > .content > .big-pic > .map {
-  background-color: aquamarine;
   width: 342px;
   height: 420px;
   overflow: hidden;
@@ -297,47 +296,4 @@
 #app > .content > .main > .house-content > .house-surround > .hs-list > .hs-slide > .hs-pic > a > .hs-dis {
   color: #b2b2b2;
   font-size: 12px;
-}
-.window-slide {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  z-index: 1000;
-  background: rgba(0, 0, 0, 0.85);
-  padding: 1px;
-}
-.window-slide > .mask-container {
-  margin-top: 6%;
-  height: 76%;
-}
-.window-slide > .mask-container > .swiper-container {
-  width: 100%;
-  height: 100%;
-  margin: 0 auto;
-  border-radius: 4px;
-  overflow: hidden;
-}
-.window-slide > .mask-container > .swiper-container > .swiper-wrapper {
-  margin-left: 350px;
-}
-.window-slide > .mask-container > .swiper-container > .swiper-wrapper > .swiper-slide > img {
-  width: 1184px;
-  height: 100%;
-}
-.window-slide > .swiper-wrapper-title {
-  text-align: center;
-  line-height: 30px;
-  color: #fff;
-  font-size: 12px;
-  font-weight: 500;
-  opacity: .4;
-  width: 100%;
-}
-.window-slide > .swiper-wrapper-title > .tit {
-  color: #fff;
-  font-size: 12px;
-  font-weight: 500;
 }

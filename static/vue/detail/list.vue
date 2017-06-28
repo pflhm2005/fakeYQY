@@ -3,30 +3,12 @@
         <!--选项-->
         <div class="house-bar">
             <ul class="hb-list clearfix">
-                <li class='on'>
-                    <span class="hbl-title">全部户型</span>
-                    <span class="hbl-num">19套</span>
-                </li>
-                <li>
-                    <span class="hbl-title">100-200m²</span>
-                    <span class="hbl-num">3套</span>
-                </li>
-                <li>
-                    <span class="hbl-title">200-300m²</span>
-                    <span class="hbl-num">11套</span>
-                </li>
-                <li>
-                    <span class="hbl-title">300-500m²</span>
-                    <span class="hbl-num">3套</span>
-                </li>
-                <li>
-                    <span class="hbl-title">500-1000m²</span>
-                    <span class="hbl-num">1套</span>
-                </li>
-                <li>
-                    <span class="hbl-title">1000m²以上</span>
-                    <span class="hbl-num">1套</span>
-                </li>
+                <template v-for="(item,index) in count">
+                    <li :class='{on:titleIter === index}' @click='changeList(index)' v-show="!!item.count">
+                        <span class="hbl-title">{{item.title}}</span>
+                        <span class="hbl-num">{{item.count}}套</span>
+                    </li>
+                </template>
             </ul>
         </div>
         <!--轮播图-->
@@ -37,7 +19,7 @@
                 <div class="hpl-btn btn-r" v-show='len>4 && slideIter<len-3' @click='next()'><i class='iconfont icon-xiayiyeqianjinchakangengduo'></i></div>
                 <div class="hpl-container">
                     <div class="hpl-content clearfix" :style='slideStyle'>
-                        <template v-for="(item,index) in smallPic">
+                        <template v-for="(item,index) in pic">
                             <div class="list-item" :class='{opc:index === slideIter+4}'>
                                 <a href="javascript:void(0);">
                                     <img :src="item" alt="">
@@ -53,32 +35,34 @@
             <h3>户型列表</h3>
             <div class="hl-title info-list">
                 <div class='hlt-item hlt-photo'>照片</div>
-                <div class='hlt-item hlt-area'>面积<i class='iconfont icon-biaotou-kepaixu'></i></div>
-                <div class='hlt-item hlt-price'><a href="#" class='on'>单价</a> · <a href="#">总价<i class='iconfont icon-biaotou-kepaixu'></i></a></div>
+                <div class='hlt-item hlt-area' @click='sort("area")'>面积<i class='iconfont icon-biaotou-kepaixu'></i></div>
+                <div class='hlt-item hlt-price' @click='sort("price")'><a href="javascript:void(0);" class='on'>单价</a> · <a href="javascript:void(0);">总价<i class='iconfont icon-biaotou-kepaixu'></i></a></div>
                 <div class='hlt-item hlt-floor'>楼层</div>
                 <div class='hlt-item hlt-decor'>装修</div>
-                <div class='hlt-item hlt-update'>更新<i class='iconfont icon-biaotou-kepaixu'></i></div>
+                <div class='hlt-item hlt-update' @click='sort("updateTime")'>更新<i class='iconfont icon-biaotou-kepaixu'></i></div>
             </div>
             <div class="hl-list">
-                <div class="hll-item">
-                    <a href="#" class='info-list'>
-                        <div class='hlt-item hlt-photo'>
-                            <img :src="smallPic[0]" alt="">
-                        </div>
-                        <div class='hlt-item hlt-area'>
-                            <span class='num'>268</span>
-                            <span class='unit'>m²</span>
-                        </div>
-                        <div class='hlt-item hlt-price'>
-                            <span class="num">70</span>
-                            <span class="unit">元/m²/月</span>
-                        </div>
-                        <div class='hlt-item hlt-floor'>中层</div>
-                        <div class='hlt-item hlt-decor'>精装</div>
-                        <div class='hlt-item hlt-update'>18小时前</div>
-                    </a>
-                </div>
-                <a href="#" class='btn-more'>查看更多</a>
+                <template v-for="item in list">
+                    <div class="hll-item">
+                        <a href="#" class='info-list'>
+                            <div class='hlt-item hlt-photo'>
+                                <img :src="item.roomPicture" alt="">
+                            </div>
+                            <div class='hlt-item hlt-area'>
+                                <span class='num'>{{item.area}}</span>
+                                <span class='unit'>m²</span>
+                            </div>
+                            <div class='hlt-item hlt-price'>
+                                <span class="num">{{item.price}}</span>
+                                <span class="unit">元/m²/月</span>
+                            </div>
+                            <div class='hlt-item hlt-floor'>{{item.floor}}</div>
+                            <div class='hlt-item hlt-decor'>{{item.fitment}}</div>
+                            <div class='hlt-item hlt-update'>{{item.coverUpdateTime}}</div>
+                        </a>
+                    </div>
+                </template>
+                <a href="javascript:void(0);" class='btn-more'>查看更多</a>
             </div>
         </div>
     </div>
@@ -87,28 +71,47 @@
     export default {
         data: function() {
             return {
-                'smallPic':['./images/tu_0001.png','./images/tu_0002.png','./images/tu_0003.png','./images/tu_0004.png','./images/tu_0005.png',],
+                titleIter:0,
                 slideIter:0,
+                sortIter:{
+                    area:1,
+                    price:1,
+                    updateTime:1
+                }
             }
         },
+        props:['count','pic','list'],
         methods:{
             next:function(){
                 this.slideIter++;
             },
             prev:function(){
                 this.slideIter--;
+            },
+            sort:function(iter){
+                var v =this;
+                this.list.sort(function(a,b){
+                    v.sortIter[iter] *= -1;
+                    return (a[iter]-b[iter])*v.sortIter[iter];
+                });
+            },
+            changeList:function(index){
+                this.titleIter = index;
             }
         },
         computed:{
             len:function(){
-                return this.smallPic.length;
+                return this.pic.length;
             },
             slideStyle:function(){
                 return 'transform:translate('+ -this.slideIter*170 +'px)';
+            },
+            titleObj:function(){
+                return this.count;
             }
         },
         created:function(){
-            
+
         }
     }
 </script>
@@ -129,6 +132,7 @@
                     text-align: center;
                     cursor: pointer;
                     >span {
+                        width:101px;
                         display: block;
                         padding-top: 10px;
                         border-right: 1px solid #eee;

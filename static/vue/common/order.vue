@@ -3,7 +3,7 @@
         <div class="oi-form">
             <h3>立即预约</h3>
             <form class='oi-order'>
-                <div class="num">该大厦近30天共有23人预约看房</div>
+                <div class="num">该大厦近30天共有{{num}}人预约看房</div>
                 <div class="oi-input">
                     <input type="text" name="mobile" placeholder="手机号码" value="">
                 </div>
@@ -27,7 +27,7 @@
 </template>
 <script>
     export default{
-
+        props:['num']
     }
 </script>
 <style lang="less">

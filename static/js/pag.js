@@ -11130,8 +11130,10 @@ new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
         }
     },
     created: function created() {
-        var v = this;
+        var v = this,
+            params = window.location.href.split('?');
 
+        var id = params[1] ? params[1].split('=')[1] : '';
         __WEBPACK_IMPORTED_MODULE_1_jquery___default.a.ajax({
             method: 'post',
             data: '',
@@ -11144,7 +11146,7 @@ new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
 
         __WEBPACK_IMPORTED_MODULE_1_jquery___default.a.ajax({
             method: 'get',
-            url: '/api/mansionList?page=1&pageSize=9',
+            url: '/api/mansionList?page=1&pageSize=9&region=' + id,
             success: function success(data) {
                 __WEBPACK_IMPORTED_MODULE_1_jquery___default()('.M-box').pagination({
                     totalData: data.total,

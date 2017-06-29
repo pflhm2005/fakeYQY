@@ -24,32 +24,11 @@ new Vue({
 
     },
     methods: {
-        getSel: function(id) {
-            var e = event.target || event.srcElement;
-            if (e.tagName === 'A') {
-                var index = e.dataset ? e.dataset.id : e.attributes[1].nodeValue;
-                switch (id) {
-                    case 0:
-                        this.region = index;
-                        break;
-                    case 1:
-                        this.type = index;
-                        break;
-                    case 2:
-                        this.area = index;
-                        break;
-                    case 3:
-                        this.price = index;
-                        break;
-                }
-                this.selReq();
+        hrefAdd: function(el) {
+            var baseUrl = './pag.html?r=';
+            for (var i = 0; i < el.length; i++) {
+                el[i].href = baseUrl + el[i].id;
             }
-        },
-        selReq: function() {
-
-        },
-        searReq: function() {
-            console.log(this.sear);
         }
     },
     created: function() {
@@ -61,7 +40,7 @@ new Vue({
             url: '/api/searchData',
             success: function(data) {
                 var u = data.data;
-                console.log(u);
+                v.hrefAdd(u);
                 v.regionArr = u;
             }
         });

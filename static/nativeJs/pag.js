@@ -30,6 +30,8 @@ new Vue({
         flPos2Show: false,
         flPos3Show: false,
         list: [],
+        // 是否有筛选信息
+        noData: false
     },
     methods: {
         setSel: function(id, index) {
@@ -103,8 +105,10 @@ new Vue({
         }
     },
     created: function() {
-        var v = this;
+        var v = this,
+            params = window.location.href.split('?');
 
+        var id = params[1] ? params[1].split('=')[1] : '';
         $.ajax({
             method: 'post',
             data: '',
@@ -117,7 +121,7 @@ new Vue({
 
         $.ajax({
             method: 'get',
-            url: '/api/mansionList?page=1&pageSize=9',
+            url: '/api/mansionList?page=1&pageSize=9&region=' + id,
             success: function(data) {
                 $('.M-box').pagination({
                     totalData: data.total,
@@ -129,7 +133,10 @@ new Vue({
                             url: '/api/mansionList?page=' + index + '&pageSize=9',
                             success: function(data) {
                                 if (data.success) {
+                                    v.noData = false;
                                     v.init(data.aaData);
+                                } else {
+                                    v.noData = true;
                                 }
                             }
                         });
@@ -137,6 +144,8 @@ new Vue({
                 }, function(api) {
                     if (data.success) {
                         v.init(data.aaData);
+                    } else {
+                        v.noData = true;
                     }
                 });
             }

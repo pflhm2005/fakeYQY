@@ -10811,30 +10811,11 @@ new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
     },
     computed: {},
     methods: {
-        getSel: function getSel(id) {
-            var e = event.target || event.srcElement;
-            if (e.tagName === 'A') {
-                var index = e.dataset ? e.dataset.id : e.attributes[1].nodeValue;
-                switch (id) {
-                    case 0:
-                        this.region = index;
-                        break;
-                    case 1:
-                        this.type = index;
-                        break;
-                    case 2:
-                        this.area = index;
-                        break;
-                    case 3:
-                        this.price = index;
-                        break;
-                }
-                this.selReq();
+        hrefAdd: function hrefAdd(el) {
+            var baseUrl = './pag.html?r=';
+            for (var i = 0; i < el.length; i++) {
+                el[i].href = baseUrl + el[i].id;
             }
-        },
-        selReq: function selReq() {},
-        searReq: function searReq() {
-            console.log(this.sear);
         }
     },
     created: function created() {
@@ -10846,7 +10827,7 @@ new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
             url: '/api/searchData',
             success: function success(data) {
                 var u = data.data;
-                console.log(u);
+                v.hrefAdd(u);
                 v.regionArr = u;
             }
         });

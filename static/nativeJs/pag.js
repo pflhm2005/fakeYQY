@@ -20,32 +20,32 @@ new Vue({
         flTotalPrice: ['总价不限', '0.5万以下', '0.5万-1.5万', '1.5万-3万', '3万-5万', '5万-10万', '10万以上'],
         // 非区域筛选数组
         flA: [
-            ['', ''],
-            ['', '100'],
-            ['100', '200'],
-            ['200', '300'],
-            ['300', '500'],
-            ['500', '1000'],
-            ['1000', ''],
+            [-1, -1],
+            [-1, 100],
+            [100, 200],
+            [200, 300],
+            [300, 500],
+            [500, 1000],
+            [1000, -1],
         ],
         flPrice: [
             [
-                ['', ''],
-                ['', '50'],
-                ['50', '80'],
-                ['80', '100'],
-                ['100', '150'],
-                ['150', '200'],
-                ['200', ''],
+                [-1, -1],
+                [-1, 50],
+                [50, 80],
+                [80, 100],
+                [100, 150],
+                [150, 200],
+                [200, -1],
             ],
             [
-                ['', ''],
-                ['', '0.5'],
-                ['0.5', '1.5'],
-                ['1.5', '3'],
-                ['3', '5'],
-                ['5', '10'],
-                ['10', ''],
+                [-1, -1],
+                [-1, 0.5],
+                [0.5, 1.5],
+                [1.5, 3],
+                [3, 5],
+                [5, 10],
+                [10, -1],
             ]
         ],
         // 变色
@@ -54,8 +54,8 @@ new Vue({
         posIter3: null,
         areaIter: 0,
         priceTypeIter: 0,
-        simplePriceIter: null,
-        totalPriceIter: null,
+        simplePriceIter: 0,
+        totalPriceIter: 0,
         // 区域二、三级菜单
         flPos2Show: false,
         flPos3Show: false,
@@ -68,8 +68,8 @@ new Vue({
             var priceIndex = this.priceTypeIter === 0 ? this.simplePriceIter : this.totalPriceIter;
             return {
                 'region': this.flPos1[this.posIter1].id,
-                'street': this.flPos2[this.posIter2].id,
-                'community': this.flPos3[this.posIter3].id,
+                'street': this.flPos2[this.posIter2] ? this.flPos2[this.posIter2].id : -1,
+                'community': this.flPos3[this.posIter3] ? this.flPos3[this.posIter3].id : -1,
                 'minArea': this.flA[this.areaIter][0],
                 'maxArea': this.flA[this.areaIter][1],
                 'type': this.priceTypeIter,
@@ -123,6 +123,7 @@ new Vue({
                     this.simplePriceIter = null;
                     break;
             }
+            console.log(this.ajaxData);
             $.ajax({
                 method: 'post',
                 url: '/api/mansionList?page=1&pageSize=9',

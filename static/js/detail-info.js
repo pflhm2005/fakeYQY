@@ -11010,7 +11010,7 @@ exports = module.exports = __webpack_require__(0)(undefined);
 
 
 // module
-exports.push([module.i, "\n.feature > li {\n  margin-bottom: 20px;\n}\n.feature > li > .hi-title {\n  display: block;\n  padding-bottom: 5px;\n  color: #b2b2b2;\n  font-size: 12px;\n}\n.feature > li > .hi-content {\n  font-size: 14px;\n  color: #353535;\n}\n.house-info {\n  background-color: #fff;\n  width: 800px;\n}\n.house-info > .hi-pic {\n  width: 200px;\n  height: 125px;\n  border-radius: 4px;\n}\n.house-info > .hi-addr-pos {\n  width: 567px;\n  float: right;\n}\n.house-info > .hi-addr-pos > ul > li {\n  width: 100%;\n}\n.house-info > .more-info > ul > li {\n  width: 33%;\n  float: left;\n}\n.house-info > .hi-intro {\n  position: relative;\n  margin-top: 5px;\n  padding: 20px 0 0 0;\n  border-top: 1px solid rgba(0, 0, 0, 0.1);\n  line-height: 1.7;\n  font-size: 14px;\n  margin-bottom: 50px;\n}\n", ""]);
+exports.push([module.i, "\n.feature > li {\n  margin-bottom: 20px;\n}\n.feature > li > .hi-title {\n  display: block;\n  padding-bottom: 5px;\n  color: #b2b2b2;\n  font-size: 12px;\n}\n.feature > li > .hi-content {\n  font-size: 14px;\n  color: #353535;\n}\n.house-info {\n  background-color: #fff;\n  width: 800px;\n}\n.house-info > .hi-pic {\n  width: 200px;\n  height: 125px;\n  border-radius: 4px;\n}\n.house-info > .hi-addr-pos {\n  width: 567px;\n  float: right;\n}\n.house-info > .hi-addr-pos > ul > li {\n  width: 100%;\n}\n.house-info > .more-info {\n  height: 100px;\n}\n.house-info > .more-info > ul > li {\n  width: 33%;\n  float: left;\n}\n.house-info > .hi-intro {\n  position: relative;\n  margin-top: 5px;\n  padding: 20px 0 0 0;\n  border-top: 1px solid rgba(0, 0, 0, 0.1);\n  line-height: 1.7;\n  font-size: 14px;\n  margin-bottom: 50px;\n}\n", ""]);
 
 // exports
 
@@ -11290,7 +11290,18 @@ new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
         Info: [],
         totalData: ''
     },
-    methods: {},
+    methods: {
+        ImgModifier: function ImgModifier(el, key, pathIter, ObjKey) {
+            var ImagePath = pathIter ? 'http://119.29.243.158:6060/mansionImage/' : 'http://119.29.243.158:6060/roomImage/';
+            for (var i = 0; i < el[key].length; i++) {
+                if (ObjKey) {
+                    el[key][i][ObjKey] = ImagePath + el[key][i][ObjKey];
+                } else {
+                    el[key][i] = ImagePath + el[key][i];
+                }
+            }
+        }
+    },
     computed: {},
     created: function created() {
         var v = this,
@@ -11302,6 +11313,7 @@ new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
             method: 'get',
             url: '/api/mansionSummary?id=' + mansionId,
             success: function success(u) {
+                console.log(u);
                 v.Info = u;
             }
         });
@@ -11310,6 +11322,7 @@ new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
             method: 'get',
             url: '/api/roomDetails?id=' + roomId,
             success: function success(u) {
+                v.ImgModifier(u, 'pictures', false);
                 v.totalData = u;
             }
         });

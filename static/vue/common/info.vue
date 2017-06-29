@@ -94,30 +94,30 @@
                 'src': './images/bg.png'
             }
         },
-        props:['info']
+        props: ['info']
     }
 </script>
 <style lang='less'>
-    @feature:feature;
-    .@{feature}{
-        >li{
+    @feature: feature;
+    .@{feature} {
+        >li {
             margin-bottom: 20px;
-            >.hi-title{
+            >.hi-title {
                 display: block;
                 padding-bottom: 5px;
                 color: #b2b2b2;
                 font-size: 12px;
             }
-            >.hi-content{
+            >.hi-content {
                 font-size: 14px;
-                color:#353535;
+                color: #353535;
             }
         }
     }
-
+    
     .house-info {
-        background-color:#fff;
-        width:800px;
+        background-color: #fff;
+        width: 800px;
         >.hi-pic {
             width: 200px;
             height: 125px;
@@ -133,6 +133,7 @@
             }
         }
         >.more-info {
+            height:100px;
             >ul {
                 >li {
                     width: 33%;

@@ -177,3 +177,10 @@
 #app > .container > .detail > .content > .more-info:hover {
   color: #17a1e6;
 }
+#app > .container > .detail > .content > .tips {
+  margin: 154px 0;
+}
+#app > .container > .detail > .content > .tips > p {
+  color: #aaa;
+  font-size: 16px;
+}

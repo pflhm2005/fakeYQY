@@ -27,7 +27,7 @@
             <div class="img fl">
                 <div class="slide">
                     <div class="slide-item">
-                        <img src="./images/bg.png" alt="">
+                        <img :src="item" alt="" v-for="item in totalData.pictures">
                     </div>
                 </div>
             </div>

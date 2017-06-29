@@ -18,7 +18,16 @@ new Vue({
         totalData: '',
     },
     methods: {
-
+        ImgModifier: function(el, key, pathIter, ObjKey) {
+            var ImagePath = pathIter ? 'http://119.29.243.158:6060/mansionImage/' : 'http://119.29.243.158:6060/roomImage/';
+            for (var i = 0; i < el[key].length; i++) {
+                if (ObjKey) {
+                    el[key][i][ObjKey] = ImagePath + el[key][i][ObjKey];
+                } else {
+                    el[key][i] = ImagePath + el[key][i];
+                }
+            }
+        },
     },
     computed: {
 
@@ -33,6 +42,7 @@ new Vue({
             method: 'get',
             url: '/api/mansionSummary?id=' + mansionId,
             success: function(u) {
+                console.log(u);
                 v.Info = u;
             }
         });
@@ -41,6 +51,7 @@ new Vue({
             method: 'get',
             url: '/api/roomDetails?id=' + roomId,
             success: function(u) {
+                v.ImgModifier(u, 'pictures', false);
                 v.totalData = u;
             }
         });

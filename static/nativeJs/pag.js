@@ -18,12 +18,42 @@ new Vue({
         flArea: ['面积不限', '100m²以下', '100-200m²', '200-300m²', '300-500m²', '500-100m²', '1000m²以上'],
         flSimplePrice: ['单价不限', '50元以下', '50-80元', '80-100元', '100-150元', '150-200元', '200元以上'],
         flTotalPrice: ['总价不限', '0.5万以下', '0.5万-1.5万', '1.5万-3万', '3万-5万', '5万-10万', '10万以上'],
+        // 非区域筛选数组
+        flA: [
+            ['', ''],
+            ['', '100'],
+            ['100', '200'],
+            ['200', '300'],
+            ['300', '500'],
+            ['500', '1000'],
+            ['1000', ''],
+        ],
+        flPrice: [
+            [
+                ['', ''],
+                ['', '50'],
+                ['50', '80'],
+                ['80', '100'],
+                ['100', '150'],
+                ['150', '200'],
+                ['200', ''],
+            ],
+            [
+                ['', ''],
+                ['', '0.5'],
+                ['0.5', '1.5'],
+                ['1.5', '3'],
+                ['3', '5'],
+                ['5', '10'],
+                ['10', ''],
+            ]
+        ],
         // 变色
         posIter1: 0,
         posIter2: null,
         posIter3: null,
         areaIter: 0,
-        priceIter: 1,
+        priceTypeIter: 0,
         simplePriceIter: null,
         totalPriceIter: null,
         // 区域二、三级菜单
@@ -32,6 +62,21 @@ new Vue({
         list: [],
         // 是否有筛选信息
         noData: false
+    },
+    computed: {
+        ajaxData: function() {
+            var priceIndex = this.priceTypeIter === 0 ? this.simplePriceIter : this.totalPriceIter;
+            return {
+                'region': this.flPos1[this.posIter1].id,
+                'street': this.flPos2[this.posIter2].id,
+                'community': this.flPos3[this.posIter3].id,
+                'minArea': this.flA[this.areaIter][0],
+                'maxArea': this.flA[this.areaIter][1],
+                'type': this.priceTypeIter,
+                'minPrice': this.flPrice[this.priceTypeIter][priceIndex][0],
+                'maxPrice': this.flPrice[this.priceTypeIter][priceIndex][1],
+            };
+        }
     },
     methods: {
         setSel: function(id, index) {
@@ -120,8 +165,12 @@ new Vue({
         });
 
         $.ajax({
-            method: 'get',
-            url: '/api/mansionList?page=1&pageSize=9&region=' + id,
+            method: 'post',
+            data: {
+                'region': id,
+                'type': 0
+            },
+            url: '/api/mansionList?page=1&pageSize=9',
             success: function(data) {
                 $('.M-box').pagination({
                     totalData: data.total,
@@ -129,12 +178,14 @@ new Vue({
                     callback: function(api) {
                         var index = api.getCurrent();
                         $.ajax({
-                            method: 'get',
+                            method: 'post',
+                            data: this.ajaxData,
                             url: '/api/mansionList?page=' + index + '&pageSize=9',
                             success: function(data) {
                                 if (data.success) {
                                     v.noData = false;
                                     v.init(data.aaData);
+                                    console.log(v.flPos1, v.flPos2, v.flPos3);
                                 } else {
                                     v.noData = true;
                                 }

@@ -60,17 +60,21 @@ new Vue({
         maskHide: function() {
             this.maskIter = false;
         },
-        ImgModifier: function(el, key, iter) {
-            var ImagePath = iter ? 'http://119.29.243.158:6060/mansionImage/' : 'http://119.29.243.158:6060/roomImage/';
-            for (var i = 0; i < el.length; i++) {
-                el[i][key] = ImagePath + el[i][key];
+        ImgModifier: function(el, key, pathIter, ObjKey) {
+            var ImagePath = pathIter ? 'http://119.29.243.158:6060/mansionImage/' : 'http://119.29.243.158:6060/roomImage/';
+            for (var i = 0; i < el[key].length; i++) {
+                if (ObjKey) {
+                    el[key][i][type] = ImagePath + el[key][i][type];
+                } else {
+                    el[key][i] = ImagePath + el[key][i];
+                }
             }
-            return el;
         },
     },
     created: function() {
-        var v = this;
-        var id = window.location.href.split('?')[1].split('=')[1];
+        var v = this,
+            url = window.location.href;
+        var id = url.split('?')[1] ? url.split('?')[1].split('=')[1] : '';
         $.ajax({
             method: 'post',
             data: '',
@@ -86,8 +90,8 @@ new Vue({
                 v.ImgModifier(u, 'mansionPictures', true);
 
                 // list.vue图片路径修正
-                v.ImgModifier(u, 'roomPictures');
-                v.ImgModifier(u, 'rooms');
+                v.ImgModifier(u, 'roomPictures', false);
+                v.ImgModifier(u, 'rooms', false, 'roomPicture');
 
                 v.totalData = u;
 
@@ -101,8 +105,6 @@ new Vue({
 
                 map.enableScrollWheelZoom();
                 map.enableKeyboard();
-
-                console.log(u);
             }
         });
 

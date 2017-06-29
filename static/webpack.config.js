@@ -8,7 +8,7 @@ module.exports = {
         'index': './nativeJs/index.js',
         'detail': './nativeJs/detail.js',
         'pag': './nativeJs/pag.js',
-        'info': './nativeJs/info.js'
+        'detail-info': './nativeJs/detail-info.js'
     },
     output: {
         path: path.resolve(__dirname, './js'),

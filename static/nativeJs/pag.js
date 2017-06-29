@@ -2,7 +2,7 @@ import Vue from 'vue';
 import $ from 'jquery';
 import top from '../vue/common/head.vue';
 import foot from '../vue/common/foot.vue';
-import '../nativeJs/page';
+require('../js/jquery.pagination');
 
 new Vue({
     el: '#app',
@@ -29,6 +29,7 @@ new Vue({
         // 区域二、三级菜单
         flPos2Show: false,
         flPos3Show: false,
+        list: [],
     },
     methods: {
         setSel: function(id, index) {
@@ -76,6 +77,30 @@ new Vue({
                     break;
             }
         },
+        ImgModifier: function(el, key, iter) {
+            var ImagePath = iter ? 'http://119.29.243.158:6060/mansionImage/' : 'http://119.29.243.158:6060/roomImage/';
+            for (var i = 0; i < el.length; i++) {
+                el[i][key] = ImagePath + el[i][key];
+            }
+        },
+        hrefModifier: function(el, iter, key) {
+            var baseUrl = iter ? './detail.html?id=' : './detail-info.html?id=';
+            for (var i = 0; i < el.length; i++) {
+                if (key) {
+                    for (var j = 0; j < el[i][key].length; j++) {
+                        el[i][key][j].href = baseUrl + el[i][key][j].id;
+                    }
+                } else {
+                    el[i].href = baseUrl + el[i].id;
+                }
+            }
+        },
+        init: function(u) {
+            this.ImgModifier(u, 'titlePicture', true);
+            this.hrefModifier(u, true);
+            this.hrefModifier(u, false, 'rooms');
+            this.list = u;
+        }
     },
     created: function() {
         var v = this;
@@ -90,24 +115,30 @@ new Vue({
             }
         });
 
-        // $.ajax({
-        //     method: 'post',
-        //     data: '',
-        //     url: '/api/mansionList?page=1&pageSize=10',
-        //     success: function(data) {
-        //         console.log(data);
-        //     }
-        // });
-
-        $(".pageBox").pageFun({
-            interFace: "/api/mansionList?page=1&pageSize=10",
-            displayCount: 9,
-            maxPage: 5,
-            dataFun: function(data) {
-                console.log(data);
-            },
-            pageFun: function(i) {
-                console.log(i);
+        $.ajax({
+            method: 'get',
+            url: '/api/mansionList?page=1&pageSize=9',
+            success: function(data) {
+                $('.M-box').pagination({
+                    totalData: data.total,
+                    showData: 9,
+                    callback: function(api) {
+                        var index = api.getCurrent();
+                        $.ajax({
+                            method: 'get',
+                            url: '/api/mansionList?page=' + index + '&pageSize=9',
+                            success: function(data) {
+                                if (data.success) {
+                                    v.init(data.aaData);
+                                }
+                            }
+                        });
+                    }
+                }, function(api) {
+                    if (data.success) {
+                        v.init(data.aaData);
+                    }
+                });
             }
         });
     },

@@ -7,9 +7,6 @@ import orderInfo from '../vue/common/order.vue';
 import list from '../vue/detail/list.vue';
 import slide from '../vue/common/slide.vue';
 
-var mansionImagePath = 'http://119.29.243.158:6060/mansionImage/',
-    roomImagePath = 'http://119.29.243.158:6060/roomImage/';
-
 new Vue({
     el: "#app",
     components: {
@@ -63,6 +60,13 @@ new Vue({
         maskHide: function() {
             this.maskIter = false;
         },
+        ImgModifier: function(el, key, iter) {
+            var ImagePath = iter ? 'http://119.29.243.158:6060/mansionImage/' : 'http://119.29.243.158:6060/roomImage/';
+            for (var i = 0; i < el.length; i++) {
+                el[i][key] = ImagePath + el[i][key];
+            }
+            return el;
+        },
     },
     created: function() {
         var v = this;
@@ -79,17 +83,11 @@ new Vue({
                 }
 
                 // 大图片路径修正
-                for (i = 0; i < u.mansionPictures.length; i++) {
-                    u.mansionPictures[i] = mansionImagePath + u.mansionPictures[i];
-                }
+                v.ImgModifier(u, 'mansionPictures', true);
 
                 // list.vue图片路径修正
-                for (i = 0; i < u.roomPictures.length; i++) {
-                    u.roomPictures[i] = roomImagePath + u.roomPictures[i];
-                }
-                for (i = 0; i < u.rooms.length; i++) {
-                    u.rooms[i].roomPicture = roomImagePath + u.rooms[i].roomPicture;
-                }
+                v.ImgModifier(u, 'roomPictures');
+                v.ImgModifier(u, 'rooms');
 
                 v.totalData = u;
 
@@ -114,6 +112,6 @@ new Vue({
             success: function(u) {
                 v.Info = u;
             }
-        })
+        });
     }
 });

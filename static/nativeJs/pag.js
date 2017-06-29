@@ -123,6 +123,14 @@ new Vue({
                     this.simplePriceIter = null;
                     break;
             }
+            $.ajax({
+                method: 'post',
+                url: '/api/mansionList?page=1&pageSize=9',
+                data: this.ajaxData,
+                success: function() {
+
+                }
+            })
         },
         ImgModifier: function(el, key, iter) {
             var ImagePath = iter ? 'http://119.29.243.158:6060/mansionImage/' : 'http://119.29.243.158:6060/roomImage/';
@@ -178,14 +186,12 @@ new Vue({
                     callback: function(api) {
                         var index = api.getCurrent();
                         $.ajax({
-                            method: 'post',
-                            data: this.ajaxData,
+                            method: 'get',
                             url: '/api/mansionList?page=' + index + '&pageSize=9',
                             success: function(data) {
                                 if (data.success) {
                                     v.noData = false;
                                     v.init(data.aaData);
-                                    console.log(v.flPos1, v.flPos2, v.flPos3);
                                 } else {
                                     v.noData = true;
                                 }

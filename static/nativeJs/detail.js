@@ -78,6 +78,16 @@ new Vue({
                 el[key][i].href = baseUrl + el[key][i].id + '&mansionId=' + id;
             }
         },
+        scroll: function(iter) {
+            switch (iter) {
+                case 1:
+                    $('body').animate({ scrollTop: $('#buildingIntro')[0].offsetTop + 'px' }, 500);
+                    break;
+                case 2:
+                    $('body').animate({ scrollTop: $('#buildingSur')[0].offsetTop + 'px' }, 500);
+                    break;
+            }
+        }
     },
     created: function() {
         var v = this,

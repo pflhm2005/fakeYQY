@@ -10351,7 +10351,7 @@ exports = module.exports = __webpack_require__(0)(undefined);
 
 
 // module
-exports.push([module.i, "\n.head {\n    width: 100%;\n}\n.top {\n    height: 74px;\n}\n.top>.logo {\n    line-height: 74px;\n}\n.top>.logo>img {\n    vertical-align: middle;\n}\n.top>.t-tel {\n    color: #525252;\n    float: right;\n}\n.top>.t-tel>.icon {\n    margin-top: 18px;\n    font-size: 12px;\n    width: 85px;\n    height: 38px;\n}\n.top>.t-tel>.icon>img {\n    margin-right: 5px;\n    float: left;\n}\n.top>.t-tel>.number {\n    margin-top: 22px;\n    font-size: 24px;\n    height: 30px;\n    line-height: 30px;\n    border-left: 1px solid #ccc;\n    margin-left: 10px;\n    padding-left: 10px;\n}\n.tab {\n    height: 48px;\n}\n.tab>.tab-list {\n    height: 100%;\n    margin-left: 678px;\n    background-color: #fb565c;\n}\n.tab>.tab-list>.trangle {\n    width: 0;\n    height: 0;\n    border-width: 48px 29px 0px 0px;\n    border-color: transparent #fb565c #fb565c transparent;\n    border-style: solid;\n    background-color: #fff;\n}\n.tab>.tab-list>li {\n    height: 100%;\n    float: left;\n}\n.tab>.tab-list>li>a {\n    font-size: 15px;\n    padding: 14px 20px;\n    color: #fff;\n    display: inline-block;\n    border-right: 1px solid #fc6b70;\n}\n", ""]);
+exports.push([module.i, "\n.head {\n  width: 100%;\n}\n.top {\n  height: 74px;\n}\n.top > .logo {\n  line-height: 74px;\n}\n.top > .logo > img {\n  vertical-align: middle;\n}\n.top > .t-tel {\n  color: #525252;\n  float: right;\n}\n.top > .t-tel > .icon {\n  margin-top: 18px;\n  font-size: 12px;\n  width: 85px;\n  height: 38px;\n}\n.top > .t-tel > .icon > img {\n  margin-right: 5px;\n  float: left;\n}\n.top > .t-tel > .number {\n  margin-top: 22px;\n  font-size: 24px;\n  height: 30px;\n  line-height: 30px;\n  border-left: 1px solid #ccc;\n  margin-left: 10px;\n  padding-left: 10px;\n}\n.tab {\n  height: 48px;\n}\n.tab > .tab-list {\n  height: 100%;\n  margin-left: 678px;\n  background-color: #fb565c;\n}\n.tab > .tab-list > .trangle {\n  width: 0;\n  height: 0;\n  border-width: 48px 29px 0px 0px;\n  border-color: transparent #fb565c #fb565c transparent;\n  border-style: solid;\n  background-color: #fff;\n}\n.tab > .tab-list > li {\n  height: 100%;\n  float: left;\n}\n.tab > .tab-list > li a {\n  font-size: 15px;\n  padding: 14px 20px;\n  color: #fff;\n  display: inline-block;\n  border-right: 1px solid #fc6b70;\n}\n", ""]);
 
 // exports
 
@@ -10409,7 +10409,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "trangle"
   }), _vm._v(" "), _c('li', [_c('a', {
     attrs: {
-      "href": "#"
+      "href": "./index.html"
     }
   }, [_vm._v("主页")])]), _vm._v(" "), _c('li', [_c('a', {
     attrs: {
@@ -10465,13 +10465,13 @@ var content = __webpack_require__(10);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(2)("1991d96e", content, false);
+var update = __webpack_require__(2)("71716a9f", content, false);
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-389904e8\",\"scoped\":false,\"hasInlineConfig\":false}!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./head.vue", function() {
-     var newContent = require("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-389904e8\",\"scoped\":false,\"hasInlineConfig\":false}!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./head.vue");
+   module.hot.accept("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-389904e8\",\"scoped\":false,\"hasInlineConfig\":false}!../../../node_modules/less-loader/dist/index.js!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./head.vue", function() {
+     var newContent = require("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-389904e8\",\"scoped\":false,\"hasInlineConfig\":false}!../../../node_modules/less-loader/dist/index.js!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./head.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -11626,6 +11626,16 @@ new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
             var baseUrl = './detail-info.html?roomId=';
             for (var i = 0; i < el[key].length; i++) {
                 el[key][i].href = baseUrl + el[key][i].id + '&mansionId=' + id;
+            }
+        },
+        scroll: function scroll(iter) {
+            switch (iter) {
+                case 1:
+                    __WEBPACK_IMPORTED_MODULE_1_jquery___default()('body').animate({ scrollTop: __WEBPACK_IMPORTED_MODULE_1_jquery___default()('#buildingIntro')[0].offsetTop + 'px' }, 500);
+                    break;
+                case 2:
+                    __WEBPACK_IMPORTED_MODULE_1_jquery___default()('body').animate({ scrollTop: __WEBPACK_IMPORTED_MODULE_1_jquery___default()('#buildingSur')[0].offsetTop + 'px' }, 500);
+                    break;
             }
         }
     },

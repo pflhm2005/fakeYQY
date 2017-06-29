@@ -62,13 +62,13 @@
                         <div class="f-list fr">
                             <div class="f-list-item f-l-1 
                             clearfix">
-                                <a href="javascript:void(0);" :class='{on:priceTypeIter === 0}' @click='priceTypeIter = 1'>单价</a>
-                                <a href="javascript:void(0);" :class='{on:priceTypeIter === 1}' @click='priceTypeIter = 2'>总价</a>
+                                <a href="javascript:void(0);" :class='{on:priceTypeIter === 0}' @click='priceTypeIter = 0'>单价</a>
+                                <a href="javascript:void(0);" :class='{on:priceTypeIter === 1}' @click='priceTypeIter = 1'>总价</a>
                             </div>
-                            <div class="f-list-item f-l-2 clearfix" v-show="priceTypeIter === 1">
+                            <div class="f-list-item f-l-2 clearfix" v-show="priceTypeIter === 0">
                                 <a href="javascript:void(0);" v-for="(item,index) in flSimplePrice" @click='setSel(4,index)' :class='{on:simplePriceIter === index}'>{{item}}</a>
                             </div>
-                            <div class="f-list-item f-l-2 clearfix" v-show="priceTypeIter === 2">
+                            <div class="f-list-item f-l-2 clearfix" v-show="priceTypeIter === 1">
                                 <a href="javascript:void(0);" v-for="(item,index) in flTotalPrice" @click='setSel(5,index)' :class='{on:totalPriceIter === index}'>{{item}}</a>
                             </div>
                         </div>

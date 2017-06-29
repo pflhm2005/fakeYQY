@@ -19,7 +19,7 @@
             <ul class='tab-list'>
                 <li class='trangle'></li>
                 <li>
-                    <a href="#">主页</a>
+                    <a href="./index.html">主页</a>
                 </li>
                 <li>
                     <a href="#">园区招聘</a>
@@ -44,79 +44,69 @@
         }
     }
 </script>
-<style>
+<style lang='less'>
     .head {
         width: 100%;
     }
     
     .top {
         height: 74px;
-    }
-    
-    .top>.logo {
-        line-height: 74px;
-    }
-    
-    .top>.logo>img {
-        vertical-align: middle;
-    }
-    
-    .top>.t-tel {
-        color: #525252;
-        float: right;
-    }
-    
-    .top>.t-tel>.icon {
-        margin-top: 18px;
-        font-size: 12px;
-        width: 85px;
-        height: 38px;
-    }
-    
-    .top>.t-tel>.icon>img {
-        margin-right: 5px;
-        float: left;
-    }
-    
-    .top>.t-tel>.number {
-        margin-top: 22px;
-        font-size: 24px;
-        height: 30px;
-        line-height: 30px;
-        border-left: 1px solid #ccc;
-        margin-left: 10px;
-        padding-left: 10px;
+        >.logo {
+            line-height: 74px;
+            >img {
+                vertical-align: middle;
+            }
+        }
+        >.t-tel {
+            color: #525252;
+            float: right;
+            >.icon {
+                margin-top: 18px;
+                font-size: 12px;
+                width: 85px;
+                height: 38px;
+                >img {
+                    margin-right: 5px;
+                    float: left;
+                }
+            }
+            >.number {
+                margin-top: 22px;
+                font-size: 24px;
+                height: 30px;
+                line-height: 30px;
+                border-left: 1px solid #ccc;
+                margin-left: 10px;
+                padding-left: 10px;
+            }
+        }
     }
     
     .tab {
         height: 48px;
-    }
-    
-    .tab>.tab-list {
-        height: 100%;
-        margin-left: 678px;
-        background-color: #fb565c;
-    }
-    
-    .tab>.tab-list>.trangle {
-        width: 0;
-        height: 0;
-        border-width: 48px 29px 0px 0px;
-        border-color: transparent #fb565c #fb565c transparent;
-        border-style: solid;
-        background-color: #fff;
-    }
-    
-    .tab>.tab-list>li {
-        height: 100%;
-        float: left;
-    }
-    
-    .tab>.tab-list>li>a {
-        font-size: 15px;
-        padding: 14px 20px;
-        color: #fff;
-        display: inline-block;
-        border-right: 1px solid #fc6b70;
+        >.tab-list {
+            height: 100%;
+            margin-left: 678px;
+            background-color: #fb565c;
+            >.trangle {
+                width: 0;
+                height: 0;
+                border-width: 48px 29px 0px 0px;
+                border-color: transparent #fb565c #fb565c transparent;
+                border-style: solid;
+                background-color: #fff;
+            }
+            >li {
+                height: 100%;
+                float: left;
+                a {
+                    font-size: 15px;
+                    padding: 14px 20px;
+                    color: #fff;
+                    display: inline-block;
+                    border-right: 1px solid #fc6b70;
+                }
+            }
+        }
     }
 </style>

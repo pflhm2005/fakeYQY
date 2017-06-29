@@ -45,7 +45,7 @@
             </div>
             <!--大图和地图-->
             <div class="big-pic clearfix">
-                <div class="img fl" @click='maskShow()'>
+                <div class="img fl" @click='maskShow(0,0)'>
                     <div class="slide">
                         <template v-for="item in totalData.mansionPictures">
                             <div class="slide-item">
@@ -89,7 +89,7 @@
                 <!--户型展示-->
                 <div class="house-content">
                     <!--大厦列表-->
-                    <list :count='totalData.countRooms' :pic='totalData.roomPictures' :list='totalData.rooms'></list>
+                    <list :count='totalData.countRooms' :pic='totalData.roomPictures' :list='totalData.rooms' @lmaskshow='maskShow(0,1)'></list>
                     <!--大厦简介-->
                     <info :info='Info' id='buildingIntro'></info>
                     <!--十分钟步行圈-->

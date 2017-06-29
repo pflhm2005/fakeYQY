@@ -27,7 +27,7 @@
     export default {
         data: function() {
             return {
-                slideIter: 0,
+                slideIter: this.src.index || 0,
             }
         },
         methods: {
@@ -35,7 +35,7 @@
                 this.slideIter += iter;
                 $('.slide-wrapper').animate({
                     'left': this.slideIter * 1910 + 'px'
-                }, 500);
+                }, 200);
             },
             close: function() {
                 this.$emit('close');
@@ -81,7 +81,7 @@
                     margin-left: 350px;
                     position: relative;
                     height: 100%;
-                    width: 1000%;
+                    width: 10000%;
                     >.slide-item {
                         height: 100%;
                         float: left;

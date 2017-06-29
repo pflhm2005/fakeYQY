@@ -21,7 +21,7 @@
                     <div class="hpl-content clearfix" :style='slideStyle'>
                         <template v-for="(item,index) in pic">
                             <div class="list-item" :class='{opc:index === slideIter+4}'>
-                                <a href="javascript:void(0);">
+                                <a href="javascript:void(0);" @click='lmaskshow(index)'>
                                     <img :src="item" alt="">
                                 </a>
                             </div>
@@ -97,6 +97,9 @@
             },
             changeList:function(index){
                 this.titleIter = index;
+            },
+            lmaskshow:function(index){
+                this.$emit('lmaskshow',index);
             }
         },
         computed:{

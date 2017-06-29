@@ -15,7 +15,7 @@ var compiler = webpack({
         'index': './static/nativeJs/index.js',
         'detail': './static/nativeJs/detail.js',
         'pag': './static/nativeJs/pag.js',
-        'info': './static/nativeJs/info.js'
+        'detail-info': './static/nativeJs/detail-info.js'
     },
     output: {
         path: path.resolve(__dirname, './js'),

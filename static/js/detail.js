@@ -11374,7 +11374,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
-            slideIter: 0
+            slideIter: this.src.index || 0
         };
     },
     methods: {
@@ -11382,7 +11382,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.slideIter += iter;
             __WEBPACK_IMPORTED_MODULE_0_jquery___default()('.slide-wrapper').animate({
                 'left': this.slideIter * 1910 + 'px'
-            }, 500);
+            }, 200);
         },
         close: function close() {
             this.$emit('close');
@@ -11506,6 +11506,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         changeList: function changeList(index) {
             this.titleIter = index;
+        },
+        lmaskshow: function lmaskshow(index) {
+            this.$emit('lmaskshow', index);
         }
     },
     computed: {
@@ -11592,7 +11595,8 @@ new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
 
         },
         // 大厦简介
-        Info: ''
+        Info: '',
+        picNameArr: ['mansionPictures', 'roomPictures']
     },
     computed: {
         len: function len() {
@@ -11600,18 +11604,19 @@ new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
         }
     },
     methods: {
-        maskShow: function maskShow() {
-            this.dataPic = this.totalData.mansionPictures;
+        maskShow: function maskShow(index, type) {
+            this.dataPic = this.totalData[this.picNameArr[type]];
+            this.dataPic.index = index;
             this.maskIter = true;
         },
         maskHide: function maskHide() {
             this.maskIter = false;
         },
-        ImgModifier: function ImgModifier(el, key, pathIter, type) {
+        ImgModifier: function ImgModifier(el, key, pathIter, ObjKey) {
             var ImagePath = pathIter ? 'http://119.29.243.158:6060/mansionImage/' : 'http://119.29.243.158:6060/roomImage/';
             for (var i = 0; i < el[key].length; i++) {
-                if (type) {
-                    el[key][i][type] = ImagePath + el[key][i][type];
+                if (ObjKey) {
+                    el[key][i][ObjKey] = ImagePath + el[key][i][ObjKey];
                 } else {
                     el[key][i] = ImagePath + el[key][i];
                 }
@@ -11639,8 +11644,6 @@ new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
                 // list.vue图片路径修正
                 v.ImgModifier(u, 'roomPictures', false);
                 v.ImgModifier(u, 'rooms', false, 'roomPicture');
-
-                console.log(u);
 
                 v.totalData = u;
 
@@ -11692,7 +11695,7 @@ exports = module.exports = __webpack_require__(0)(undefined);
 
 
 // module
-exports.push([module.i, "\n.window-slide {\n  position: fixed;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  overflow: hidden;\n  z-index: 1000;\n  background: rgba(0, 0, 0, 0.85);\n  padding: 1px;\n}\n.window-slide > .mask-container {\n  margin-top: 6%;\n  height: 76%;\n}\n.window-slide > .mask-container > .slide-container {\n  width: 100%;\n  height: 100%;\n  margin: 0 auto;\n  border-radius: 4px;\n  overflow: hidden;\n  position: relative;\n}\n.window-slide > .mask-container > .slide-container > .slide-wrapper {\n  margin-left: 350px;\n  position: relative;\n  height: 100%;\n  width: 1000%;\n}\n.window-slide > .mask-container > .slide-container > .slide-wrapper > .slide-item {\n  height: 100%;\n  float: left;\n  padding-right: 740px;\n}\n.window-slide > .mask-container > .slide-container > .slide-wrapper > .slide-item > img {\n  width: 1184px;\n  height: 100%;\n}\n.window-slide > .mask-container > .slide-container > .btn {\n  position: absolute;\n  top: 0;\n  width: 200px;\n  height: 100%;\n  cursor: pointer;\n}\n.window-slide > .mask-container > .slide-container > .btn > i {\n  top: 40%;\n  position: relative;\n  color: #fff;\n  font-size: 60px;\n  left: 25%;\n}\n.window-slide > .mask-container > .slide-container > .btn-l {\n  left: 10px;\n}\n.window-slide > .mask-container > .slide-container > .btn-r {\n  right: 10px;\n}\n.window-slide > .swiper-wrapper-title {\n  text-align: center;\n  line-height: 30px;\n  color: #fff;\n  font-size: 12px;\n  font-weight: 500;\n  opacity: .4;\n  width: 100%;\n}\n.window-slide > .swiper-wrapper-title > .tit {\n  color: #fff;\n  font-size: 12px;\n  font-weight: 500;\n}\n.window-slide > .close {\n  position: absolute;\n  right: 50px;\n  top: 50px;\n  cursor: pointer;\n}\n.window-slide > .close > i {\n  color: #fff;\n  font-size: 30px;\n}\n", ""]);
+exports.push([module.i, "\n.window-slide {\n  position: fixed;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  overflow: hidden;\n  z-index: 1000;\n  background: rgba(0, 0, 0, 0.85);\n  padding: 1px;\n}\n.window-slide > .mask-container {\n  margin-top: 6%;\n  height: 76%;\n}\n.window-slide > .mask-container > .slide-container {\n  width: 100%;\n  height: 100%;\n  margin: 0 auto;\n  border-radius: 4px;\n  overflow: hidden;\n  position: relative;\n}\n.window-slide > .mask-container > .slide-container > .slide-wrapper {\n  margin-left: 350px;\n  position: relative;\n  height: 100%;\n  width: 10000%;\n}\n.window-slide > .mask-container > .slide-container > .slide-wrapper > .slide-item {\n  height: 100%;\n  float: left;\n  padding-right: 740px;\n}\n.window-slide > .mask-container > .slide-container > .slide-wrapper > .slide-item > img {\n  width: 1184px;\n  height: 100%;\n}\n.window-slide > .mask-container > .slide-container > .btn {\n  position: absolute;\n  top: 0;\n  width: 200px;\n  height: 100%;\n  cursor: pointer;\n}\n.window-slide > .mask-container > .slide-container > .btn > i {\n  top: 40%;\n  position: relative;\n  color: #fff;\n  font-size: 60px;\n  left: 25%;\n}\n.window-slide > .mask-container > .slide-container > .btn-l {\n  left: 10px;\n}\n.window-slide > .mask-container > .slide-container > .btn-r {\n  right: 10px;\n}\n.window-slide > .swiper-wrapper-title {\n  text-align: center;\n  line-height: 30px;\n  color: #fff;\n  font-size: 12px;\n  font-weight: 500;\n  opacity: .4;\n  width: 100%;\n}\n.window-slide > .swiper-wrapper-title > .tit {\n  color: #fff;\n  font-size: 12px;\n  font-weight: 500;\n}\n.window-slide > .close {\n  position: absolute;\n  right: 50px;\n  top: 50px;\n  cursor: pointer;\n}\n.window-slide > .close > i {\n  color: #fff;\n  font-size: 30px;\n}\n", ""]);
 
 // exports
 
@@ -11777,6 +11780,11 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }, [_c('a', {
       attrs: {
         "href": "javascript:void(0);"
+      },
+      on: {
+        "click": function($event) {
+          _vm.lmaskshow(index)
+        }
       }
     }, [_c('img', {
       attrs: {

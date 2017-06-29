@@ -45,7 +45,8 @@ new Vue({
 
         },
         // 大厦简介
-        Info: ''
+        Info: '',
+        picNameArr: ['mansionPictures', 'roomPictures']
     },
     computed: {
         len: function() {
@@ -53,8 +54,9 @@ new Vue({
         }
     },
     methods: {
-        maskShow: function() {
-            this.dataPic = this.totalData.mansionPictures;
+        maskShow: function(index, type) {
+            this.dataPic = this.totalData[this.picNameArr[type]];
+            this.dataPic.index = index;
             this.maskIter = true;
         },
         maskHide: function() {
@@ -64,7 +66,7 @@ new Vue({
             var ImagePath = pathIter ? 'http://119.29.243.158:6060/mansionImage/' : 'http://119.29.243.158:6060/roomImage/';
             for (var i = 0; i < el[key].length; i++) {
                 if (ObjKey) {
-                    el[key][i][type] = ImagePath + el[key][i][type];
+                    el[key][i][ObjKey] = ImagePath + el[key][i][ObjKey];
                 } else {
                     el[key][i] = ImagePath + el[key][i];
                 }

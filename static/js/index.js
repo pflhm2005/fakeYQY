@@ -10846,6 +10846,7 @@ new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
             url: '/api/searchData',
             success: function success(data) {
                 var u = data.data;
+                console.log(u);
                 v.regionArr = u;
             }
         });

@@ -44,7 +44,7 @@
             <div class="hl-list">
                 <template v-for="item in list">
                     <div class="hll-item">
-                        <a href="#" class='info-list'>
+                        <a :href="item.href" class='info-list'>
                             <div class='hlt-item hlt-photo'>
                                 <img :src="item.roomPicture" alt="">
                             </div>

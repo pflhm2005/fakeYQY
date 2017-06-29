@@ -15,6 +15,7 @@ new Vue({
     },
     data: {
         Info: [],
+        totalData: '',
     },
     methods: {
 
@@ -25,12 +26,22 @@ new Vue({
     created: function() {
         var v = this,
             url = window.location.href;
-        var id = url.split('?')[1] ? url.split('?')[1].split('=')[1] : '';
+        var id = url.split('?')[1] ? url.split('?')[1].split('&') : '';
+        var roomId = id[0].split('=')[1],
+            mansionId = id[1].split('=')[1];
         $.ajax({
             method: 'get',
-            url: '/api/mansionSummary?id=' + id,
+            url: '/api/mansionSummary?id=' + mansionId,
             success: function(u) {
                 v.Info = u;
+            }
+        });
+
+        $.ajax({
+            method: 'get',
+            url: '/api/roomDetails?id=' + roomId,
+            success: function(u) {
+                v.totalData = u;
             }
         });
     }

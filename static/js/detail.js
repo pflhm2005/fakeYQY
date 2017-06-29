@@ -11621,6 +11621,12 @@ new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
                     el[key][i] = ImagePath + el[key][i];
                 }
             }
+        },
+        hrefModifier: function hrefModifier(el, key, id) {
+            var baseUrl = './detail-info.html?roomId=';
+            for (var i = 0; i < el[key].length; i++) {
+                el[key][i].href = baseUrl + el[key][i].id + '&mansionId=' + id;
+            }
         }
     },
     created: function created() {
@@ -11644,6 +11650,10 @@ new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
                 // list.vue图片路径修正
                 v.ImgModifier(u, 'roomPictures', false);
                 v.ImgModifier(u, 'rooms', false, 'roomPicture');
+
+                // list.vue跳转路径添加
+                v.hrefModifier(u, 'rooms', id);
+                console.log(u);
 
                 v.totalData = u;
 
@@ -11840,7 +11850,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }, [_c('a', {
       staticClass: "info-list",
       attrs: {
-        "href": "#"
+        "href": item.href
       }
     }, [_c('div', {
       staticClass: "hlt-item hlt-photo"

@@ -33,26 +33,26 @@
             </div>
             <div class="intro fr">
                 <div class="i-title">
-                    低层· 精装· 308
+                    {{totalData.belongFloor}}楼· {{totalData.fitment}}· {{totalData.area}}
                     <span>m²</span></div>
                 <div class="i-price">
                     <div class="month">
-                        <div class="unit">80</div>
+                        <div class="unit">{{totalData.unitPrice}}</div>
                         <span>元/m²/月</span>
                     </div>
-                    <div class="total">总价 2.46 万元/月</div>
+                    <div class="total">总价 {{totalData.totalPrice}} 万元/月</div>
                     <div class="update">
-                        <span>22小时前</span>更新
+                        <span>{{totalData.updateTime}}</span>更新
                     </div>
                 </div>
                 <div class="i-tip">
                     <div class="it-list clearfix">
                         <div class="itl-title">物业费用：</div>
-                        <div class="itl-content">5 元/m²/月</div>
+                        <div class="itl-content">{{Info.tntPrice}} 元/m²/月</div>
                     </div>
                     <div class="it-list clearfix">
                         <div class="itl-title">空调费用：</div>
-                        <div class="itl-content">10</div>
+                        <div class="itl-content">{{Info.airConditionCost}}</div>
                     </div>
                     <div class="it-list clearfix">
                         <div class="itl-title">停车费用：</div>
@@ -62,7 +62,7 @@
                 <div class="i-tip">
                     <div class="it-list clearfix">
                         <div class="itl-title">楼层高度：</div>
-                        <div class="itl-content">标准层高3.5m；净层高3.2m</div>
+                        <div class="itl-content">{{Info.heightDesc}}</div>
                     </div>
                     <div class="it-list clearfix">
                         <div class="itl-title">窗面朝向：</div>

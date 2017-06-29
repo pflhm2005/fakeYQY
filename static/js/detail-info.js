@@ -11287,19 +11287,30 @@ new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
         'orderInfo': __WEBPACK_IMPORTED_MODULE_5__vue_common_order_vue___default.a
     },
     data: {
-        Info: []
+        Info: [],
+        totalData: ''
     },
     methods: {},
     computed: {},
     created: function created() {
         var v = this,
             url = window.location.href;
-        var id = url.split('?')[1] ? url.split('?')[1].split('=')[1] : '';
+        var id = url.split('?')[1] ? url.split('?')[1].split('&') : '';
+        var roomId = id[0].split('=')[1],
+            mansionId = id[1].split('=')[1];
         __WEBPACK_IMPORTED_MODULE_1_jquery___default.a.ajax({
             method: 'get',
-            url: '/api/mansionSummary?id=' + id,
+            url: '/api/mansionSummary?id=' + mansionId,
             success: function success(u) {
                 v.Info = u;
+            }
+        });
+
+        __WEBPACK_IMPORTED_MODULE_1_jquery___default.a.ajax({
+            method: 'get',
+            url: '/api/roomDetails?id=' + roomId,
+            success: function success(u) {
+                v.totalData = u;
             }
         });
     }

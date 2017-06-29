@@ -61,6 +61,7 @@ new Vue({
             url: '/api/searchData',
             success: function(data) {
                 var u = data.data;
+                console.log(u);
                 v.regionArr = u;
             }
         });

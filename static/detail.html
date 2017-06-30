@@ -123,18 +123,20 @@
                     <div class="house-surround" id='buildingSur'>
                         <h3>周边大厦</h3>
                         <div class="hs-list">
-                            <div class="hs-btn btn-l"><i class='iconfont icon-shangyiyehoutuifanhui'></i></div>
-                            <div class="hs-btn btn-r"><i class='iconfont icon-xiayiyeqianjinchakangengduo'></i></div>
-                            <div class="hs-slide">
-                                <div class="hs-pic">
-                                    <template v-for="item in totalData.around">
+                            <div class="hs-btn btn-l" v-show="slideIter !== 0" @click='prev()'><i class='iconfont icon-shangyiyehoutuifanhui'></i></div>
+                            <div class="hs-btn btn-r" v-show='arroundLen>4 && slideIter<arroundLen-3' @click='next()'><i class='iconfont icon-xiayiyeqianjinchakangengduo'></i></div>
+                            <div class="hs-content">
+                                <div class="hs-slide" :style='slideStyle'>
+                                    <div class="hs-pic">
+                                        <template v-for="(item,index) in totalData.around">
                                         <a :href="item.href">
-                                            <img :src="item.titlePicture" alt="">
+                                            <img :src="item.titlePicture" alt=""  :class='{opc:index === slideIter+3}'>
                                             <div class='hs-name' v-cloak>{{item.name}}</div>
                                             <div class='hs-price' v-cloak>{{item.price}}元/m²/月</div>
                                             <div class='hs-dis' v-cloak>距离{{item.distance}}米</div>
                                         </a>
                                     </template>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -145,18 +147,6 @@
         <foot></foot>
     </div>
     <script src='./js/detail.js'></script>
-    <!--<script>
-        var map = new BMap.Map("pos_img");
-
-        var point = new BMap.Point(1, 1);
-        map.centerAndZoom(point, 16);
-
-        var marker = new BMap.Marker(point);
-        map.addOverlay(marker);
-
-        map.enableScrollWheelZoom();
-        map.enableKeyboard();
-    </script>-->
 </body>
 
 </html>

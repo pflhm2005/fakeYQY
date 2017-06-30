@@ -42,8 +42,8 @@
         <div class='hlt-item hlt-update' @click='sort("updateTime")'>更新<i class='iconfont icon-biaotou-kepaixu'></i></div>
     </div>
     <div class="hl-list">
-        <template v-for="item in list">
-                    <div class="hll-item">
+        <template v-for="(item,index) in list">
+                    <div class="hll-item" v-show="index < showNum">
                         <a :href="item.href" class='info-list'>
                             <div class='hlt-item hlt-photo'>
                                 <img :src="item.roomPicture" alt="">
@@ -66,7 +66,7 @@
                         </a>
                     </div>
                 </template>
-        <a href="javascript:void(0);" class='btn-more'>查看更多</a>
+        <a href="javascript:void(0);" v-show="showNum < list.length" class='btn-more' @click='showMore'>查看更多</a>
     </div>
 </div>
 </div>
@@ -82,7 +82,8 @@
                     price: 1,
                     updateTime: 1
                 },
-                priceIter:0,
+                priceIter: 0,
+                showNum: 9,
             }
         },
         props: ['count', 'pic', 'list'],
@@ -107,11 +108,15 @@
             lmaskshow: function(index) {
                 this.$emit('lmaskshow', index);
             },
-            showSimplePrice:function(){
+            showSimplePrice: function() {
                 this.priceIter = 0;
             },
-            showTotalPrice:function(){
+            showTotalPrice: function() {
                 this.priceIter = 1;
+            },
+            showMore: function() {
+                this.showNum += 9;
+                console.log(this.showNum);
             }
         },
         computed: {

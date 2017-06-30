@@ -61,7 +61,7 @@ new Vue({
         flPos3Show: false,
         list: [],
         // 是否有筛选信息
-        noData: false
+        noData: false,
     },
     computed: {
         ajaxData: function() {
@@ -127,8 +127,12 @@ new Vue({
             $.ajax({
                 method: 'post',
                 url: '/api/mansionList?page=1&pageSize=9',
-                data: this.ajaxData,
+                data: v.ajaxData,
                 success: function(data) {
+                    $('.M-box').pagination({
+                        totalData: data.total,
+                        showData: 9
+                    });
                     if (!!data.total) {
                         v.noData = false;
                         v.init(data.aaData);
@@ -160,7 +164,6 @@ new Vue({
             }
         },
         init: function(u) {
-            console.log(u);
             this.ImgModifier(u, 'titlePicture', true);
             this.hrefModifier(u, true);
             this.hrefModifier(u, false, 'rooms');

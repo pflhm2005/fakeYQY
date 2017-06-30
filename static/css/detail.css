@@ -242,8 +242,8 @@
   overflow: hidden;
 }
 #app > .content > .main > .house-content > .house-surround > .hs-list {
-  width: 694px;
   position: relative;
+  width: 820px;
 }
 #app > .content > .main > .house-content > .house-surround > .hs-list > .hs-btn {
   position: absolute;
@@ -262,38 +262,42 @@
 #app > .content > .main > .house-content > .house-surround > .hs-list > .btn-r {
   right: 0px;
 }
-#app > .content > .main > .house-content > .house-surround > .hs-list > .hs-slide {
+#app > .content > .main > .house-content > .house-surround > .hs-list > .hs-content {
   width: 800px;
   overflow: hidden;
 }
-#app > .content > .main > .house-content > .house-surround > .hs-list > .hs-slide > .hs-pic {
+#app > .content > .main > .house-content > .house-surround > .hs-list > .hs-content > .hs-slide {
   width: 9999px;
+  position: relative;
 }
-#app > .content > .main > .house-content > .house-surround > .hs-list > .hs-slide > .hs-pic > a {
+#app > .content > .main > .house-content > .house-surround > .hs-list > .hs-content > .hs-slide > .hs-pic > a {
   float: left;
   display: block;
   width: 210px;
   height: 210px;
   margin-right: 20px;
 }
-#app > .content > .main > .house-content > .house-surround > .hs-list > .hs-slide > .hs-pic > a > img {
+#app > .content > .main > .house-content > .house-surround > .hs-list > .hs-content > .hs-slide > .hs-pic > a > img {
   width: 100%;
   height: 140px;
   border-radius: 3px;
 }
-#app > .content > .main > .house-content > .house-surround > .hs-list > .hs-slide > .hs-pic > a > .hs-name {
+#app > .content > .main > .house-content > .house-surround > .hs-list > .hs-content > .hs-slide > .hs-pic > a > .opc {
+  opacity: 0.5;
+}
+#app > .content > .main > .house-content > .house-surround > .hs-list > .hs-content > .hs-slide > .hs-pic > a > .hs-name {
   padding: 5px 0 2px 0;
   color: #000;
   font-size: 14px;
   position: relative;
 }
-#app > .content > .main > .house-content > .house-surround > .hs-list > .hs-slide > .hs-pic > a > .hs-price {
+#app > .content > .main > .house-content > .house-surround > .hs-list > .hs-content > .hs-slide > .hs-pic > a > .hs-price {
   padding: 1px 0;
   padding-bottom: 3px;
   color: #cc2929;
   font-size: 12px;
 }
-#app > .content > .main > .house-content > .house-surround > .hs-list > .hs-slide > .hs-pic > a > .hs-dis {
+#app > .content > .main > .house-content > .house-surround > .hs-list > .hs-content > .hs-slide > .hs-pic > a > .hs-dis {
   color: #b2b2b2;
   font-size: 12px;
 }

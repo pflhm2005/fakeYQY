@@ -52,12 +52,19 @@ new Vue({
         },
         // 大厦简介
         Info: '',
-        picNameArr: ['mansionPictures', 'roomPictures']
+        picNameArr: ['mansionPictures', 'roomPictures'],
+        slideIter: 0,
     },
     computed: {
         len: function() {
             return this.totalData.mansionPictures.length;
-        }
+        },
+        slideStyle: function() {
+            return 'transform:translate(' + -this.slideIter * 230 + 'px)';
+        },
+        arroundLen: function() {
+            return this.totalData.around.length;
+        },
     },
     methods: {
         maskShow: function(index, type) {
@@ -97,7 +104,13 @@ new Vue({
         changeState: function(u, s) {
             this.regStateObj.phone = u;
             this.regStateObj.state = s;
-        }
+        },
+        next: function() {
+            this.slideIter++;
+        },
+        prev: function() {
+            this.slideIter--;
+        },
     },
     created: function() {
         var v = this,
@@ -125,9 +138,9 @@ new Vue({
 
                 // list.vue跳转路径添加
                 v.hrefModifier(u, 'rooms', id);
-                // console.log(u.rooms);
+                console.log(u.rooms);
                 v.totalData = u;
-                console.log(u);
+
                 var map = new BMap.Map("pos_img");
 
                 var point = new BMap.Point(u.longitude, u.latitude);

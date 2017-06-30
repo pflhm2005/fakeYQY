@@ -20,7 +20,7 @@
                     <p class='order-title'>预约成功</p>
                     <p class='order-text'>客服将在10分钟内与您联系</p>
                 </div>
-                <input type="button" value="预约看房" class='btn-submit' @click='appoint()' v-else>   
+                <input type="button" :value="appointText" class='btn-submit' @click='appoint()' v-else>
             </form>
         </div>
         <div class="oi-contact">
@@ -40,7 +40,8 @@
             return {
                 orderIter: false,
                 phoneNum: '',
-                verNum: ''
+                verNum: '',
+                appointText: ''
             }
         },
         props: ['num', 'stateobj', 'idobj'],
@@ -79,30 +80,37 @@
                         },
                         url: '/api/user/login',
                         success: function(data) {
-                            console.log(data);
                             if (data.success) {
                                 v.$emit('reg', data.obj, true);
+                                window.location.reload();
                             } else {
                                 alert(data.msg);
                             }
                         }
                     })
-                }
-                console.log('登录');
-                $.ajax({
-                    method: 'post',
-                    data: v.idobj,
-                    url: '/api/appiont',
-                    success: function(data) {
-                        console.log(v.idobj);
-                        console.log('第二个请求', data);
-                        if (data.success) {
-                            v.orderIter = true;
-                            window.location.reload();
+                } else {
+                    $.ajax({
+                        method: 'post',
+                        data: v.idobj,
+                        url: '/api/appiont',
+                        success: function(data) {
+                            if (data.success) {
+                                v.orderIter = true;
+                            }
                         }
-                    }
-                });
+                    });
+                }
             }
+        },
+        created: function() {
+            var v = this;
+            $.ajax({
+                method: 'get',
+                url: '/api/user/getuserloginstatus',
+                success: function(data) {
+                    v.appointText = data.success ? '我要预约' : '预约看房';
+                }
+            })
         }
     }
 </script>

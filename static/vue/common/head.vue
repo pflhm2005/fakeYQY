@@ -121,6 +121,7 @@
                 });
             },
             exit:function(){
+                var v =this;
                 $.ajax({
                     method:'get',
                     url:'/api/user/loginOut',

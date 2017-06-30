@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="./css/base.css">
     <link rel="stylesheet" href="./css/pag.css">
+    <link rel="stylesheet" href="./icon/iconfont.css">
     <link rel="stylesheet" href="./css/pagination.css">
     <title>筛选页</title>
 </head>
@@ -37,13 +38,13 @@
                                 <a href="javascript:void(0);">区域</a>
                             </div>
                             <div class="f-list-item f-l-2 clearfix">
-                                <a href="javascript:void(0);" v-for="(item,index) in flPos1" @click='setSel(0,index)' :class='{on:posIter1 === index}'>{{item.name}}</a>
+                                <a href="javascript:void(0);" v-for="(item,index) in flPos1" @click='setSel(0,index)' :class='{on:posIter1 == index}' v-cloak>{{item.name}}</a>
                             </div>
                             <div class="f-list-item f-l-3 clearfix" v-show="flPos2Show">
-                                <a href="javascript:void(0);" v-for="(item,index) in flPos2" @click='setSel(1,index)' :class='{on:posIter2 === index}'>{{item.name}}</a>
+                                <a href="javascript:void(0);" v-for="(item,index) in flPos2" @click='setSel(1,index)' :class='{on:posIter2 == index}' v-cloak>{{item.name}}</a>
                             </div>
                             <div class="f-list-item f-l-4 clearfix" v-show='flPos3Show'>
-                                <a href="javascript:void(0);" v-for="(item,index) in flPos3" @click='setSel(2,index)' :class='{on:posIter3 === index}'>{{item.name}}</a>
+                                <a href="javascript:void(0);" v-for="(item,index) in flPos3" @click='setSel(2,index)' :class='{on:posIter3 == index}' v-cloak>{{item.name}}</a>
                             </div>
                         </div>
                     </div>
@@ -52,7 +53,7 @@
                         <div class="f-title fl">面积</div>
                         <div class="f-list fr">
                             <div class="f-list-item f-l-1 clearfix">
-                                <a href="javascript:void(0);" v-for="(item,index) in flArea" @click='setSel(3,index)' :class='{on:areaIter === index}'>{{item}}</a>
+                                <a href="javascript:void(0);" v-for="(item,index) in flArea" @click='setSel(3,index)' :class='{on:areaIter == index}'>{{item}}</a>
                             </div>
                         </div>
                     </div>
@@ -66,10 +67,10 @@
                                 <a href="javascript:void(0);" :class='{on:priceTypeIter === 1}' @click='priceTypeIter = 1'>总价</a>
                             </div>
                             <div class="f-list-item f-l-2 clearfix" v-show="priceTypeIter === 0">
-                                <a href="javascript:void(0);" v-for="(item,index) in flSimplePrice" @click='setSel(4,index)' :class='{on:simplePriceIter === index}'>{{item}}</a>
+                                <a href="javascript:void(0);" v-for="(item,index) in flSimplePrice" @click='setSel(4,index)' :class='{on:simplePriceIter == index}' v-cloak>{{item}}</a>
                             </div>
                             <div class="f-list-item f-l-2 clearfix" v-show="priceTypeIter === 1">
-                                <a href="javascript:void(0);" v-for="(item,index) in flTotalPrice" @click='setSel(5,index)' :class='{on:totalPriceIter === index}'>{{item}}</a>
+                                <a href="javascript:void(0);" v-for="(item,index) in flTotalPrice" @click='setSel(5,index)' :class='{on:totalPriceIter == index}' v-cloak>{{item}}</a>
                             </div>
                         </div>
                     </div>
@@ -86,22 +87,22 @@
                             <div class='info fl'>
                                 <div class="part1 clearfix">
                                     <h2 class='fl'>
-                                        <a href="#">{{item.name}}</a>
+                                        <a href="#" v-cloak>{{item.name}}</a>
                                     </h2>
                                     <div class="price fr">
-                                        <span class='num'>{{item.price}}</span>
+                                        <span class='num' v-cloak>{{item.price}}</span>
                                         <span class='unit'>元/m²/月</span>
                                     </div>
                                 </div>
                                 <div class="part2">
-                                    <span>{{item.region}}-{{item.street}}</span>
+                                    <span v-cloak>{{item.region}}-{{item.street}}</span>
                                 </div>
                                 <div class="part3">
-                                    <span class='update'>{{item.updateTime}}前有更新</span>
-                                    <span class='order'> · 近30天内共有{{item.appiontCount}}人预约</span>
+                                    <span class='update' v-cloak>{{item.updateTime}}前有更新</span>
+                                    <span class='order' v-cloak> · 近30天内共有{{item.appiontCount}}人预约</span>
                                 </div>
                                 <div class="part4">
-                                    <a :href="i.href" v-for="i in item.rooms">{{i.area}}m²</a>
+                                    <a :href="i.href" v-for="i in item.rooms" v-cloak>{{i.area}}m²</a>
                                 </div>
                                 <a :href="item.href" class="btn">查看详情</a>
                             </div>

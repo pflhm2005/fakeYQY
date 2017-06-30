@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "/js";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 34);
+/******/ 	return __webpack_require__(__webpack_require__.s = 37);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -10353,6 +10353,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -10363,12 +10370,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             'phoneIcon': './images/Icon.png',
             maskIter: false,
             phoneNum: '',
-            verNum: ''
+            verNum: '',
+            isReg: false,
+            regPhone: '',
+            searText: ''
         };
     },
     methods: {
         getVerNum: function getVerNum() {
-            if (!!this.phoneNum) {
+            if (!this.phoneNum) {
                 alert('手机号码不能为空');
                 return;
             }
@@ -10378,7 +10388,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 data: {
                     'phoneNum': v.phoneNum
                 },
-                url: '/user/getPhoneCode',
+                url: '/api/user/getPhoneCode',
                 success: function success(data) {
                     if (data.success) {
                         alert('已发送');
@@ -10387,7 +10397,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             });
         },
         sub: function sub() {
-            if (!!this.phoneNum || !!this.verNum) {
+            if (!this.phoneNum || !this.verNum) {
                 alert('手机号码或验证码不能为空');
                 return;
             }
@@ -10398,14 +10408,47 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     'phoneNum': v.phoneNum,
                     'phoneCode': v.verNum
                 },
-                url: '/api/login',
+                url: '/api/user/login',
                 success: function success(data) {
                     if (data.success) {
+                        window.location.reload();
                         v.maskIter = false;
+                        this.regPhone = data.obj;
+                    } else {
+                        alert(data.msg);
                     }
                 }
             });
+        },
+        exit: function exit() {
+            __WEBPACK_IMPORTED_MODULE_0_jquery___default.a.ajax({
+                method: 'get',
+                url: '/api/user/loginOut',
+                success: function success(data) {
+                    console.log(data);
+                    if (data.success) {
+                        v.$emit('reg', '', false);
+                        window.location.reload();
+                    }
+                }
+            });
+        },
+        topSear: function topSear() {
+            window.location.href = './pag.html?name=' + this.searText + '&i=0';
         }
+    },
+    created: function created() {
+        var v = this;
+        __WEBPACK_IMPORTED_MODULE_0_jquery___default.a.ajax({
+            method: 'get',
+            url: '/api/user/getuserloginstatus',
+            success: function success(data) {
+                if (data.success) {
+                    v.$emit('reg', data.obj, true);
+                    v.isReg = true;
+                }
+            }
+        });
     }
 
 });
@@ -10419,7 +10462,7 @@ exports = module.exports = __webpack_require__(1)(undefined);
 
 
 // module
-exports.push([module.i, "\n.head {\n  width: 100%;\n}\n.reg {\n  z-index: 9999;\n  position: fixed;\n  width: 100%;\n  height: 100%;\n  left: 0;\n  top: 0;\n  background-color: rgba(0, 0, 0, 0.7);\n}\n.reg > .form {\n  width: 420px;\n  height: 350px;\n  margin: 250px auto;\n  background-color: #fff;\n  border-radius: 8px;\n}\n.reg > .form > .content {\n  padding-top: 44px;\n  text-align: center;\n}\n.reg > .form > .content > h1 {\n  height: 31px;\n  font-size: 25px;\n  font-weight: 500;\n  color: #000;\n}\n.reg > .form > .content > h2 {\n  height: 19px;\n  font-size: 14px;\n  color: #666;\n  margin-top: 15px;\n}\n.reg > .form > .content > .login-form {\n  margin: 29px auto;\n  width: 360px;\n}\n.reg > .form > .content > .login-form > div {\n  height: 48px;\n  margin-bottom: 10px;\n  border-radius: 4px;\n  background-color: #f5f5f5;\n}\n.reg > .form > .content > .login-form > div > input {\n  height: 100%;\n  line-height: 20px;\n  padding: 4px 19px;\n  outline: 0;\n  border-radius: 4px;\n  background: #f5f5f5;\n  font-size: 15px;\n  border: 0;\n  width: 100%;\n}\n.reg > .form > .content > .login-form > div > .getVer {\n  float: right;\n  margin-right: 15px;\n  position: relative;\n  margin-top: -30px;\n  text-decoration: none!important;\n  font-size: 12px;\n  height: 16px;\n  width: 63px;\n}\n.reg > .form > .content > .login-form > .submit {\n  background-color: #148fcc;\n  color: #fff;\n  width: 360px;\n  display: block;\n  height: 48px;\n  margin-top: 20px;\n  line-height: 47px;\n  border-radius: 4px;\n  text-align: center;\n}\n.top {\n  height: 74px;\n}\n.top > .logo {\n  line-height: 74px;\n}\n.top > .logo > img {\n  vertical-align: middle;\n}\n.top > .t-tel {\n  color: #525252;\n  float: right;\n}\n.top > .t-tel > .regbtn {\n  margin: 20px 10px;\n  font-size: 13px;\n  color: #aaa;\n  padding: 5px 10px;\n}\n.top > .t-tel > .icon {\n  margin-top: 18px;\n  font-size: 12px;\n  width: 85px;\n  height: 38px;\n}\n.top > .t-tel > .icon > img {\n  margin-right: 5px;\n  float: left;\n}\n.top > .t-tel > .number {\n  margin-top: 22px;\n  font-size: 24px;\n  height: 30px;\n  line-height: 30px;\n  border-left: 1px solid #ccc;\n  margin-left: 10px;\n  padding-left: 10px;\n}\n.tab {\n  height: 48px;\n}\n.tab > .tab-list {\n  height: 100%;\n  margin-left: 678px;\n  background-color: #fb565c;\n}\n.tab > .tab-list > .trangle {\n  width: 0;\n  height: 0;\n  border-width: 48px 29px 0px 0px;\n  border-color: transparent #fb565c #fb565c transparent;\n  border-style: solid;\n  background-color: #fff;\n}\n.tab > .tab-list > li {\n  height: 100%;\n  float: left;\n}\n.tab > .tab-list > li > a {\n  font-size: 15px;\n  padding: 14px 20px;\n  color: #fff;\n  display: inline-block;\n  border-right: 1px solid #fc6b70;\n}\n", ""]);
+exports.push([module.i, "\n.head {\n  width: 100%;\n}\n.reg {\n  z-index: 9999;\n  position: fixed;\n  width: 100%;\n  height: 100%;\n  left: 0;\n  top: 0;\n  background-color: rgba(0, 0, 0, 0.7);\n}\n.reg > .form {\n  width: 420px;\n  height: 350px;\n  margin: 250px auto;\n  background-color: #fff;\n  border-radius: 8px;\n}\n.reg > .form > .content {\n  padding-top: 44px;\n  text-align: center;\n}\n.reg > .form > .content > h1 {\n  height: 31px;\n  font-size: 25px;\n  font-weight: 500;\n  color: #000;\n}\n.reg > .form > .content > h2 {\n  height: 19px;\n  font-size: 14px;\n  color: #666;\n  margin-top: 15px;\n}\n.reg > .form > .content > .login-form {\n  margin: 29px auto;\n  width: 360px;\n}\n.reg > .form > .content > .login-form > div {\n  height: 48px;\n  margin-bottom: 10px;\n  border-radius: 4px;\n  background-color: #f5f5f5;\n}\n.reg > .form > .content > .login-form > div > input {\n  height: 100%;\n  line-height: 20px;\n  padding: 4px 19px;\n  outline: 0;\n  border-radius: 4px;\n  background: #f5f5f5;\n  font-size: 15px;\n  border: 0;\n  width: 100%;\n}\n.reg > .form > .content > .login-form > div > .getVer {\n  float: right;\n  margin-right: 15px;\n  position: relative;\n  margin-top: -30px;\n  text-decoration: none!important;\n  font-size: 12px;\n  height: 16px;\n  width: 63px;\n}\n.reg > .form > .content > .login-form > .submit {\n  background-color: #148fcc;\n  color: #fff;\n  width: 360px;\n  display: block;\n  height: 48px;\n  margin-top: 20px;\n  line-height: 47px;\n  border-radius: 4px;\n  text-align: center;\n}\n.top {\n  height: 74px;\n}\n.top > .logo {\n  line-height: 74px;\n  margin-right: 20px;\n}\n.top > .logo > img {\n  vertical-align: middle;\n}\n.top > .search {\n  width: 300px;\n  height: 38px;\n  margin: 18px 0 0 5px;\n  position: relative;\n  border-radius: 3px;\n}\n.top > .search > .sInput {\n  width: 320px;\n  text-indent: 16px;\n  height: 20px;\n  line-height: 20px;\n  margin-top: 10px;\n  margin-left: 8px;\n  font-size: 14px;\n  border: 0;\n  border-radius: 3px 0 0 3px;\n  color: #555;\n  background: #FFF;\n  text-align: left;\n}\n.top > .search > i {\n  position: absolute;\n  left: -15px;\n  top: 11px;\n  padding-left: 15px;\n  border-left: 1px solid rgba(0, 0, 0, 0.1);\n  color: #DDD;\n  cursor: pointer;\n  font-size: 18px;\n}\n.top > .t-tel {\n  color: #525252;\n  float: right;\n}\n.top > .t-tel > .regbtn {\n  margin: 20px 10px;\n  font-size: 13px;\n  color: #aaa;\n  padding: 5px 10px;\n}\n.top > .t-tel > p {\n  margin: 20px 10px;\n  font-size: 13px;\n  padding: 5px 10px;\n}\n.top > .t-tel > .exit {\n  cursor: pointer;\n  margin: 21px 0;\n  font-size: 13px;\n  padding: 5px 10px;\n}\n.top > .t-tel > .iconPhone {\n  margin-top: 18px;\n  font-size: 12px;\n  width: 85px;\n  height: 38px;\n}\n.top > .t-tel > .iconPhone > img {\n  margin-right: 5px;\n  float: left;\n}\n.top > .t-tel > .number {\n  margin-top: 22px;\n  font-size: 24px;\n  height: 30px;\n  line-height: 30px;\n  border-left: 1px solid #ccc;\n  margin-left: 10px;\n  padding-left: 10px;\n}\n.tab {\n  height: 48px;\n}\n.tab > .tab-list {\n  height: 100%;\n  margin-left: 678px;\n  background-color: #fb565c;\n}\n.tab > .tab-list > .trangle {\n  width: 0;\n  height: 0;\n  border-width: 48px 29px 0px 0px;\n  border-color: transparent #fb565c #fb565c transparent;\n  border-style: solid;\n  background-color: #fff;\n}\n.tab > .tab-list > li {\n  height: 100%;\n  float: left;\n}\n.tab > .tab-list > li > a {\n  font-size: 15px;\n  padding: 14px 20px;\n  color: #fff;\n  display: inline-block;\n  border-right: 1px solid #fc6b70;\n}\n", ""]);
 
 // exports
 
@@ -10448,7 +10491,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('div', {
     staticClass: "top box"
   }, [_c('a', {
-    staticClass: "logo",
+    staticClass: "logo fl",
     attrs: {
       "href": "./index.html"
     }
@@ -10458,8 +10501,36 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "alt": ""
     }
   })]), _vm._v(" "), _c('div', {
+    staticClass: "search fl"
+  }, [_c('i', {
+    staticClass: "iconfont icon-sousuo",
+    on: {
+      "click": _vm.topSear
+    }
+  }), _vm._v(" "), _c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.searText),
+      expression: "searText"
+    }],
+    staticClass: "sInput fl",
+    attrs: {
+      "type": "text",
+      "placeholder": "请输入大厦名称或区域位置"
+    },
+    domProps: {
+      "value": (_vm.searText)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.searText = $event.target.value
+      }
+    }
+  })]), _vm._v(" "), _c('div', {
     staticClass: "t-tel"
-  }, [_c('a', {
+  }, [(!_vm.isReg) ? _c('a', {
     staticClass: "regbtn fl",
     attrs: {
       "href": "javascript:void(0);"
@@ -10469,8 +10540,17 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.maskIter = true
       }
     }
-  }, [_vm._v("登录")]), _vm._v(" "), _c('div', {
-    staticClass: "icon fl"
+  }, [_vm._v("登录")]) : _c('p', {
+    staticClass: "fl"
+  }, [_vm._v(_vm._s(_vm.regPhone) + "用户已登录")]), _vm._v(" "), _c('div', {
+    staticClass: "exit fl",
+    on: {
+      "click": _vm.exit
+    }
+  }, [(_vm.isReg) ? _c('i', {
+    staticClass: "iconfont icon-cuowuguanbiquxiao-fangkuang"
+  }) : _vm._e()]), _vm._v(" "), _c('div', {
+    staticClass: "iconPhone fl"
   }, [_c('img', {
     attrs: {
       "src": _vm.phoneIcon
@@ -10567,9 +10647,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "tab"
   }, [_c('ul', {
     staticClass: "tab-list"
-  }, [_c('li', {
-    staticClass: "trangle"
-  }), _vm._v(" "), _c('li', [_c('a', {
+  }, [_c('li', [_c('a', {
     attrs: {
       "href": "./index.html"
     }
@@ -10925,13 +11003,13 @@ module.exports = g;
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(28)
+  __webpack_require__(33)
 }
 var Component = __webpack_require__(2)(
   /* script */
-  __webpack_require__(21),
+  __webpack_require__(22),
   /* template */
-  __webpack_require__(26),
+  __webpack_require__(30),
   /* styles */
   injectStyle,
   /* scopeId */
@@ -10969,13 +11047,13 @@ module.exports = Component.exports
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(27)
+  __webpack_require__(31)
 }
 var Component = __webpack_require__(2)(
   /* script */
-  __webpack_require__(22),
+  __webpack_require__(23),
   /* template */
-  __webpack_require__(25),
+  __webpack_require__(28),
   /* styles */
   injectStyle,
   /* scopeId */
@@ -11008,6 +11086,50 @@ module.exports = Component.exports
 
 /***/ }),
 /* 21 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(32)
+}
+var Component = __webpack_require__(2)(
+  /* script */
+  __webpack_require__(24),
+  /* template */
+  __webpack_require__(29),
+  /* styles */
+  injectStyle,
+  /* scopeId */
+  null,
+  /* moduleIdentifier (server only) */
+  null
+)
+Component.options.__file = "D:\\workspace\\fakeYQY\\static\\vue\\common\\slide.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] slide.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-8a8e6d4e", Component.options)
+  } else {
+    hotAPI.reload("data-v-8a8e6d4e", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 22 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -11104,19 +11226,26 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
-        return {
-            'src': './images/bg.png'
-        };
+        return {};
     },
     props: ['info']
 });
 
 /***/ }),
-/* 22 */
+/* 23 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_jquery__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_jquery__);
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -11145,12 +11274,145 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['num']
+    data: function data() {
+        return {
+            orderIter: false,
+            phoneNum: '',
+            verNum: ''
+        };
+    },
+    props: ['num', 'stateobj', 'idobj'],
+    methods: {
+        getVerNum: function getVerNum() {
+            if (!this.phoneNum) {
+                alert('手机号码不能为空');
+                return;
+            }
+            var v = this;
+            __WEBPACK_IMPORTED_MODULE_0_jquery___default.a.ajax({
+                method: 'post',
+                data: {
+                    'phoneNum': v.phoneNum
+                },
+                url: '/api/user/getPhoneCode',
+                success: function success(data) {
+                    if (data.success) {
+                        alert('已发送');
+                    }
+                }
+            });
+        },
+        appoint: function appoint() {
+            var v = this;
+            if (!this.stateobj.state) {
+                if (!this.phoneNum || !this.verNum) {
+                    alert('手机号码或验证码不能为空');
+                    return;
+                }
+                __WEBPACK_IMPORTED_MODULE_0_jquery___default.a.ajax({
+                    method: 'post',
+                    data: {
+                        'phoneNum': v.phoneNum,
+                        'phoneCode': v.verNum
+                    },
+                    url: '/api/user/login',
+                    success: function success(data) {
+                        console.log(data);
+                        if (data.success) {
+                            v.$emit('reg', data.obj, true);
+                        } else {
+                            alert(data.msg);
+                        }
+                    }
+                });
+            }
+            console.log('登录');
+            __WEBPACK_IMPORTED_MODULE_0_jquery___default.a.ajax({
+                method: 'post',
+                data: v.idobj,
+                url: '/api/appiont',
+                success: function success(data) {
+                    console.log(v.idobj);
+                    console.log('第二个请求', data);
+                    if (data.success) {
+                        v.orderIter = true;
+                        window.location.reload();
+                    }
+                }
+            });
+        }
+    }
 });
 
 /***/ }),
-/* 23 */
+/* 24 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_jquery__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_jquery__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    data: function data() {
+        return {
+            slideIter: this.src.index || 0
+        };
+    },
+    methods: {
+        slidePic: function slidePic(iter) {
+            this.slideIter += iter;
+            __WEBPACK_IMPORTED_MODULE_0_jquery___default()('.slide-wrapper').animate({
+                'left': this.slideIter * 1910 + 'px'
+            }, 200);
+        },
+        close: function close() {
+            this.$emit('close');
+            this.picCollection = [];
+        }
+    },
+    computed: {
+        len: function len() {
+            return this.src.length;
+        },
+        picCollection: function picCollection() {
+            return this.src;
+        }
+    },
+    props: ['src'],
+    mounted: function mounted() {}
+});
+
+/***/ }),
+/* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(undefined);
@@ -11158,13 +11420,27 @@ exports = module.exports = __webpack_require__(1)(undefined);
 
 
 // module
-exports.push([module.i, "\n.other-info {\n  background-color: #fff;\n  width: 250px;\n  padding: 20px;\n  margin-right: 10px;\n}\n.other-info > .oi-form > h3 {\n  padding-bottom: 0;\n  border: none;\n}\n.other-info > .oi-form > form > .num {\n  color: #666;\n  font-size: 12px;\n  margin: 10px 0 20px 0;\n}\n.other-info > .oi-form > form > .oi-input {\n  position: relative;\n}\n.other-info > .oi-form > form > .oi-input > input {\n  border: 0;\n  width: 210px;\n  height: 48px;\n  margin-bottom: 10px;\n  padding: 14px;\n  border-radius: 4px;\n  background-color: #f5f5f5;\n}\n.other-info > .oi-form > form > .oi-input > .oi-ver {\n  display: block;\n  position: absolute;\n  left: auto;\n  right: 10px;\n  top: 12px;\n}\n.other-info > .oi-form > form > .oi-input > .oi-ver > a {\n  color: #b2b2b2;\n  font-size: 12px;\n}\n.other-info > .oi-form > form > .btn-submit {\n  width: 210px;\n  height: 48px;\n  line-height: 48px;\n  display: block;\n  color: #fff;\n  font-size: 14px;\n  font-weight: 600;\n  text-align: center;\n  background: #fb565c;\n  border-radius: 4px;\n  border: 0;\n  padding: 0;\n}\n.other-info > .oi-contact {\n  margin-top: 20px;\n  padding-top: 20px;\n  border-top: 1px solid #ccc;\n}\n.other-info > .oi-contact > .oic-title {\n  color: #666;\n  font-size: 16px;\n  font-weight: bold;\n}\n.other-info > .oi-contact > .oic-title > i {\n  position: relative;\n  top: 4px;\n  margin-right: 10px;\n  font-size: 28px;\n}\n.other-info > .oi-contact > .oic-tel {\n  padding-left: 38px;\n  margin: 5px 0 0 0;\n  height: 28px;\n  line-height: 28px;\n  color: #666;\n  font-size: 20px;\n}\n.other-info > .oi-contact > .oic-time {\n  padding-left: 38px;\n  margin: 5px 0 0 0;\n  color: #b2b2b2;\n  font-size: 12px;\n}\n", ""]);
+exports.push([module.i, "\n.other-info {\n  background-color: #fff;\n  width: 250px;\n  padding: 20px;\n  margin-right: 10px;\n}\n.other-info > .oi-form > h3 {\n  padding-bottom: 0;\n  border: none;\n}\n.other-info > .oi-form > form > .num {\n  color: #666;\n  font-size: 12px;\n  margin: 10px 0 5px 0;\n}\n.other-info > .oi-form > form > .form-input > .oi-input {\n  position: relative;\n}\n.other-info > .oi-form > form > .form-input > .oi-input > input {\n  border: 0;\n  width: 210px;\n  height: 48px;\n  margin-bottom: 10px;\n  padding: 14px;\n  border-radius: 4px;\n  background-color: #f5f5f5;\n}\n.other-info > .oi-form > form > .form-input > .oi-input > .oi-ver {\n  display: block;\n  position: absolute;\n  left: auto;\n  right: 10px;\n  top: 12px;\n}\n.other-info > .oi-form > form > .form-input > .oi-input > .oi-ver > a {\n  color: #b2b2b2;\n  font-size: 12px;\n}\n.other-info > .oi-form > form > .regSuccess {\n  font-size: 13px;\n  color: #333;\n  margin-bottom: 10px;\n}\n.other-info > .oi-form > form > .order {\n  text-indent: 5px;\n}\n.other-info > .oi-form > form > .order > .order-title {\n  font-size: 16px;\n}\n.other-info > .oi-form > form > .order > .order-text {\n  font-size: 12px;\n  color: #999;\n}\n.other-info > .oi-form > form > .btn-submit {\n  width: 210px;\n  height: 48px;\n  line-height: 48px;\n  display: block;\n  color: #fff;\n  font-size: 14px;\n  font-weight: 600;\n  text-align: center;\n  background: #fb565c;\n  border-radius: 4px;\n  border: 0;\n  padding: 0;\n}\n.other-info > .oi-contact {\n  margin-top: 20px;\n  padding-top: 20px;\n  border-top: 1px solid #ccc;\n}\n.other-info > .oi-contact > .oic-title {\n  color: #666;\n  font-size: 16px;\n  font-weight: bold;\n}\n.other-info > .oi-contact > .oic-title > i {\n  position: relative;\n  top: 4px;\n  margin-right: 10px;\n  font-size: 28px;\n}\n.other-info > .oi-contact > .oic-tel {\n  padding-left: 38px;\n  margin: 5px 0 0 0;\n  height: 28px;\n  line-height: 28px;\n  color: #666;\n  font-size: 20px;\n}\n.other-info > .oi-contact > .oic-time {\n  padding-left: 38px;\n  margin: 5px 0 0 0;\n  color: #b2b2b2;\n  font-size: 12px;\n}\n", ""]);
 
 // exports
 
 
 /***/ }),
-/* 24 */
+/* 26 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(1)(undefined);
+// imports
+
+
+// module
+exports.push([module.i, "\n.window-slide {\n  position: fixed;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  overflow: hidden;\n  z-index: 1000;\n  background: rgba(0, 0, 0, 0.85);\n  padding: 1px;\n}\n.window-slide > .mask-container {\n  margin-top: 6%;\n  height: 76%;\n}\n.window-slide > .mask-container > .slide-container {\n  width: 100%;\n  height: 100%;\n  margin: 0 auto;\n  border-radius: 4px;\n  overflow: hidden;\n  position: relative;\n}\n.window-slide > .mask-container > .slide-container > .slide-wrapper {\n  margin-left: 350px;\n  position: relative;\n  height: 100%;\n  width: 10000%;\n}\n.window-slide > .mask-container > .slide-container > .slide-wrapper > .slide-item {\n  height: 100%;\n  float: left;\n  padding-right: 740px;\n}\n.window-slide > .mask-container > .slide-container > .slide-wrapper > .slide-item > img {\n  width: 1184px;\n  height: 100%;\n}\n.window-slide > .mask-container > .slide-container > .btn {\n  position: absolute;\n  top: 0;\n  width: 200px;\n  height: 100%;\n  cursor: pointer;\n}\n.window-slide > .mask-container > .slide-container > .btn > i {\n  top: 40%;\n  position: relative;\n  color: #fff;\n  font-size: 60px;\n  left: 25%;\n}\n.window-slide > .mask-container > .slide-container > .btn-l {\n  left: 10px;\n}\n.window-slide > .mask-container > .slide-container > .btn-r {\n  right: 10px;\n}\n.window-slide > .swiper-wrapper-title {\n  text-align: center;\n  line-height: 30px;\n  color: #fff;\n  font-size: 12px;\n  font-weight: 500;\n  opacity: .4;\n  width: 100%;\n}\n.window-slide > .swiper-wrapper-title > .tit {\n  color: #fff;\n  font-size: 12px;\n  font-weight: 500;\n}\n.window-slide > .close {\n  position: absolute;\n  right: 50px;\n  top: 50px;\n  cursor: pointer;\n}\n.window-slide > .close > i {\n  color: #fff;\n  font-size: 30px;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(undefined);
@@ -11178,7 +11454,7 @@ exports.push([module.i, "\n.feature > li {\n  margin-bottom: 20px;\n}\n.feature 
 
 
 /***/ }),
-/* 25 */
+/* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -11190,42 +11466,86 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "oi-order"
   }, [_c('div', {
     staticClass: "num"
-  }, [_vm._v("该大厦近30天共有" + _vm._s(_vm.num) + "人预约看房")]), _vm._v(" "), _vm._m(0), _vm._v(" "), _vm._m(1), _vm._v(" "), _c('input', {
-    staticClass: "btn-submit",
-    attrs: {
-      "type": "submit",
-      "value": "预约看房"
-    }
-  })])]), _vm._v(" "), _vm._m(2)])
-},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
+  }, [_vm._v("该大厦近30天共有" + _vm._s(_vm.num) + "人预约看房")]), _vm._v(" "), (!_vm.stateobj.state) ? _c('div', {
+    staticClass: "form-input"
+  }, [_c('div', {
     staticClass: "oi-input"
   }, [_c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.phoneNum),
+      expression: "phoneNum"
+    }],
     attrs: {
       "type": "text",
       "name": "mobile",
-      "placeholder": "手机号码",
-      "value": ""
+      "placeholder": "手机号码"
+    },
+    domProps: {
+      "value": (_vm.phoneNum)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.phoneNum = $event.target.value
+      }
     }
-  })])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
+  })]), _vm._v(" "), _c('div', {
     staticClass: "oi-input"
   }, [_c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.verNum),
+      expression: "verNum"
+    }],
     attrs: {
       "type": "text",
       "name": "verifyCode",
-      "placeholder": "验证码",
-      "value": ""
+      "placeholder": "验证码"
+    },
+    domProps: {
+      "value": (_vm.verNum)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.verNum = $event.target.value
+      }
     }
   }), _vm._v(" "), _c('div', {
     staticClass: "oi-ver"
   }, [_c('a', {
     attrs: {
       "href": "javascript:void(0);"
+    },
+    on: {
+      "click": function($event) {
+        _vm.getVerNum()
+      }
     }
-  }, [_vm._v("获取验证码")])])])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  }, [_vm._v("获取验证码")])])])]) : _c('div', {
+    staticClass: "regSuccess"
+  }, [_vm._v("预约手机号：" + _vm._s(_vm.stateobj.phone))]), _vm._v(" "), (_vm.orderIter) ? _c('div', {
+    staticClass: "order"
+  }, [_c('p', {
+    staticClass: "order-title"
+  }, [_vm._v("预约成功")]), _vm._v(" "), _c('p', {
+    staticClass: "order-text"
+  }, [_vm._v("客服将在10分钟内与您联系")])]) : _c('input', {
+    staticClass: "btn-submit",
+    attrs: {
+      "type": "button",
+      "value": "预约看房"
+    },
+    on: {
+      "click": function($event) {
+        _vm.appoint()
+      }
+    }
+  })])]), _vm._v(" "), _vm._m(0)])
+},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "oi-contact"
   }, [_c('div', {
@@ -11247,7 +11567,74 @@ if (false) {
 }
 
 /***/ }),
-/* 26 */
+/* 29 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "window-slide"
+  }, [_c('div', {
+    staticClass: "mask-container"
+  }, [_c('div', {
+    staticClass: "slide-container"
+  }, [_c('div', {
+    staticClass: "slide-wrapper"
+  }, [_vm._l((_vm.src), function(item) {
+    return [_c('div', {
+      staticClass: "slide-item"
+    }, [_c('img', {
+      attrs: {
+        "src": item,
+        "alt": ""
+      }
+    })])]
+  })], 2), _vm._v(" "), _c('div', {
+    staticClass: "btn btn-l",
+    on: {
+      "click": function($event) {
+        _vm.slideIter !== 0 && _vm.slidePic(1)
+      }
+    }
+  }, [_c('i', {
+    staticClass: "iconfont icon-shangyiyehoutuifanhui"
+  })]), _vm._v(" "), _c('div', {
+    staticClass: "btn btn-r",
+    on: {
+      "click": function($event) {
+        _vm.slideIter != 1 - _vm.len && _vm.slidePic(-1)
+      }
+    }
+  }, [_c('i', {
+    staticClass: "iconfont icon-xiayiyeqianjinchakangengduo"
+  })])])]), _vm._v(" "), _c('div', {
+    staticClass: "swiper-wrapper-title"
+  }, [_c('span', {
+    staticClass: "tit"
+  }, [_vm._v("大厦图片")]), _vm._v("("), _c('span', {
+    staticClass: "currentIndex"
+  }, [_vm._v(_vm._s(1 - _vm.slideIter))]), _vm._v("/"), _c('span', {
+    staticClass: "totalPic"
+  }, [_vm._v(_vm._s(_vm.len))]), _vm._v(")\n")]), _vm._v(" "), _c('div', {
+    staticClass: "close",
+    on: {
+      "click": function($event) {
+        _vm.close()
+      }
+    }
+  }, [_c('i', {
+    staticClass: "iconfont icon-cuowuguanbiquxiao-xianxingyuankuang"
+  })])])
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-8a8e6d4e", module.exports)
+  }
+}
+
+/***/ }),
+/* 30 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -11256,7 +11643,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('h3', [_vm._v("大厦简介")]), _vm._v(" "), _c('img', {
     staticClass: "hi-pic",
     attrs: {
-      "src": _vm.src,
+      "src": _vm.info.titlePicture,
       "alt": ""
     }
   }), _vm._v(" "), _c('div', {
@@ -11359,13 +11746,13 @@ if (false) {
 }
 
 /***/ }),
-/* 27 */
+/* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(23);
+var content = __webpack_require__(25);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -11385,13 +11772,39 @@ if(false) {
 }
 
 /***/ }),
-/* 28 */
+/* 32 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(24);
+var content = __webpack_require__(26);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(3)("5c75e3c6", content, false);
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-8a8e6d4e\",\"scoped\":false,\"hasInlineConfig\":false}!../../../node_modules/less-loader/dist/index.js!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./slide.vue", function() {
+     var newContent = require("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-8a8e6d4e\",\"scoped\":false,\"hasInlineConfig\":false}!../../../node_modules/less-loader/dist/index.js!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./slide.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 33 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(27);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -11411,12 +11824,10 @@ if(false) {
 }
 
 /***/ }),
-/* 29 */,
-/* 30 */,
-/* 31 */,
-/* 32 */,
-/* 33 */,
-/* 34 */
+/* 34 */,
+/* 35 */,
+/* 36 */,
+/* 37 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -11431,8 +11842,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__vue_common_foot_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__vue_common_foot_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__vue_common_info_vue__ = __webpack_require__(19);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__vue_common_info_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__vue_common_info_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__vue_common_order_vue__ = __webpack_require__(20);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__vue_common_order_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__vue_common_order_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__vue_common_slide_vue__ = __webpack_require__(21);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__vue_common_slide_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__vue_common_slide_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__vue_common_order_vue__ = __webpack_require__(20);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__vue_common_order_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__vue_common_order_vue__);
+
 
 
 
@@ -11446,11 +11860,26 @@ new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
         'top': __WEBPACK_IMPORTED_MODULE_2__vue_common_head_vue___default.a,
         'foot': __WEBPACK_IMPORTED_MODULE_3__vue_common_foot_vue___default.a,
         'info': __WEBPACK_IMPORTED_MODULE_4__vue_common_info_vue___default.a,
-        'orderInfo': __WEBPACK_IMPORTED_MODULE_5__vue_common_order_vue___default.a
+        'orderInfo': __WEBPACK_IMPORTED_MODULE_6__vue_common_order_vue___default.a,
+        'slide': __WEBPACK_IMPORTED_MODULE_5__vue_common_slide_vue___default.a
     },
     data: {
+        idObj: {
+            mansionId: null,
+            blockId: null,
+            roomId: null
+        },
         Info: [],
-        totalData: ''
+        totalData: {
+            pictures: []
+        },
+        maskIter: false,
+        dataPic: '',
+        picNameArr: ['pictures'],
+        regStateObj: {
+            state: false,
+            phone: ''
+        }
     },
     methods: {
         ImgModifier: function ImgModifier(el, key, pathIter, ObjKey) {
@@ -11462,20 +11891,40 @@ new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
                     el[key][i] = ImagePath + el[key][i];
                 }
             }
+        },
+        maskShow: function maskShow(index, type) {
+            this.dataPic = this.totalData[this.picNameArr[type]];
+            this.dataPic.index = index;
+            this.maskIter = true;
+        },
+        maskHide: function maskHide() {
+            this.maskIter = false;
+        },
+        changeState: function changeState(u, s) {
+            this.regStateObj.phone = u;
+            this.regStateObj.state = s;
         }
     },
-    computed: {},
+    computed: {
+        len: function len() {
+            return this.totalData.pictures.length;
+        }
+    },
     created: function created() {
         var v = this,
             url = window.location.href;
         var id = url.split('?')[1] ? url.split('?')[1].split('&') : '';
-        var roomId = id[0].split('=')[1],
-            mansionId = id[1].split('=')[1];
+        var roomId = id[1].split('=')[1],
+            mansionId = id[0].split('=')[1];
+
+        this.idObj.mansionId = mansionId;
+        this.idObj.roomId = roomId;
+
         __WEBPACK_IMPORTED_MODULE_1_jquery___default.a.ajax({
             method: 'get',
             url: '/api/mansionSummary?id=' + mansionId,
             success: function success(u) {
-                console.log(u);
+                u.titlePicture = 'http://119.29.243.158:6060/mansionImage/' + u.titlePicture;
                 v.Info = u;
             }
         });
@@ -11485,6 +11934,7 @@ new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
             url: '/api/roomDetails?id=' + roomId,
             success: function success(u) {
                 v.ImgModifier(u, 'pictures', false);
+                v.idObj.blockId = u.blockId;
                 v.totalData = u;
             }
         });

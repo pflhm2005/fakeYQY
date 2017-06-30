@@ -40,12 +40,12 @@ new Vue({
             ],
             [
                 [-1, -1],
-                [-1, 0.5],
-                [0.5, 1.5],
-                [1.5, 3],
-                [3, 5],
-                [5, 10],
-                [10, -1],
+                [-1, 5000],
+                [5000, 15000],
+                [15000, 30000],
+                [30000, 50000],
+                [50000, 100000],
+                [100000, -1],
             ]
         ],
         // 变色
@@ -123,13 +123,18 @@ new Vue({
                     this.simplePriceIter = null;
                     break;
             }
-            console.log(this.ajaxData);
+            this.list = [];
             $.ajax({
                 method: 'post',
                 url: '/api/mansionList?page=1&pageSize=9',
                 data: this.ajaxData,
-                success: function() {
-
+                success: function(data) {
+                    if (!!data.total) {
+                        v.noData = false;
+                        v.init(data.aaData);
+                    } else {
+                        v.noData = true;
+                    }
                 }
             })
         },
@@ -140,11 +145,14 @@ new Vue({
             }
         },
         hrefModifier: function(el, iter, key) {
-            var baseUrl = iter ? './detail.html?id=' : './detail-info.html?id=';
+            var baseUrl = iter ? './detail.html?id=' : './detail-info.html?',
+                params;
             for (var i = 0; i < el.length; i++) {
                 if (key) {
                     for (var j = 0; j < el[i][key].length; j++) {
-                        el[i][key][j].href = baseUrl + el[i][key][j].id;
+                        params = 'masionId=' + el[i].id + '&roomId=';
+                        params = params + el[i].rooms[j].id;
+                        el[i][key][j].href = baseUrl + params;
                     }
                 } else {
                     el[i].href = baseUrl + el[i].id;
@@ -152,6 +160,7 @@ new Vue({
             }
         },
         init: function(u) {
+            console.log(u);
             this.ImgModifier(u, 'titlePicture', true);
             this.hrefModifier(u, true);
             this.hrefModifier(u, false, 'rooms');
@@ -160,9 +169,28 @@ new Vue({
     },
     created: function() {
         var v = this,
-            params = window.location.href.split('?');
+            params = window.location.href.split('?'),
+            t, id, index;
 
-        var id = params[1] ? params[1].split('=')[1] : '';
+        if (params[1]) {
+            var p1 = params[1].split('&');
+            t = p1[0].split('=')[0];
+            id = decodeURI(p1[0].split('=')[1]);
+            index = p1[1].split('=')[1];
+        } else {
+            t = 'name';
+            id = '';
+            index = 0;
+        }
+
+
+        var initObj = {
+            'type': 0
+        }
+        initObj[t] = id;
+
+        this.posIter1 = index;
+
         $.ajax({
             method: 'post',
             data: '',
@@ -175,10 +203,7 @@ new Vue({
 
         $.ajax({
             method: 'post',
-            data: {
-                'region': id,
-                'type': 0
-            },
+            data: initObj,
             url: '/api/mansionList?page=1&pageSize=9',
             success: function(data) {
                 $('.M-box').pagination({
@@ -187,10 +212,11 @@ new Vue({
                     callback: function(api) {
                         var index = api.getCurrent();
                         $.ajax({
-                            method: 'get',
+                            method: 'post',
+                            data: v.ajaxData,
                             url: '/api/mansionList?page=' + index + '&pageSize=9',
                             success: function(data) {
-                                if (data.success) {
+                                if (!!data.total) {
                                     v.noData = false;
                                     v.init(data.aaData);
                                 } else {
@@ -200,7 +226,7 @@ new Vue({
                         });
                     }
                 }, function(api) {
-                    if (data.success) {
+                    if (!!data.total) {
                         v.init(data.aaData);
                     } else {
                         v.noData = true;
@@ -209,7 +235,4 @@ new Vue({
             }
         });
     },
-    mounted: function() {
-
-    }
 });

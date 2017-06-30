@@ -18,13 +18,18 @@ form {
     box-sizing: border-box;
 }
 
+[v-cloak] {
+    display: none;
+}
+
 html {
     font-size: 100%;
 }
 
 img,
 input {
-    border: 0
+    border: 0;
+    outline: none;
 }
 
 body {

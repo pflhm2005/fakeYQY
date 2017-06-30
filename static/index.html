@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="./css/base.css">
     <link rel="stylesheet" href="./css/index.css">
+    <link rel="stylesheet" href="./icon/iconfont.css">
     <title>园区云首页</title>
 </head>
 
@@ -24,7 +25,7 @@
                     <div class="s-input">
                         <input type="text" placeholder="输入您要查找的楼盘或区域名称" v-model='sear'>
                         <a href="javascript:void(0);" class='nor-sear' @click='searReq()'>开始找房</a>
-                        <a href="javascript:void(0);" class='map-sear'>地图找房</a>
+                        <!--<a href="javascript:void(0);" class='map-sear'>地图找房</a>-->
                     </div>
                 </div>
             </div>
@@ -35,7 +36,7 @@
                     <div class="c-f-region c-list">
                         <div class="title">区域</div>
                         <div class="c-f-list clearfix">
-                            <a :href='item.href' v-for="item in regionArr">{{item.name}}</a>
+                            <a :href='item.href' v-for="item in regionArr" v-cloak>{{item.name}}</a>
                             <a href='./pag.html'>更多>></a>
                         </div>
                     </div>
@@ -47,13 +48,15 @@
                         <li class='list-item'>
                             <a :href="list.href">
                                 <img :src="list.titlePicture" alt="">
-                                <p class='l-title'>{{list.name}}</p>
-                                <p class='l-intro'>{{list.titleDesc}}</p>
+                                <p class='l-title' v-cloak>{{list.name}}</p>
+                                <p class='l-intro' v-cloak>{{list.titleDesc}}</p>
                             </a>
                         </li>
                     </template>
                         <li class='list-item'>
-                            <a href="./pag.html">查看更多</a>
+                            <p class='num'>10000+</p>
+                            <p>套办公室任你挑选</p>
+                            <a href='./pag.html'>查看更多房源</a>
                         </li>
                     </ul>
                 </div>

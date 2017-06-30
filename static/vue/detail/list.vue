@@ -5,115 +5,127 @@
             <ul class="hb-list clearfix">
                 <template v-for="(item,index) in count">
                     <li :class='{on:titleIter === index}' @click='changeList(index)' v-show="!!item.count">
-                        <span class="hbl-title">{{item.title}}</span>
-                        <span class="hbl-num">{{item.count}}套</span>
+                        <span class="hbl-title" v-cloak>{{item.title}}</span>
+                        <span class="hbl-num" v-cloak>{{item.count}}套</span>
                     </li>
                 </template>
-            </ul>
-        </div>
-        <!--轮播图-->
-        <div class="house-pic">
-            <h3>照片总览<span class="small">户型照片集合</span></h3>
-            <div class="hp-list">
-                <div class="hpl-btn btn-l" v-show="slideIter !== 0" @click='prev()'><i class='iconfont icon-shangyiyehoutuifanhui'></i></div>
-                <div class="hpl-btn btn-r" v-show='len>4 && slideIter<len-3' @click='next()'><i class='iconfont icon-xiayiyeqianjinchakangengduo'></i></div>
-                <div class="hpl-container">
-                    <div class="hpl-content clearfix" :style='slideStyle'>
-                        <template v-for="(item,index) in pic">
+</ul>
+</div>
+<!--轮播图-->
+<div class="house-pic">
+    <h3>照片总览<span class="small">户型照片集合</span></h3>
+    <div class="hp-list">
+        <div class="hpl-btn btn-l" v-show="slideIter !== 0" @click='prev()'><i class='iconfont icon-shangyiyehoutuifanhui'></i></div>
+        <div class="hpl-btn btn-r" v-show='len>4 && slideIter<len-3' @click='next()'><i class='iconfont icon-xiayiyeqianjinchakangengduo'></i></div>
+        <div class="hpl-container">
+            <div class="hpl-content clearfix" :style='slideStyle'>
+                <template v-for="(item,index) in pic">
                             <div class="list-item" :class='{opc:index === slideIter+4}'>
                                 <a href="javascript:void(0);" @click='lmaskshow(index)'>
                                     <img :src="item" alt="">
                                 </a>
                             </div>
                         </template>
-                    </div>
-                </div>
             </div>
         </div>
-        <!--详情列表-->
-        <div class="house-list">
-            <h3>户型列表</h3>
-            <div class="hl-title info-list">
-                <div class='hlt-item hlt-photo'>照片</div>
-                <div class='hlt-item hlt-area' @click='sort("area")'>面积<i class='iconfont icon-biaotou-kepaixu'></i></div>
-                <div class='hlt-item hlt-price' @click='sort("price")'><a href="javascript:void(0);" class='on'>单价</a> · <a href="javascript:void(0);">总价<i class='iconfont icon-biaotou-kepaixu'></i></a></div>
-                <div class='hlt-item hlt-floor'>楼层</div>
-                <div class='hlt-item hlt-decor'>装修</div>
-                <div class='hlt-item hlt-update' @click='sort("updateTime")'>更新<i class='iconfont icon-biaotou-kepaixu'></i></div>
-            </div>
-            <div class="hl-list">
-                <template v-for="item in list">
+    </div>
+</div>
+<!--详情列表-->
+<div class="house-list">
+    <h3>户型列表</h3>
+    <div class="hl-title info-list">
+        <div class='hlt-item hlt-photo'>照片</div>
+        <div class='hlt-item hlt-area' @click='sort("area")'>面积<i class='iconfont icon-biaotou-kepaixu'></i></div>
+        <div class='hlt-item hlt-price' @click='sort("price")'><a href="javascript:void(0);" :class='{on:priceIter ==0}' @click='showSimplePrice'>单价</a> · <a href="javascript:void(0);" :class='{on:priceIter ==1}' @click='showTotalPrice'>总价<i class='iconfont icon-biaotou-kepaixu'></i></a></div>
+        <div class='hlt-item hlt-floor'>楼层</div>
+        <div class='hlt-item hlt-decor'>装修</div>
+        <div class='hlt-item hlt-update' @click='sort("updateTime")'>更新<i class='iconfont icon-biaotou-kepaixu'></i></div>
+    </div>
+    <div class="hl-list">
+        <template v-for="item in list">
                     <div class="hll-item">
                         <a :href="item.href" class='info-list'>
                             <div class='hlt-item hlt-photo'>
                                 <img :src="item.roomPicture" alt="">
                             </div>
                             <div class='hlt-item hlt-area'>
-                                <span class='num'>{{item.area}}</span>
+                                <span class='num' v-cloak>{{item.area}}</span>
                                 <span class='unit'>m²</span>
                             </div>
-                            <div class='hlt-item hlt-price'>
-                                <span class="num">{{item.price}}</span>
+                            <div class='hlt-item hlt-price' v-show="priceIter == 0">
+                                <span class="num" v-cloak>{{item.price}}</span>
                                 <span class="unit">元/m²/月</span>
                             </div>
-                            <div class='hlt-item hlt-floor'>{{item.floor}}</div>
-                            <div class='hlt-item hlt-decor'>{{item.fitment}}</div>
-                            <div class='hlt-item hlt-update'>{{item.coverUpdateTime}}</div>
+                            <div class='hlt-item hlt-price' v-show="priceIter == 1">
+                                <span class="num" v-cloak>{{item.totalPrice}}</span>
+                                <span class="unit">元/月</span>
+                            </div>
+                            <div class='hlt-item hlt-floor' v-cloak>{{item.floor}}</div>
+                            <div class='hlt-item hlt-decor' v-cloak>{{item.fitment}}</div>
+                            <div class='hlt-item hlt-update' v-cloak>{{item.coverUpdateTime}}</div>
                         </a>
                     </div>
                 </template>
-                <a href="javascript:void(0);" class='btn-more'>查看更多</a>
-            </div>
-        </div>
+        <a href="javascript:void(0);" class='btn-more'>查看更多</a>
     </div>
+</div>
+</div>
 </template>
 <script>
     export default {
         data: function() {
             return {
-                titleIter:0,
-                slideIter:0,
-                sortIter:{
-                    area:1,
-                    price:1,
-                    updateTime:1
-                }
+                titleIter: 0,
+                slideIter: 0,
+                sortIter: {
+                    area: 1,
+                    price: 1,
+                    updateTime: 1
+                },
+                priceIter:0,
             }
         },
-        props:['count','pic','list'],
-        methods:{
-            next:function(){
+        props: ['count', 'pic', 'list'],
+        methods: {
+            next: function() {
                 this.slideIter++;
             },
-            prev:function(){
+            prev: function() {
                 this.slideIter--;
             },
-            sort:function(iter){
-                var v =this;
-                this.list.sort(function(a,b){
-                    v.sortIter[iter] *= -1;
-                    return (a[iter]-b[iter])*v.sortIter[iter];
+            sort: function(iter) {
+                var v = this;
+                v.sortIter[iter] *= -1;
+                this.list.sort(function(a, b) {
+                    return (a[iter] - b[iter]) * v.sortIter[iter];
                 });
             },
-            changeList:function(index){
+            changeList: function(index) {
+                console.log(index);
                 this.titleIter = index;
             },
-            lmaskshow:function(index){
-                this.$emit('lmaskshow',index);
+            lmaskshow: function(index) {
+                this.$emit('lmaskshow', index);
+            },
+            showSimplePrice:function(){
+                this.priceIter = 0;
+            },
+            showTotalPrice:function(){
+                this.priceIter = 1;
             }
         },
-        computed:{
-            len:function(){
+        computed: {
+            len: function() {
                 return this.pic.length;
             },
-            slideStyle:function(){
-                return 'transform:translate('+ -this.slideIter*170 +'px)';
+            slideStyle: function() {
+                return 'transform:translate(' + -this.slideIter * 170 + 'px)';
             },
-            titleObj:function(){
+            titleObj: function() {
                 return this.count;
             }
         },
-        created:function(){
+        created: function() {
 
         }
     }
@@ -135,7 +147,7 @@
                     text-align: center;
                     cursor: pointer;
                     >span {
-                        width:101px;
+                        width: 101px;
                         display: block;
                         padding-top: 10px;
                         border-right: 1px solid #eee;
@@ -171,15 +183,15 @@
                     overflow: hidden;
                     width: 765px;
                     >.hpl-content {
-                        user-select:none;
+                        user-select: none;
                         width: 9999px;
-                        position:relative;
+                        position: relative;
                         >.list-item {
                             float: left;
                             width: 170px;
                             height: 100px;
-                            &.opc{
-                                opacity:0.5;
+                            &.opc {
+                                opacity: 0.5;
                             }
                             >a {
                                 width: 160px;
@@ -200,7 +212,7 @@
                     height: 20px;
                     top: 40px;
                     cursor: pointer;
-                    z-index:1;
+                    z-index: 1;
                     >i {
                         font-weight: bold;
                         font-size: 20px;

@@ -18,6 +18,13 @@ new Vue({
         'slide': slide
     },
     data: {
+        regStateObj: {
+            state: false,
+            phone: ''
+        },
+        idObj: {
+            mansionId: ''
+        },
         maskIter: false,
         dataPic: [],
         totalData: {
@@ -42,7 +49,6 @@ new Vue({
             countRooms: [],
             roomPictures: [],
             rooms: [],
-
         },
         // 大厦简介
         Info: '',
@@ -73,9 +79,9 @@ new Vue({
             }
         },
         hrefModifier: function(el, key, id) {
-            var baseUrl = './detail-info.html?roomId=';
+            var baseUrl = './detail-info.html?mansionId=';
             for (var i = 0; i < el[key].length; i++) {
-                el[key][i].href = baseUrl + el[key][i].id + '&mansionId=' + id;
+                el[key][i].href = baseUrl + id + '&roomId=' + el[key][i].id;
             }
         },
         scroll: function(iter) {
@@ -87,12 +93,17 @@ new Vue({
                     $('body').animate({ scrollTop: $('#buildingSur')[0].offsetTop + 'px' }, 500);
                     break;
             }
+        },
+        changeState: function(u, s) {
+            this.regStateObj.phone = u;
+            this.regStateObj.state = s;
         }
     },
     created: function() {
         var v = this,
             url = window.location.href;
         var id = url.split('?')[1] ? url.split('?')[1].split('=')[1] : '';
+        this.idObj.mansionId = id;
         $.ajax({
             method: 'post',
             data: '',
@@ -110,13 +121,13 @@ new Vue({
                 // list.vue图片路径修正
                 v.ImgModifier(u, 'roomPictures', false);
                 v.ImgModifier(u, 'rooms', false, 'roomPicture');
+                v.ImgModifier(u, 'around', true, 'titlePicture')
 
                 // list.vue跳转路径添加
                 v.hrefModifier(u, 'rooms', id);
-                console.log(u);
-
+                // console.log(u.rooms);
                 v.totalData = u;
-
+                console.log(u);
                 var map = new BMap.Map("pos_img");
 
                 var point = new BMap.Point(u.longitude, u.latitude);
@@ -134,6 +145,7 @@ new Vue({
             method: 'get',
             url: '/api/mansionSummary?id=' + id,
             success: function(u) {
+                u.titlePicture = 'http://119.29.243.158:6060/mansionImage/' + u.titlePicture;
                 v.Info = u;
             }
         });

@@ -16,15 +16,15 @@
     <!--挂载区域-->
     <div id="app" style='min-height:800px;'>
         <!--头部-->
-        <top></top>
+        <top @reg='changeState'></top>
         <div class='content box'>
             <!--标题-->
             <div class="title">
                 <div class="title-name fl">
-                    <h1>{{totalData.name}}</h1>
+                    <h1 v-cloak>{{totalData.name}}</h1>
                 </div>
                 <div class="title-price fr">
-                    <span class='num'>{{totalData.scopePrice}}</span>元/m²/月
+                    <span class='num' v-cloak>{{totalData.scopePrice}}</span>元/m²/月
                 </div>
             </div>
             <!--小标题-->
@@ -32,14 +32,14 @@
                 <div class="tip-part1">
                     <p>
                         <i class='iconfont icon-ditu'></i>
-                        <a href="#">深圳市</a> -
-                        <a href="#">{{totalData.city}}</a>
+                        <a href="javascript:void(0);" v-cloak>{{totalData.city}}</a> -
+                        <a href="javascript:void(0);" v-cloak>{{totalData.region}}</a>
                     </p>
                 </div>
                 <div class="tip-part2">
                     <p>
                         <i class='iconfont icon-qiyeyuanquwuye-xianxing'></i>
-                        <span class='num'>{{totalData.updateTime}}</span>有更新 · 近30天内共有{{totalData.appiontCount}}人预约
+                        <span class='num' v-cloak>{{totalData.updateTime}}</span>有更新 · 近30天内共有{{totalData.appiontCount}}人预约
                     </p>
                 </div>
             </div>
@@ -54,7 +54,7 @@
                         </template>
                     </div>
                     <div class="slide-mask">
-                        <p>查看所有{{len}}张照片</p>
+                        <p v-cloak>查看所有{{len}}张照片</p>
                     </div>
                 </div>
                 <div class="map fr" id='pos_img'>
@@ -76,12 +76,12 @@
                         <div class="price-info clearfix">
                             <div class="pi-title">大厦均价</div>
                             <div class="pi-price">
-                                <span>{{totalData.avgPrice}}</span>
+                                <span v-cloak>{{totalData.avgPrice}}</span>
                                 <span class='unit'>元/m²/月</span>
                             </div>
                         </div>
                         <!--电话预约信息-->
-                        <order-info :num='totalData.appiontCount'></order-info>
+                        <order-info :num='totalData.appiontCount' :stateobj='regStateObj' :idobj='idObj' @regsuccess='changeState'></order-info>
                     </div>
                 </div>
             </div>
@@ -129,10 +129,10 @@
                                 <div class="hs-pic">
                                     <template v-for="item in totalData.around">
                                         <a :href="item.href">
-                                            <img src="./images/tu_0001.png" alt="">
-                                            <div class='hs-name'>{{item.name}}</div>
-                                            <div class='hs-price'>{{item.price}}元/m²/月</div>
-                                            <div class='hs-dis'>距离{{item.distance}}米</div>
+                                            <img :src="item.titlePicture" alt="">
+                                            <div class='hs-name' v-cloak>{{item.name}}</div>
+                                            <div class='hs-price' v-cloak>{{item.price}}元/m²/月</div>
+                                            <div class='hs-dis' v-cloak>距离{{item.distance}}米</div>
                                         </a>
                                     </template>
                                 </div>

@@ -12,10 +12,6 @@ new Vue({
     },
     data: {
         sear: '',
-        region: '',
-        type: '',
-        area: '',
-        price: '',
         // 图片
         picArr: [],
         regionArr: []
@@ -25,10 +21,13 @@ new Vue({
     },
     methods: {
         hrefAdd: function(el) {
-            var baseUrl = './pag.html?r=';
+            var baseUrl = './pag.html?region=';
             for (var i = 0; i < el.length; i++) {
-                el[i].href = baseUrl + el[i].id;
+                el[i].href = baseUrl + el[i].id + '&i=' + i;
             }
+        },
+        searReq: function() {
+            window.location.href = './pag.html?name=' + this.sear + '&i=0';
         }
     },
     created: function() {
@@ -49,15 +48,13 @@ new Vue({
             method: 'get',
             url: '/api/indexMansionList',
             success: function(data) {
-                if (data.success) {
-                    var u = data.aaData,
-                        l = u.length;
-                    for (var i = 0; i < l; i++) {
-                        u[i].titlePicture = rootPath + '/mansionImage/' + u[i].titlePicture;
-                        u[i].href = './detail.html?id=' + u[i].id;
-                    }
-                    v.picArr = u;
+                var u = data.aaData,
+                    l = u.length;
+                for (var i = 0; i < l; i++) {
+                    u[i].titlePicture = rootPath + '/mansionImage/' + u[i].titlePicture;
+                    u[i].href = './detail.html?id=' + u[i].id;
                 }
+                v.picArr = u;
             },
             error: function() {
                 console.log(1);

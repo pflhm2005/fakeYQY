@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "/js";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 37);
+/******/ 	return __webpack_require__(__webpack_require__.s = 40);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -10353,6 +10353,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -10363,12 +10370,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             'phoneIcon': './images/Icon.png',
             maskIter: false,
             phoneNum: '',
-            verNum: ''
+            verNum: '',
+            isReg: false,
+            regPhone: '',
+            searText: ''
         };
     },
     methods: {
         getVerNum: function getVerNum() {
-            if (!!this.phoneNum) {
+            if (!this.phoneNum) {
                 alert('手机号码不能为空');
                 return;
             }
@@ -10378,7 +10388,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 data: {
                     'phoneNum': v.phoneNum
                 },
-                url: '/user/getPhoneCode',
+                url: '/api/user/getPhoneCode',
                 success: function success(data) {
                     if (data.success) {
                         alert('已发送');
@@ -10387,7 +10397,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             });
         },
         sub: function sub() {
-            if (!!this.phoneNum || !!this.verNum) {
+            if (!this.phoneNum || !this.verNum) {
                 alert('手机号码或验证码不能为空');
                 return;
             }
@@ -10398,14 +10408,47 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     'phoneNum': v.phoneNum,
                     'phoneCode': v.verNum
                 },
-                url: '/api/login',
+                url: '/api/user/login',
                 success: function success(data) {
                     if (data.success) {
+                        window.location.reload();
                         v.maskIter = false;
+                        this.regPhone = data.obj;
+                    } else {
+                        alert(data.msg);
                     }
                 }
             });
+        },
+        exit: function exit() {
+            __WEBPACK_IMPORTED_MODULE_0_jquery___default.a.ajax({
+                method: 'get',
+                url: '/api/user/loginOut',
+                success: function success(data) {
+                    console.log(data);
+                    if (data.success) {
+                        v.$emit('reg', '', false);
+                        window.location.reload();
+                    }
+                }
+            });
+        },
+        topSear: function topSear() {
+            window.location.href = './pag.html?name=' + this.searText + '&i=0';
         }
+    },
+    created: function created() {
+        var v = this;
+        __WEBPACK_IMPORTED_MODULE_0_jquery___default.a.ajax({
+            method: 'get',
+            url: '/api/user/getuserloginstatus',
+            success: function success(data) {
+                if (data.success) {
+                    v.$emit('reg', data.obj, true);
+                    v.isReg = true;
+                }
+            }
+        });
     }
 
 });
@@ -10419,7 +10462,7 @@ exports = module.exports = __webpack_require__(1)(undefined);
 
 
 // module
-exports.push([module.i, "\n.head {\n  width: 100%;\n}\n.reg {\n  z-index: 9999;\n  position: fixed;\n  width: 100%;\n  height: 100%;\n  left: 0;\n  top: 0;\n  background-color: rgba(0, 0, 0, 0.7);\n}\n.reg > .form {\n  width: 420px;\n  height: 350px;\n  margin: 250px auto;\n  background-color: #fff;\n  border-radius: 8px;\n}\n.reg > .form > .content {\n  padding-top: 44px;\n  text-align: center;\n}\n.reg > .form > .content > h1 {\n  height: 31px;\n  font-size: 25px;\n  font-weight: 500;\n  color: #000;\n}\n.reg > .form > .content > h2 {\n  height: 19px;\n  font-size: 14px;\n  color: #666;\n  margin-top: 15px;\n}\n.reg > .form > .content > .login-form {\n  margin: 29px auto;\n  width: 360px;\n}\n.reg > .form > .content > .login-form > div {\n  height: 48px;\n  margin-bottom: 10px;\n  border-radius: 4px;\n  background-color: #f5f5f5;\n}\n.reg > .form > .content > .login-form > div > input {\n  height: 100%;\n  line-height: 20px;\n  padding: 4px 19px;\n  outline: 0;\n  border-radius: 4px;\n  background: #f5f5f5;\n  font-size: 15px;\n  border: 0;\n  width: 100%;\n}\n.reg > .form > .content > .login-form > div > .getVer {\n  float: right;\n  margin-right: 15px;\n  position: relative;\n  margin-top: -30px;\n  text-decoration: none!important;\n  font-size: 12px;\n  height: 16px;\n  width: 63px;\n}\n.reg > .form > .content > .login-form > .submit {\n  background-color: #148fcc;\n  color: #fff;\n  width: 360px;\n  display: block;\n  height: 48px;\n  margin-top: 20px;\n  line-height: 47px;\n  border-radius: 4px;\n  text-align: center;\n}\n.top {\n  height: 74px;\n}\n.top > .logo {\n  line-height: 74px;\n}\n.top > .logo > img {\n  vertical-align: middle;\n}\n.top > .t-tel {\n  color: #525252;\n  float: right;\n}\n.top > .t-tel > .regbtn {\n  margin: 20px 10px;\n  font-size: 13px;\n  color: #aaa;\n  padding: 5px 10px;\n}\n.top > .t-tel > .icon {\n  margin-top: 18px;\n  font-size: 12px;\n  width: 85px;\n  height: 38px;\n}\n.top > .t-tel > .icon > img {\n  margin-right: 5px;\n  float: left;\n}\n.top > .t-tel > .number {\n  margin-top: 22px;\n  font-size: 24px;\n  height: 30px;\n  line-height: 30px;\n  border-left: 1px solid #ccc;\n  margin-left: 10px;\n  padding-left: 10px;\n}\n.tab {\n  height: 48px;\n}\n.tab > .tab-list {\n  height: 100%;\n  margin-left: 678px;\n  background-color: #fb565c;\n}\n.tab > .tab-list > .trangle {\n  width: 0;\n  height: 0;\n  border-width: 48px 29px 0px 0px;\n  border-color: transparent #fb565c #fb565c transparent;\n  border-style: solid;\n  background-color: #fff;\n}\n.tab > .tab-list > li {\n  height: 100%;\n  float: left;\n}\n.tab > .tab-list > li > a {\n  font-size: 15px;\n  padding: 14px 20px;\n  color: #fff;\n  display: inline-block;\n  border-right: 1px solid #fc6b70;\n}\n", ""]);
+exports.push([module.i, "\n.head {\n  width: 100%;\n}\n.reg {\n  z-index: 9999;\n  position: fixed;\n  width: 100%;\n  height: 100%;\n  left: 0;\n  top: 0;\n  background-color: rgba(0, 0, 0, 0.7);\n}\n.reg > .form {\n  width: 420px;\n  height: 350px;\n  margin: 250px auto;\n  background-color: #fff;\n  border-radius: 8px;\n}\n.reg > .form > .content {\n  padding-top: 44px;\n  text-align: center;\n}\n.reg > .form > .content > h1 {\n  height: 31px;\n  font-size: 25px;\n  font-weight: 500;\n  color: #000;\n}\n.reg > .form > .content > h2 {\n  height: 19px;\n  font-size: 14px;\n  color: #666;\n  margin-top: 15px;\n}\n.reg > .form > .content > .login-form {\n  margin: 29px auto;\n  width: 360px;\n}\n.reg > .form > .content > .login-form > div {\n  height: 48px;\n  margin-bottom: 10px;\n  border-radius: 4px;\n  background-color: #f5f5f5;\n}\n.reg > .form > .content > .login-form > div > input {\n  height: 100%;\n  line-height: 20px;\n  padding: 4px 19px;\n  outline: 0;\n  border-radius: 4px;\n  background: #f5f5f5;\n  font-size: 15px;\n  border: 0;\n  width: 100%;\n}\n.reg > .form > .content > .login-form > div > .getVer {\n  float: right;\n  margin-right: 15px;\n  position: relative;\n  margin-top: -30px;\n  text-decoration: none!important;\n  font-size: 12px;\n  height: 16px;\n  width: 63px;\n}\n.reg > .form > .content > .login-form > .submit {\n  background-color: #148fcc;\n  color: #fff;\n  width: 360px;\n  display: block;\n  height: 48px;\n  margin-top: 20px;\n  line-height: 47px;\n  border-radius: 4px;\n  text-align: center;\n}\n.top {\n  height: 74px;\n}\n.top > .logo {\n  line-height: 74px;\n  margin-right: 20px;\n}\n.top > .logo > img {\n  vertical-align: middle;\n}\n.top > .search {\n  width: 300px;\n  height: 38px;\n  margin: 18px 0 0 5px;\n  position: relative;\n  border-radius: 3px;\n}\n.top > .search > .sInput {\n  width: 320px;\n  text-indent: 16px;\n  height: 20px;\n  line-height: 20px;\n  margin-top: 10px;\n  margin-left: 8px;\n  font-size: 14px;\n  border: 0;\n  border-radius: 3px 0 0 3px;\n  color: #555;\n  background: #FFF;\n  text-align: left;\n}\n.top > .search > i {\n  position: absolute;\n  left: -15px;\n  top: 11px;\n  padding-left: 15px;\n  border-left: 1px solid rgba(0, 0, 0, 0.1);\n  color: #DDD;\n  cursor: pointer;\n  font-size: 18px;\n}\n.top > .t-tel {\n  color: #525252;\n  float: right;\n}\n.top > .t-tel > .regbtn {\n  margin: 20px 10px;\n  font-size: 13px;\n  color: #aaa;\n  padding: 5px 10px;\n}\n.top > .t-tel > p {\n  margin: 20px 10px;\n  font-size: 13px;\n  padding: 5px 10px;\n}\n.top > .t-tel > .exit {\n  cursor: pointer;\n  margin: 21px 0;\n  font-size: 13px;\n  padding: 5px 10px;\n}\n.top > .t-tel > .iconPhone {\n  margin-top: 18px;\n  font-size: 12px;\n  width: 85px;\n  height: 38px;\n}\n.top > .t-tel > .iconPhone > img {\n  margin-right: 5px;\n  float: left;\n}\n.top > .t-tel > .number {\n  margin-top: 22px;\n  font-size: 24px;\n  height: 30px;\n  line-height: 30px;\n  border-left: 1px solid #ccc;\n  margin-left: 10px;\n  padding-left: 10px;\n}\n.tab {\n  height: 48px;\n}\n.tab > .tab-list {\n  height: 100%;\n  margin-left: 678px;\n  background-color: #fb565c;\n}\n.tab > .tab-list > .trangle {\n  width: 0;\n  height: 0;\n  border-width: 48px 29px 0px 0px;\n  border-color: transparent #fb565c #fb565c transparent;\n  border-style: solid;\n  background-color: #fff;\n}\n.tab > .tab-list > li {\n  height: 100%;\n  float: left;\n}\n.tab > .tab-list > li > a {\n  font-size: 15px;\n  padding: 14px 20px;\n  color: #fff;\n  display: inline-block;\n  border-right: 1px solid #fc6b70;\n}\n", ""]);
 
 // exports
 
@@ -10448,7 +10491,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('div', {
     staticClass: "top box"
   }, [_c('a', {
-    staticClass: "logo",
+    staticClass: "logo fl",
     attrs: {
       "href": "./index.html"
     }
@@ -10458,8 +10501,36 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "alt": ""
     }
   })]), _vm._v(" "), _c('div', {
+    staticClass: "search fl"
+  }, [_c('i', {
+    staticClass: "iconfont icon-sousuo",
+    on: {
+      "click": _vm.topSear
+    }
+  }), _vm._v(" "), _c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.searText),
+      expression: "searText"
+    }],
+    staticClass: "sInput fl",
+    attrs: {
+      "type": "text",
+      "placeholder": "请输入大厦名称或区域位置"
+    },
+    domProps: {
+      "value": (_vm.searText)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.searText = $event.target.value
+      }
+    }
+  })]), _vm._v(" "), _c('div', {
     staticClass: "t-tel"
-  }, [_c('a', {
+  }, [(!_vm.isReg) ? _c('a', {
     staticClass: "regbtn fl",
     attrs: {
       "href": "javascript:void(0);"
@@ -10469,8 +10540,17 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.maskIter = true
       }
     }
-  }, [_vm._v("登录")]), _vm._v(" "), _c('div', {
-    staticClass: "icon fl"
+  }, [_vm._v("登录")]) : _c('p', {
+    staticClass: "fl"
+  }, [_vm._v(_vm._s(_vm.regPhone) + "用户已登录")]), _vm._v(" "), _c('div', {
+    staticClass: "exit fl",
+    on: {
+      "click": _vm.exit
+    }
+  }, [(_vm.isReg) ? _c('i', {
+    staticClass: "iconfont icon-cuowuguanbiquxiao-fangkuang"
+  }) : _vm._e()]), _vm._v(" "), _c('div', {
+    staticClass: "iconPhone fl"
   }, [_c('img', {
     attrs: {
       "src": _vm.phoneIcon
@@ -10567,9 +10647,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "tab"
   }, [_c('ul', {
     staticClass: "tab-list"
-  }, [_c('li', {
-    staticClass: "trangle"
-  }), _vm._v(" "), _c('li', [_c('a', {
+  }, [_c('li', [_c('a', {
     attrs: {
       "href": "./index.html"
     }
@@ -10929,7 +11007,12 @@ module.exports = g;
 /* 26 */,
 /* 27 */,
 /* 28 */,
-/* 29 */
+/* 29 */,
+/* 30 */,
+/* 31 */,
+/* 32 */,
+/* 33 */,
+/* 34 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -11167,14 +11250,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 /* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(44)(module)))
 
 /***/ }),
-/* 30 */,
-/* 31 */,
-/* 32 */,
-/* 33 */,
-/* 34 */,
 /* 35 */,
 /* 36 */,
-/* 37 */
+/* 37 */,
+/* 38 */,
+/* 39 */,
+/* 40 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -11191,7 +11272,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 
-__webpack_require__(29);
+__webpack_require__(34);
 
 new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
     el: '#app',
@@ -11209,7 +11290,7 @@ new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
         flTotalPrice: ['总价不限', '0.5万以下', '0.5万-1.5万', '1.5万-3万', '3万-5万', '5万-10万', '10万以上'],
         // 非区域筛选数组
         flA: [[-1, -1], [-1, 100], [100, 200], [200, 300], [300, 500], [500, 1000], [1000, -1]],
-        flPrice: [[[-1, -1], [-1, 50], [50, 80], [80, 100], [100, 150], [150, 200], [200, -1]], [[-1, -1], [-1, 0.5], [0.5, 1.5], [1.5, 3], [3, 5], [5, 10], [10, -1]]],
+        flPrice: [[[-1, -1], [-1, 50], [50, 80], [80, 100], [100, 150], [150, 200], [200, -1]], [[-1, -1], [-1, 5000], [5000, 15000], [15000, 30000], [30000, 50000], [50000, 100000], [100000, -1]]],
         // 变色
         posIter1: 0,
         posIter2: null,
@@ -11285,12 +11366,19 @@ new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
                     this.simplePriceIter = null;
                     break;
             }
-            console.log(this.ajaxData);
+            this.list = [];
             __WEBPACK_IMPORTED_MODULE_1_jquery___default.a.ajax({
                 method: 'post',
                 url: '/api/mansionList?page=1&pageSize=9',
                 data: this.ajaxData,
-                success: function success() {}
+                success: function success(data) {
+                    if (!!data.total) {
+                        v.noData = false;
+                        v.init(data.aaData);
+                    } else {
+                        v.noData = true;
+                    }
+                }
             });
         },
         ImgModifier: function ImgModifier(el, key, iter) {
@@ -11300,11 +11388,14 @@ new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
             }
         },
         hrefModifier: function hrefModifier(el, iter, key) {
-            var baseUrl = iter ? './detail.html?id=' : './detail-info.html?id=';
+            var baseUrl = iter ? './detail.html?id=' : './detail-info.html?',
+                params;
             for (var i = 0; i < el.length; i++) {
                 if (key) {
                     for (var j = 0; j < el[i][key].length; j++) {
-                        el[i][key][j].href = baseUrl + el[i][key][j].id;
+                        params = 'masionId=' + el[i].id + '&roomId=';
+                        params = params + el[i].rooms[j].id;
+                        el[i][key][j].href = baseUrl + params;
                     }
                 } else {
                     el[i].href = baseUrl + el[i].id;
@@ -11312,6 +11403,7 @@ new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
             }
         },
         init: function init(u) {
+            console.log(u);
             this.ImgModifier(u, 'titlePicture', true);
             this.hrefModifier(u, true);
             this.hrefModifier(u, false, 'rooms');
@@ -11320,9 +11412,29 @@ new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
     },
     created: function created() {
         var v = this,
-            params = window.location.href.split('?');
+            params = window.location.href.split('?'),
+            t,
+            id,
+            index;
 
-        var id = params[1] ? params[1].split('=')[1] : '';
+        if (params[1]) {
+            var p1 = params[1].split('&');
+            t = p1[0].split('=')[0];
+            id = decodeURI(p1[0].split('=')[1]);
+            index = p1[1].split('=')[1];
+        } else {
+            t = 'name';
+            id = '';
+            index = 0;
+        }
+
+        var initObj = {
+            'type': 0
+        };
+        initObj[t] = id;
+
+        this.posIter1 = index;
+
         __WEBPACK_IMPORTED_MODULE_1_jquery___default.a.ajax({
             method: 'post',
             data: '',
@@ -11335,10 +11447,7 @@ new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
 
         __WEBPACK_IMPORTED_MODULE_1_jquery___default.a.ajax({
             method: 'post',
-            data: {
-                'region': id,
-                'type': 0
-            },
+            data: initObj,
             url: '/api/mansionList?page=1&pageSize=9',
             success: function success(data) {
                 __WEBPACK_IMPORTED_MODULE_1_jquery___default()('.M-box').pagination({
@@ -11347,10 +11456,11 @@ new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
                     callback: function callback(api) {
                         var index = api.getCurrent();
                         __WEBPACK_IMPORTED_MODULE_1_jquery___default.a.ajax({
-                            method: 'get',
+                            method: 'post',
+                            data: v.ajaxData,
                             url: '/api/mansionList?page=' + index + '&pageSize=9',
                             success: function success(data) {
-                                if (data.success) {
+                                if (!!data.total) {
                                     v.noData = false;
                                     v.init(data.aaData);
                                 } else {
@@ -11360,7 +11470,7 @@ new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
                         });
                     }
                 }, function (api) {
-                    if (data.success) {
+                    if (!!data.total) {
                         v.init(data.aaData);
                     } else {
                         v.noData = true;
@@ -11368,14 +11478,10 @@ new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
                 });
             }
         });
-    },
-    mounted: function mounted() {}
+    }
 });
 
 /***/ }),
-/* 38 */,
-/* 39 */,
-/* 40 */,
 /* 41 */,
 /* 42 */,
 /* 43 */,

@@ -1,17 +1,17 @@
 <template>
     <div class="house-info">
         <h3>大厦简介</h3>
-        <img class='hi-pic' :src="src" alt="">
+        <img class='hi-pic' :src="info.titlePicture" alt="">
         <div class='hi-addr-pos'>
             <ul class='feature'>
                 <li>
                     <span class='hi-title'>竣工时间</span>
-                    <span class='hi-content'>{{info.etbTime}}</span>
+                    <span class='hi-content' v-cloak>{{info.etbTime}}</span>
                 </li>
                 <li>
                     <span class='hi-title'>地理位置</span>
                     <span class='hi-content'>
-                        <a href="#">{{info.address}}</a>
+                        <a href="#" v-cloak>{{info.address}}</a>
                     </span>
                 </li>
             </ul>
@@ -20,15 +20,15 @@
             <ul class='feature'>
                 <li>
                     <span class='hi-title'>层高</span>
-                    <span class='hi-content'>{{info.heightDesc}}</span>
+                    <span class='hi-content' v-cloak>{{info.heightDesc}}</span>
                 </li>
                 <li>
                     <span class='hi-title'>层数</span>
-                    <span class='hi-content'>{{info.numDesc}}</span>
+                    <span class='hi-content' v-cloak>{{info.numDesc}}</span>
                 </li>
                 <li>
                     <span class='hi-title'>物业</span>
-                    <span class='hi-content'>{{info.tntName}}</span>
+                    <span class='hi-content' v-cloak>{{info.tntName}}</span>
                 </li>
             </ul>
         </div>
@@ -36,15 +36,15 @@
             <ul class='feature'>
                 <li>
                     <span class='hi-title'>物业费</span>
-                    <span class='hi-content'>{{info.tntPrice}}</span>
+                    <span class='hi-content' v-cloak>{{info.tntPrice}}</span>
                 </li>
                 <li>
                     <span class='hi-title'>车位</span>
-                    <span class='hi-content'>{{info.parkingDesc}}</span>
+                    <span class='hi-content' v-cloak>{{info.parkingDesc}}</span>
                 </li>
                 <li>
                     <span class='hi-title'>车位月租金</span>
-                    <span class='hi-content'>{{info.parkingPrice}}</span>
+                    <span class='hi-content' v-cloak>{{info.parkingPrice}}</span>
                 </li>
             </ul>
         </div>
@@ -52,15 +52,15 @@
             <ul class='feature'>
                 <li>
                     <span class='hi-title'>空调</span>
-                    <span class='hi-content'>{{info.airCondition}}</span>
+                    <span class='hi-content' v-cloak>{{info.airCondition}}</span>
                 </li>
                 <li>
                     <span class='hi-title'>空调费</span>
-                    <span class='hi-content'>{{info.airConditionCost}}</span>
+                    <span class='hi-content' v-cloak>{{info.airConditionCost}}</span>
                 </li>
                 <li>
                     <span class='hi-title'>空调开放时长</span>
-                    <span class='hi-content'>{{info.airConditionTime}}</span>
+                    <span class='hi-content' v-cloak>{{info.airConditionTime}}</span>
                 </li>
             </ul>
         </div>
@@ -68,15 +68,15 @@
             <ul class='feature'>
                 <li>
                     <span class='hi-title'>电梯</span>
-                    <span class='hi-content'>{{info.elevatorDesc}}</span>
+                    <span class='hi-content' v-cloak>{{info.elevatorDesc}}</span>
                 </li>
                 <li>
                     <span class='hi-title'>网络</span>
-                    <span class='hi-content'>{{info.internetDesc}}</span>
+                    <span class='hi-content' v-cloak>{{info.internetDesc}}</span>
                 </li>
                 <li>
                     <span class='hi-title'>入驻企业</span>
-                    <span class='hi-content'>{{info.companyName}}</span>
+                    <span class='hi-content' v-cloak>{{info.companyName}}</span>
                 </li>
             </ul>
         </div>
@@ -91,7 +91,7 @@
     export default {
         data: function() {
             return {
-                'src': './images/bg.png'
+
             }
         },
         props: ['info']
@@ -133,7 +133,7 @@
             }
         }
         >.more-info {
-            height:100px;
+            height: 100px;
             >ul {
                 >li {
                     width: 33%;

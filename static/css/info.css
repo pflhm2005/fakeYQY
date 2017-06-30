@@ -21,10 +21,37 @@
   border-radius: 4px;
   overflow: hidden;
   position: relative;
+  cursor: pointer;
+}
+.big-pic > .img:hover > .slide-mask {
+  display: block;
 }
 .big-pic > .img > .slide > .slide-otem > img {
   width: 100%;
   height: 100%;
+}
+.big-pic > .img > .slide-mask {
+  background-color: rgba(0, 0, 0, 0.1);
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: none;
+}
+.big-pic > .img > .slide-mask > p {
+  position: absolute;
+  width: 160px;
+  line-height: 28px;
+  z-index: 2;
+  text-align: center;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 20px;
+  font-weight: 600;
+  color: #fff;
+  font-size: 14px;
+  top: 48%;
+  left: 320px;
 }
 .big-pic > .intro {
   width: 342px;

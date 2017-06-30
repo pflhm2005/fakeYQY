@@ -14,7 +14,7 @@
 </div>
 </div>
 <div class="swiper-wrapper-title">
-    <span class="tit">大厦图片</span>(<span class='currentIndex'>{{1-slideIter}}</span>/<span class='totalPic'>{{len}}</span>)
+    <span class="tit">大厦图片</span>(<span class='currentIndex' v-cloak>{{1-slideIter}}</span>/<span class='totalPic' v-cloak>{{len}}</span>)
 </div>
 <div class="close" @click='close()'>
     <i class='iconfont icon-cuowuguanbiquxiao-xianxingyuankuang'></i>

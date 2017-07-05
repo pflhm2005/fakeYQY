@@ -42,7 +42,7 @@
         <div class='hlt-item hlt-update' @click='sort("updateTime")'>更新<i class='iconfont icon-biaotou-kepaixu'></i></div>
     </div>
     <div class="hl-list">
-        <template v-for="(item,index) in list">
+        <template v-for="(item,index) in renderList">
                     <div class="hll-item" v-show="index < showNum">
                         <a :href="item.href" class='info-list'>
                             <div class='hlt-item hlt-photo'>
@@ -66,7 +66,7 @@
                         </a>
                     </div>
                 </template>
-        <a href="javascript:void(0);" v-show="showNum < list.length" class='btn-more' @click='showMore'>查看更多</a>
+        <a href="javascript:void(0);" v-show="showNum < renderList.length && renderList.length != 0" class='btn-more' @click='showMore'>查看更多</a>
     </div>
 </div>
 </div>
@@ -84,6 +84,17 @@
                 },
                 priceIter: 0,
                 showNum: 9,
+                minArea: 0,
+                maxArea: 0,
+                filterRange: [
+                    [0, 0],
+                    [0, 100],
+                    [100, 200],
+                    [200, 300],
+                    [300, 500],
+                    [500, 1000],
+                    [1000, 0]
+                ],
             }
         },
         props: ['count', 'pic', 'list'],
@@ -102,8 +113,20 @@
                 });
             },
             changeList: function(index) {
-                console.log(index);
+                this.minArea = this.filterRange[index][0];
+                this.minArea = this.filterRange[index][1];
                 this.titleIter = index;
+            },
+            filterArea: function(col, min, max) {
+                if (max == 0) {
+                    return min == 0 ? this.list : this.list.filter(function(val) {
+                        return val.area >= min;
+                    });
+                } else {
+                    return this.list.filter(function(val) {
+                        return val.area >= min && val.area <= max;
+                    })
+                }
             },
             lmaskshow: function(index) {
                 this.$emit('lmaskshow', index);
@@ -116,7 +139,6 @@
             },
             showMore: function() {
                 this.showNum += 9;
-                console.log(this.showNum);
             }
         },
         computed: {
@@ -128,6 +150,9 @@
             },
             titleObj: function() {
                 return this.count;
+            },
+            renderList: function() {
+                return this.filterArea(this.list, this.minArea, this.maxArea);
             }
         },
         created: function() {
@@ -138,6 +163,7 @@
 <style lang='less'>
     .house-list-module {
         background-color: #fff;
+        /*padding-left: 30px;*/
         >.house-bar {
             margin-bottom: 20px;
             font-size: 12px;

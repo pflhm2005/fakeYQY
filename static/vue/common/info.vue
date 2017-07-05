@@ -117,7 +117,7 @@
     
     .house-info {
         background-color: #fff;
-        width: 800px;
+        /*padding-left: 30px;*/
         >.hi-pic {
             width: 200px;
             height: 125px;

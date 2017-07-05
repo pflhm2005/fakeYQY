@@ -1,6 +1,6 @@
 .c-list > .title {
   font-weight: bold;
-  font-size: 15px;
+  font-size: 16px;
   margin-top: 20px;
 }
 .c-list > .title > .small {
@@ -8,7 +8,7 @@
   font-size: 12px;
 }
 .c-list > .c-f-list > a {
-  margin-top: 15px;
+  margin-top: 16px;
   float: left;
   color: #999;
   margin-right: 16px;
@@ -24,7 +24,7 @@
 }
 #app > .container > .sear > .s-content {
   color: #fff;
-  width: 550px;
+  width: 600px;
   margin: 100px auto;
   text-align: center;
 }
@@ -41,12 +41,12 @@
   font-size: 0;
 }
 #app > .container > .sear > .s-content > .s-input > input {
-  width: 320px;
-  padding: 7px 12px;
+  width: 500px;
+  padding: 10px 20px;
 }
 #app > .container > .sear > .s-content > .s-input > a {
   display: inline-block;
-  padding: 7px 12px;
+  padding: 10px 20px;
   font-size: 12px;
 }
 #app > .container > .sear > .s-content > .s-input > .nor-sear {

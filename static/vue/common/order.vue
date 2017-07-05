@@ -119,7 +119,7 @@
         background-color: #fff;
         width: 250px;
         padding: 20px;
-        margin-right: 10px;
+        float: right;
         >.oi-form {
             >h3 {
                 padding-bottom: 0;

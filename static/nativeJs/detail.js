@@ -123,6 +123,9 @@ new Vue({
             url: '/api/mansionDetails?id=' + id,
             success: function(u) {
                 var i;
+
+                document.title = '园区云，' + u.name;
+
                 // a标签链接修正
                 for (i = 0; i < u.around.length; i++) {
                     u.around[i].href = './detail.html?id=' + u.around[i].id;
@@ -138,7 +141,8 @@ new Vue({
 
                 // list.vue跳转路径添加
                 v.hrefModifier(u, 'rooms', id);
-                console.log(u.rooms);
+
+                console.log(u);
                 v.totalData = u;
 
                 var map = new BMap.Map("pos_img");

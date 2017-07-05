@@ -60,6 +60,7 @@
   height: 30px;
   line-height: 30px;
   margin: 20px auto;
+  position: relative;
 }
 #app > .content > .title > .title-name > h1 {
   color: #000;
@@ -67,6 +68,9 @@
   font-weight: normal;
 }
 #app > .content > .title > .title-price {
+  top: 50px;
+  right: 0;
+  position: absolute;
   color: #cc2929;
   font-size: 12px;
 }
@@ -155,7 +159,7 @@
 }
 #app > .content > .tab > .tab-content > .tab-bar > li {
   float: left;
-  margin-right: 60px;
+  margin: 0 30px;
   line-height: 59px;
 }
 #app > .content > .tab > .tab-content > .tab-bar > li.on {
@@ -177,7 +181,7 @@
 }
 #app > .content > .tab > .tab-content > .right-info > .price-info {
   background-color: #fff;
-  height: 271px;
+  height: 113px;
   width: 250px;
   padding: 20px;
   margin-left: 10px;
@@ -209,7 +213,7 @@
 #app > .content > .main {
   margin-top: 20px;
   width: 860px;
-  padding: 0 30px;
+  padding-right: 30px;
 }
 #app > .content > .main > .house-content {
   margin-bottom: 20px;

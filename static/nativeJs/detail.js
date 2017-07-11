@@ -142,7 +142,6 @@ new Vue({
                 // list.vue跳转路径添加
                 v.hrefModifier(u, 'rooms', id);
 
-                console.log(u);
                 v.totalData = u;
 
                 var map = new BMap.Map("pos_img");
